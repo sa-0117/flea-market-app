@@ -26,6 +26,7 @@ php artisan db:seed
 
 ##ER図
 
+![er](https://github.com/user-attachments/assets/a5efe6ec-19d9-4037-88be-e85bd37a9cd2)
 
 
 ##URL  

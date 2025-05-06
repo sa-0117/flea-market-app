@@ -1,0 +1,83 @@
+.container {
+    
+}
+
+.product__inner {
+    max-width: 1540px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 40px;
+}
+
+.product-index {
+    display: flex;
+
+}
+
+.product-index__item a {
+    text-decoration: none;
+    color: #aaa
+}
+
+.product-index__item a:active {
+    color: #FF0000;
+}
+
+.product-list {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    width: 80%;
+    margin: 0 auto;
+
+}
+
+.product-list__card {
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-list__card img {
+    width: 100%;
+    height: auto;
+}
+
+.product-list__card a {
+    text-decoration: none;
+}
+
+.product-list__card-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+
+.search__panel-price {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+}
+
+.search__panel-price select::after {
+    content: "▼";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 12px;
+}
+
+.search__panel-price select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    padding: 10px;
+    padding-right: 30px;
+    border: 1px solid #f8f6f6;
+    background-color: #f8f6f6;
+    box-sizing: border-box;
+}

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href=" {{ asset('css/products.css') }}">
+<link rel="stylesheet" href=" {{ asset('css/mylist.css') }}">
 @endsection
 
 @section('content')
@@ -11,11 +11,7 @@
                 <a href="{{ url('/') }}">おすすめ</a>
             </div>
             <div class="product-index__item">
-                @auth
                 <a href="{{ url('/?page=mylist') }}">マイリスト</a>
-                @else
-                <span class="product-index__disabled">マイリスト</span>
-                @endauth
             </div>
         </div>
         <div class="product-list">            
@@ -23,11 +19,11 @@
             <div class="product-list__item">
                 <div class="product-list__card">
                     <a href="">
-                        <img src="{{ asset('storage/image/' .$product->image) }}" alt="{{ $product->name }}">
+                        <img src="{{ asset('storage/image/' .$product['image']) }}" alt="{{ $product['name'] }}">
                     </a>
                 </div>
                 <div class="product-list__card-title">
-                    <span class="product-list__name">{{ $product->name }}</span>
+                    <span class="product-list__name">{{ $product['name'] }}</span>
                 </div>
             </div>
         @endforeach

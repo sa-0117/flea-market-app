@@ -16,4 +16,9 @@ class Product extends Model
         'description',
         'condition'
     ]; 
+
+    public function favorete()
+    {
+        return $this->belongsToMany(User::class, 'favorite_products');
+    }
 }

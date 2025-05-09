@@ -27,6 +27,11 @@ class User extends Authenticatable
         'profile_image'
     ];
 
+    public function favorites(){
+        
+        return $this->blongsToMany(Product::class,'favorite_products');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

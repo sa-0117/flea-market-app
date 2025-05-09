@@ -22,9 +22,7 @@ class ItemController extends Controller
         return view('product_index', compact('products'));
     }
 
-    public function profile() {
-        return view('profile_edit');
-    }
+
 
 
 

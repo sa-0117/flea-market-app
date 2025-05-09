@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/profile_edit.css') }}">
+<link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @endsection
 
 @section('content')
@@ -13,11 +13,17 @@
                 <div class="profile__heading-ttl">
                     <h2>プロフィール設定</h2>
                 </div>
-                <div class="profile__heading-img">
+            </div>
+            <div class="profile-image">
+                <div class="profile-image__inner">
                     <img src="" alt="profile-image">
-                    <button class="profile-edit__button">画像を選択する</button>
+                </div>
+                <div class="profile-image-edit">
+                    <input type="file" name="avatar" id="avatar" style="display:none;">
+                    <label for="avatar" class="profile-image-edit__label">画像を選択する</label>
                 </div>
             </div>
+            
   
             <div class="profile-form__group">
                 <label class="profile-form__label" for="name">ユーザー名</label>          

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SellController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,11 @@ use App\Http\Controllers\SellController;
 */
 
 Route::get('/', [ItemController::class, 'index']);
-Route::get('/mypage/profile', [ItemController::class, 'profile']);
 
 Route::get('/sell', [SellController::class, 'create']);
 
-
+Route::get('/mypage', [UserController::class, 'show']);
+Route::get('/mypage/profile', [UserController::class, 'update']);
 
 
 

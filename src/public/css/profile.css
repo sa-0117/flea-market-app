@@ -19,28 +19,28 @@
     text-align: center;
 }
 
-.profile__heading-img {
+.profile-image {
     display: flex;
 }
 
-.profile__heading-img img {
-    display: block;
+.profile-iamge__inner {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
+ 
+.profile-image-edit {
+margin-left: 20px;
+}
 
-.profile-edit__button {
+.profile-image-edit__label {
     display: block;
     border: 1px solid #fb8e8e;
     color: #fb8e8e;
     background: #fff;
     border-radius: 8px;
-    padding: 5px;
-    margin-left: 20px;
+    height: 30px;
 }
-
-
 
 .profile-form__group {
     margin-bottom: 20px;
@@ -50,6 +50,7 @@
     display: block;
     text-align: left;
     font-weight: bold;
+    padding-bottom: 5px;
 }
 
 .profile-form__error-message {

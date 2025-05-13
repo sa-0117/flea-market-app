@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     public function index() {
-        return view('product_index');
+        return view('product');
     }
 }

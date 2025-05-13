@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -19,7 +20,12 @@ class ItemController extends Controller
             $products = Product::latest()->get();
         }
 
-        return view('product_index', compact('products'));
+        return view('product', compact('products'));
+    }
+
+    public function show($item_id) {
+        $product = Product::findOrFail($item_id);
+        return view('item', compact('product'));
     }
 
 

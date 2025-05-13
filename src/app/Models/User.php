@@ -29,7 +29,7 @@ class User extends Authenticatable
 
     public function favorites(){
         
-        return $this->blongsToMany(Product::class,'favorite_products');
+        return $this->blongsToMany(Product::class,'mylist');
     }
 
     /**

@@ -7,7 +7,7 @@
 @section('content')
 <div class="sell">
     <div class="sell__inner">
-        <form class="sell__form" action="" method="post">
+        <form class="sell-form" action="/item" method="post">
         @csrf
             <div class="sell__heading">
                 <div class="sell__heading-ttl">
@@ -24,7 +24,7 @@
 
             <div class="sell-form__index">
                 <div class="sell-form__index-ttl">
-                    <h3 >商品の詳細</h3>
+                    <h3>商品の詳細</h3>
                 </div>
                 <label class="sell-form__label" for="category">カテゴリー</label> 
             

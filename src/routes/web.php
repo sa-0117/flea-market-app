@@ -18,6 +18,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', [ItemController::class, 'index']);
+Route::get('/item/{item_id}', [ItemController::class, 'show']);
 
 Route::get('/sell', [SellController::class, 'create']);
 
@@ -26,6 +27,8 @@ Route::get('/mypage/profile', [UserController::class, 'update']);
 
 
 
+
+
 Route::middleware('auth')->group(function(){
-    Route::get('/login', [AuthController::class, 'index']);
+    Route::get('/mylist', [AuthController::class, 'index']);
 });

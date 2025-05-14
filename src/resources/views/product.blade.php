@@ -8,16 +8,17 @@
     <div class="product">
         <div class="product-index">
             <div class="product-index__item">
-                <a href="{{ url('/') }}">おすすめ</a>
+                <a href="{{ route('product.index') }}" class="{{ request()->routeIs('product.index') ? 'active' : '' }}">おすすめ</a>
             </div>
             <div class="product-index__item">
                 @auth
-                <a href="{{ url('/?page=mylist') }}">マイリスト</a>
+                    <a href="{{ route('mylist.index') }}" class="{{ request()->routeIs('mylist.index') ? 'active' : '' }}">マイリスト</a>
                 @else
-                <span class="product-index__disabled">マイリスト</span>
+                    <span class="disabled">マイリスト</span>
                 @endauth
             </div>
         </div>
+
         <div class="product-list">            
         @foreach ($products as $product)
             <div class="product-list__item">

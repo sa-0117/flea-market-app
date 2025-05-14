@@ -27,9 +27,10 @@ class User extends Authenticatable
         'profile_image'
     ];
 
-    public function favorites(){
-        
-        return $this->blongsToMany(Product::class,'mylist');
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class, 'favorite_products')
+        ->withTimestamps();
     }
 
     /**
@@ -50,4 +51,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
 }

@@ -8,25 +8,26 @@
     <div class="container">
         <div class="product-index">
             <div class="product-index__item">
-                <a href="{{ url('/') }}">おすすめ</a>
+                <a href="{{ route('product.index') }}" class="{{ request()->routeIs('product.index') ? 'active' : '' }}">おすすめ</a>
             </div>
             <div class="product-index__item">
-                <a href="{{ url('/?page=mylist') }}">マイリスト</a>
+                @auth
+                    <a href="{{ route('mylist.index') }}" class="{{ request()->routeIs('mylist.index') ? 'active' : '' }}">マイリスト</a>
+                @else
+                    <span class="disabled">マイリスト</span>
+                @endauth
             </div>
         </div>
         <div class="product-list">            
         @foreach ($products as $product)
             <div class="product-list__item">
-                <div class="product-list__card">
-                    <a href="">
-                        <img src="{{ asset('storage/image/' .$product['image']) }}" alt="{{ $product['name'] }}">
-                    </a>
+                <div class="product-list__image">
+                        <img src="{{ asset('storage/image/' .$product->image) }}" alt="{{ $product->name }}">
                 </div>
-                <div class="product-list__card-title">
-                    <span class="product-list__name">{{ $product['name'] }}</span>
-                </div>
+                <div class="product-list__name">{{ $product->name }}</div>
             </div>
         @endforeach
         </div>         
     </div>
+    
 @endsection

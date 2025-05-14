@@ -5,6 +5,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +18,22 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/', [ItemController::class, 'index'])->name('product.index');
 Route::get('/item/{item_id}', [ItemController::class, 'show']);
+
+Route::middleware(['auth'])->group(function (){
+    Route::get('/mylist',[FavoriteController::class, 'index'])->name('mylist.index');
+});
 
 Route::get('/sell', [SellController::class, 'create']);
 
 Route::get('/mypage', [UserController::class, 'show']);
 Route::get('/mypage/profile', [UserController::class, 'update']);
 
+Route::get('/purchase{item_id}',[PurchaseController::class, 'store']);
 
 
 
 
-Route::middleware('auth')->group(function(){
-    Route::get('/mylist', [AuthController::class, 'index']);
-});
+
+

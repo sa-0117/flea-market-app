@@ -5,89 +5,53 @@
 @endsection
 
 @section('content')
-    <div class="item">
-    
-        <div class="item__inner">
-            <div class="item-row">
-                <div class="item__group">
-                    <div class="item__image-preview"  style="background-image: url('{{ old('image_path') }}')">
-                    </div>
+    <div class="purchase-container">
+        <div class="purchase-left">
+            <div class="purchase-product">
+                <div class="purchase-product__image"  style="background-image: url('{{ old('image_path') }}')">
+                    <img src="" alt="">
+                </div>
+                <div class="purchase-detail">
+                    <h3>{{$product->name}}</h3>
+                    <span>&yen;{{$product->price}}</span>
                 </div>
             </div>
-            <div class="item-column">
-                <div class="item__group">
-                    <form class="item-purchase" action="" method="post">
-                    @csrf
-                        <div class="item__group-index">
-                            <h2>{{$product->name}}</h2>
-                            <small>ブランド名</small>
-                            <div class="item__group-price">
-                                <span>&yen{{$product->price}}</span>
-                            </div>
-                        </div>
-                        <div class="item__iconbutton">
-                            <div class="item__iconbutton-container">
-                                <button class="item__iconbutton-favorite" type="button" name="favorite" value="">☆</button>
-                                <p class="item__iconbutton-text">1</p>
-                            </div>
-                            <div class="item__iconbutton">
-                                <div class="item__iconbutton-container">
-                                    <button class="item__iconbutton-comment" type="button" name="favorite" value="">□</button>
-                                    <p class="item__iconbutton-text">1</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item__button">
-                            <button class="item__button-submit" type="submit" name="action" value="send">購入手続きへ</button>
-                            
-                        </div>
-                    </form>
+            <div class="purchase-section">
+                <label class="purchase-section__label" for="payment">支払方法</label>  
+                <div class="purchase-section__select-inner">       
+                    <select class="purchase-section__select" name="payment" id="payment">          
+                        <option disabled selected>選択してください</option>
+                        <option value="convenience">コンビニ払い</option>
+                        <option value="credit">カード支払い</option>
+                    </select>
                 </div>
-            
-                <div class="item__group">
-                    <div class="item__group-index">
-                        <h3>商品説明</h3>
-                    </div>
-                    <textarea class="item-group__textarea" name="description" id="description"></textarea>
-                    
-                </div>
-                <div class="item__group">
-                    <div class="item__group-index">
-                        <h3>商品の情報</h3>
-                    </div>
-                
-                    <div class="item__group">
-                        <label class="item__group__label">カテゴリー</label>
-                    
-                    </div>
-                </div>
-                <div class="item__group">
-                    <label class="item__group__label" for="condition">商品の状態</label>
-                    <div class="item__group-select">
-                        
-                    </div>
-                </div>
-
-                <div class="item__group">
-                    <div class="item__group-index-comment">
-                        <h3>コメント</h3>
-                        <span>(1)</span>
-                    </div>
-                    <div class="">
-
-                    
-                    </div>
-                    <form class="form-comment" action="" method="post">
-                        @csrf
-                        <label class="item__group__label" for="comment">admin</label>
-                        <textarea class="item-group__textarea" name="comment" id="comment"></textarea>
-
-                        <div class="item__button">
-                            <button class="item__button-submit" type="submit" name="action" value="send">コメントを送信する</button>
-                        </div>   
-                    </form>
+            </div>
+            <div class="purchase-section">
+                <div class="purchase-address__header">
+                    <span class="purchase-address__label" for="address">配送先</span>
+                    <a class="purchase-address__label-edit" href="">変更する</a>
+                </div>          
+                <div class="purchase-address__list">
+                    <span class="purchase-address__list-postcode">〒</span>
+                    <span class="purchase-address__list-address"></span>
                 </div>
             </div>
         </div>
+            
+        <div class="purchase-right">
+            <div class="purchase-summary__list">
+                <div class="purchase-summary__item">
+                    <span>商品代金</span>
+                    <span>&yen;{{$product->price}}</span>
+                </div>
+                <div class="purchase-summary__payment">
+                    <span>支払い方法</span>
+                    <span>コンビニ支払い</span>
+                </div>
+            </div>
+            <div class="purchase__button">
+                <button class="purchase__button-submit" type="submit">購入する</button>
+            </div>
+        </div> 
     </div>
 @endsection

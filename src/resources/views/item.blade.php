@@ -16,7 +16,7 @@
             </div>
             <div class="item-column">
                 <div class="item__group">
-                    <form class="item-purchase" action="" method="post">
+                    <div class="item-purchase">
                     @csrf
                         <div class="item__group-index">
                             <h2>{{$product->name}}</h2>
@@ -39,10 +39,10 @@
                             </div>
                         </div>
                         <div class="item__button">
-                            <button class="item__button-submit" type="submit" name="action" value="send">購入手続きへ</button>
+                            <a href="{{ url('purchase/' . $product->id) }}" class="item__button-submit">購入手続きへ</a>
                             
                         </div>
-                    </form>
+                    </div>
                 </div>
             
                 <div class="item__group">

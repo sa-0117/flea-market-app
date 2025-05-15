@@ -75,12 +75,12 @@ margin-left: 20px;
 }
 
 .profile-form__button-submit {
-    padding: 10px;
     width: 100%;
-    height: 40px;
-    border: none;
-    border-radius: 3px;
-    background: #fb8e8e;
+    background-color: #ff4b4b;
     color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
 }

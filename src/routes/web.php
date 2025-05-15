@@ -30,6 +30,7 @@ Route::get('/sell', [SellController::class, 'create']);
 
 Route::get('/mypage', [UserController::class, 'show']);
 Route::get('/mypage/profile', [UserController::class, 'update']);
+Route::get('/purchase/address/{item_id}', [UserController::class, 'edit']);
 
 Route::get('/purchase/{item_id}',[PurchaseController::class, 'store']);
 

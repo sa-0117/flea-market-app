@@ -9,6 +9,6 @@ class PurchaseController extends Controller
 {
     public function store($item_id) {
         $product = Product::findOrFail($item_id);
-        return view('purchase', compact('product'));
+        return view('purchase.purchase', compact('product'));
     }
 }

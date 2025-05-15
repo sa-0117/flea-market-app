@@ -18,8 +18,8 @@
 
 .profile-image-edit__label {
     display: block;
-    border: 1px solid #fb8e8e;
-    color: #fb8e8e;
+    border: none;
+    color: #ff4b4b;
     background: #fff;
     border-radius: 8px;
     height: 30px;

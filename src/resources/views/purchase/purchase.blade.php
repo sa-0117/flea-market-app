@@ -29,7 +29,7 @@
             <div class="purchase-section">
                 <div class="purchase-address__header">
                     <span class="purchase-address__label" for="address">配送先</span>
-                    <a class="purchase-address__label-edit" href="">変更する</a>
+                    <a class="purchase-address__label-edit" href="{{ url('purchase/address/' . $product->id) }}" >変更する</a>
                 </div>          
                 <div class="purchase-address__list">
                     <span class="purchase-address__list-postcode">〒</span>

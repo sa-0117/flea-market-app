@@ -1,36 +1,36 @@
-.register-form {
+.address-container {
     margin: 0 auto;
     padding: 30px 15px;
     max-width: 1540px;
 }
 
-.register-form__heading {
-    margin-bottom: 20px;
+.address-heading {
+    margin-bottom: 60px;
     text-align: center;
 }
 
-.register-form__form {
+.address-form {
     margin: 0 auto;
     width: 40%;
     text-align: center;
 }
 
-.register-form__group {
-    margin-bottom: 5px;
+.address-form__group {
+    margin-bottom: 40px;
 }
 
-.register-form__label {
+.address-form__label {
     display: block;
     text-align: left;
 }
 
-.register-form__error-message {
+.address-form__error-message {
     height: 20px;
     color: #ff0000;
     text-align: left;
 }
 
-.register-form__input {
+.address-form__input {
     display: block;
     padding: 10px;
     width: 100%;
@@ -41,11 +41,11 @@
     appearance: none;
 }
 
-.register-form__button {
-    margin-top: 30px;
+.address-form__button {
+    margin-top: 40px;
 }
 
-.register-form__button-submit {
+.address-form__button-submit {
     padding: 10px;
     width: 100%;
     height: 40px;
@@ -54,14 +54,4 @@
     background: #ff4b4b;
     color: #fff;
     cursor: pointer;
-}
-
-.login-form__link {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.login-form__button-submit {
-    text-decoration: none;
-    color: rgb(51, 51, 252);
 }

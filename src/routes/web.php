@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::get('/sell', [SellController::class, 'create']);
 Route::get('/mypage', [UserController::class, 'show']);
 Route::get('/mypage/profile', [UserController::class, 'update']);
 
-Route::get('/purchase{item_id}',[PurchaseController::class, 'store']);
+Route::get('/purchase/{item_id}',[PurchaseController::class, 'store']);
 
 
 

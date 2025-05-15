@@ -13,4 +13,8 @@ class UserController extends Controller
     public function update() {
         return view('mypage.profile');
     }
+
+    public function edit() {
+        return view('purchase.address');
+    }
 }

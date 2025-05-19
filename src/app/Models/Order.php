@@ -10,8 +10,16 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'buyer_id',
         'product_id',
-        'purchase_price'
+        'purchase_price',
+        'shopping_post_code',
+        'shopping_address',
+        'shopping_building'
     ]; 
+
+    public function product(){
+
+        return $this->belingsTo(Product::class);
+    }
 }

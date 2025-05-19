@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
@@ -28,7 +27,12 @@ Route::middleware(['auth'])->group(function (){
 
 Route::get('/sell', [SellController::class, 'create']);
 
-Route::get('/mypage', [UserController::class, 'show']);
+Route::middleware(['auth'])->group(function(){
+    Route::get('/mypage', [UserController::class, 'show']);
+});
+
+
+
 Route::get('/mypage/profile', [UserController::class, 'update']);
 Route::get('/purchase/address/{item_id}', [UserController::class, 'edit']);
 

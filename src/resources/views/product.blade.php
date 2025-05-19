@@ -7,16 +7,16 @@
 @section('content')
     <div class="product">
         <div class="product-index">
-            <div class="product-index__item">
+            <li class="product-index__item">
                 <a href="{{ route('product.index') }}" class="{{ request()->routeIs('product.index') ? 'active' : '' }}">おすすめ</a>
-            </div>
-            <div class="product-index__item">
+            </li>
+            <li class="product-index__item">
                 @auth
                     <a href="{{ route('mylist.index') }}" class="{{ request()->routeIs('mylist.index') ? 'active' : '' }}">マイリスト</a>
                 @else
                     <span class="disabled">マイリスト</span>
                 @endauth
-            </div>
+            </li>
         </div>
 
         <div class="product-list">            

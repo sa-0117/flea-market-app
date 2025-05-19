@@ -10,7 +10,7 @@
         <form class="sell-form" action="/item" method="post">
         @csrf
             <div class="sell__heading">
-                <div class="sell__heading-ttl">
+                <div class="sell__heading-title">
                     <h2>商品の出品</h2>
                 </div>
             </div>

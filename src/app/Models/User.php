@@ -33,6 +33,16 @@ class User extends Authenticatable
         ->withTimestamps();
     }
 
+    public function listings() {
+   
+        return $this->hasMany(Listing::class, 'seller_id');
+    }
+
+    public function orders(){
+   
+        return $this->hasMany(Order::class, 'buyer_id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

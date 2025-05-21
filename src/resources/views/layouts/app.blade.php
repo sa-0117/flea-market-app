@@ -15,32 +15,34 @@
     <header class="header">
       <div class="header__inner">
         <div class="header__logo">
-            <img src="{{ asset('storage/image/logo.svg') }}" alt="COACHTECH">
+          <img src="{{ asset('storage/image/logo.svg') }}" alt="COACHTECH" onclick="location.href='/';">
         </div>
+        @empty($HeaderParts)
         <div class="header__form">
           <form class="header__form-search" action="" method="get">
             <input type="text" name="keyword" placeholder="なにをお探しですか？">
           </form>
         </div> 
         <div class="header-nav__group">
-            <nav>
-                <ul class="header-nav">
-                    <li class="header-nav__item">
-                      <form class="header-nav__form" action="/logout" method="post">
-                        @csrf  
-                        <button class="header-nav__button">ログアウト</button>
-                      </form>
-                    </li>
-                    <li class="header-nav__item">
-                      <a href="/mypage">マイページ</a>
-                    </li>
-                    <li class="header-nav__item">
-                      <button class="header-nav__button">出品</button>
-                    </li>
-                </ul>
-            </nav>
+          <nav>
+            <ul class="header-nav">
+              <li class="header-nav__item">
+                <form class="header-nav__form" action="/logout" method="post">
+                  @csrf  
+                  <button class="header-nav__link logout-button" type="submit">ログアウト</button>
+                </form>
+              </li>
+              <li class="header-nav__item">
+                <a class="header-nav__link" href="/mypage">マイページ</a>
+              </li>
+              <li class="header-nav__item">
+                <a class="header-nav__link is-button" href="/mypage">出品</a>
+              </li>
+            </ul>
+          </nav>
         </div>
-      @yield('link')
+        @endempty
+      </div>
     </header>
     <div class="content">
       @yield('content')

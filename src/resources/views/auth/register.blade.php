@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="{{ asset('css/register.css') }}">
 @endsection
 
+@php
+  $HeaderParts = true;
+@endphp
+
 @section('content')
 <div class="register-form">
   <div class="register-form__heading">

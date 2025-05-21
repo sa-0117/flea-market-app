@@ -6,6 +6,8 @@ use App\Http\Controllers\SellController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\Auth\CustomAuthenticatedSessionController;
+use Laravel\Fortify\Fortify;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +29,13 @@ Route::middleware(['auth'])->group(function (){
 
 Route::get('/sell', [SellController::class, 'create']);
 
-Route::middleware(['auth'])->group(function(){
-    Route::get('/mypage', [UserController::class, 'show']);
+Route::middleware(['auth'])->prefix('mypage')->group(function(){
+    Route::get('/', [UserController::class, 'show']);
+    Route::get('/profile', [UserController::class, 'edit']);
+    Route::post('/profile', [UserController::class, 'update']); 
 });
 
-
-
-Route::get('/mypage/profile', [UserController::class, 'update']);
-Route::get('/purchase/address/{item_id}', [UserController::class, 'edit']);
+Route::get('/purchase/address/{item_id}', [UserController::class, 'stoer']);
 
 Route::get('/purchase/{item_id}',[PurchaseController::class, 'store']);
 

@@ -22,12 +22,12 @@
         <div class="product-list">            
         @foreach ($products as $product)
             <div class="product-list__item">
-                <div class="product-list__card">
+                <div class="product-list__image">
                     <a href="{{ url('item/' . $product->id) }}">
                         <img src="{{ asset('storage/image/' .$product->image) }}" alt="{{ $product->name }}">
                     </a>
                 </div>
-                <div class="product-list__card-title">
+                <div class="product-list__image-title">
                     <span class="product-list__name">{{ $product->name }}</span>
                 </div>
             </div>

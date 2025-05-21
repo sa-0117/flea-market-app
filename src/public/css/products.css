@@ -40,22 +40,22 @@
 
 }
 
-.product-list__card {
+.product-list__image {
     border: 1px solid #e7e7e7;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.product-list__card img {
+.product-list__image img {
     width: 100%;
     height: auto;
 }
 
-.product-list__card a {
+.header-nav__link a {
     text-decoration: none;
 }
 
-.product-list__card-title {
+.product-list__image-title {
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;

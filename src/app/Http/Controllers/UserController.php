@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class UserController extends Controller
 {   
@@ -22,11 +23,43 @@ class UserController extends Controller
         return view('mypage.mypage',compact('products','page'));
     }
 
-    public function update() {
-        return view('mypage.profile');
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        // プロフィール更新
+        $user->fill($validated);
+
+        // ファイルアップロード処理
+    if ($request->hasFile('avatar')) {
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $user->avatar = $path;
     }
 
-    public function edit() {
+        // 初回設定時だけ profile_completed を true に
+        if (!$user->profile_completed) {
+            $user->profile_completed = true;
+        }
+
+        $user->save();
+
+        // リダイレクト先を条件で分岐
+        if (!$user->wasChanged('profile_completed')) {
+            // 編集時 → プロフィール画面へ
+            return redirect('/mypage');
+        } else {
+            // 初回設定完了 → お気に入りリストへ
+            return redirect('/mylist');
+        }
+    } 
+
+    public function edit()
+{
+    $user = Auth::user();
+    return view('mypage.profile', compact('user'));
+}
+
+    public function store() {
         return view('purchase.address');
     }
 }

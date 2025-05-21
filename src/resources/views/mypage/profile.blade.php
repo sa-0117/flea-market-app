@@ -7,7 +7,7 @@
 @section('content')
 <div class="profile">
     <div class="profile__inner">
-        <form class="profile__form" action="" method="post">
+        <form class="profile__form" action="/mypage/profile" method="post" enctype="multipart/form-data">
         @csrf
             <div class="profile__heading">
                 <div class="profile__heading-ttl">

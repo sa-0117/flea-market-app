@@ -6,13 +6,17 @@
 
 @section('content')
     <div class="mypage-container">
-        <div class="profile-image">
-            <div class="profile-image__inner">
-                <img src="" alt="profile-image">
+        <div class="mypage-top">
+            <div class="mypage-top__left">
+                @if($user->avatar !== null)
+                    <img src="{{ asset('storage/image/'. $user->avatar) }}" alt="avatar" class="avatar">
+                @else
+                    <div class="avatar avatar-placeholder"></div>
+                @endif
             </div>
-            <div class="profile-image-edit">
-                <input type="file" name="avatar" id="avatar" style="display:none;">
-                <label for="avatar" class="profile-image-edit__label">画像を選択する</label>
+            <div class="mypage-top__middle">{{ $userName }} </div>
+            <div class="mypage-top__right-edit">
+                <a href="{{ url('/mypage/profile') }}" class="profile-image-edit__link">プロフィールを編集</a>
             </div>
         </div>
         <ul class="product-tab">

@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function (){
 });
 
 Route::get('/sell', [SellController::class, 'create']);
+Route::post('/sell', [SellController::class, 'store']);
 
 Route::middleware(['auth'])->prefix('mypage')->group(function(){
     Route::get('/', [UserController::class, 'show']);
@@ -35,7 +36,7 @@ Route::middleware(['auth'])->prefix('mypage')->group(function(){
     Route::post('/profile', [UserController::class, 'update']); 
 });
 
-Route::get('/purchase/address/{item_id}', [UserController::class, 'stoer']);
+Route::get('/purchase/address/{item_id}', [UserController::class, 'store']);
 
 Route::get('/purchase/{item_id}',[PurchaseController::class, 'store']);
 

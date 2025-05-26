@@ -35,12 +35,12 @@ class User extends Authenticatable
 
     public function listings() {
    
-        return $this->hasMany(Listing::class, 'seller_id');
+        return $this->hasMany(Listing::class);
     }
 
     public function orders(){
    
-        return $this->hasMany(Order::class, 'buyer_id');
+        return $this->hasMany(Order::class);
     }
 
     /**

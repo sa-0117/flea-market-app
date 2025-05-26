@@ -16,10 +16,9 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->insert([
+        $productId = DB::table('products')->insert([
             [
                 "name" => "腕時計",
-                "price" => 15000,
                 "description" => "スタイリッシュなデザインのメンズ腕時計",
                 "condition" => "良好",
                 "image" => "clock.jpg",
@@ -29,7 +28,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "HDD",
-                "price" => 5000,
                 "description" => "高速で信頼性の高いハードディスク",
                 "condition" => "目立った傷や汚れなし",
                 "image" => "hdd.jpg",
@@ -39,7 +37,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "玉ねぎ3束",
-                "price" => 300,
                 "description" => "新鮮な玉ねぎ3束のセット",
                 "condition" => "やや傷や汚れあり",
                 "image" => "onion.jpg",
@@ -49,7 +46,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "革靴",
-                "price" => 4000,
                 "description" => "クラシックなデザインの革靴",
                 "condition" => "状態が悪い",
                 "image" => "shoes.jpg",
@@ -59,7 +55,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "ノートPC",
-                "price" => 45000,
                 "description" => "高性能なノートパソコン",
                 "condition" => "良好",
                 "image" => "pc.jpg",
@@ -69,7 +64,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "マイク",
-                "price" => 8000,
                 "description" => "高音質のレコーディング用マイク",
                 "condition" => "目立った傷や汚れなし",
                 "image" => "mic.jpg",
@@ -79,7 +73,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "ショルダーバッグ",
-                "price" => 3500,
                 "description" => "おしゃれなショルダーバッグ",
                 "condition" => "やや傷や汚れあり",
                 "image" => "bag.jpg",
@@ -89,7 +82,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "タンブラー",
-                "price" => 500,
                 "description" => "使いやすいタンブラー",
                 "condition" => "状態が悪い",
                 "image" => "tumbler.jpg",
@@ -99,7 +91,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "コーヒーミル",
-                "price" => 4000,
                 "description" => "手動のコーヒーミル",
                 "condition" => "良好",
                 "image" => "coffeemill.jpg",
@@ -109,7 +100,6 @@ class ProductsTableSeeder extends Seeder
 
             [
                 "name" => "メイクセット",
-                "price" => 2500,
                 "description" => "便利なメイクアップセット",
                 "condition" => "目立った傷や汚れなし",
                 "image" => "makeupset.jpg",

@@ -12,24 +12,23 @@ class Product extends Model
     protected $fillable = [
         'image',
         'name',
-        'price',
         'description',
         'condition'
     ]; 
 
-    public function favorete()
+    public function favoretes()
     {
         return $this->belongsToMany(User::class, 'favorite_products');
     }
 
-    public function listing() {
+    public function listings() {
         
-        return $this->belongsTo(Listing::class);
+        return $this->hasMany(Listing::class);
     }
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
 }

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Sell;
 use Illuminate\Support\Facades\DB;
 
 class CategoriesTableSeeder extends Seeder

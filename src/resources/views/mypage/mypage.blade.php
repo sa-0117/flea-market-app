@@ -32,9 +32,9 @@
                 @foreach ($products as $product)
                     <div class="product-list__item">
                         <div class="product-list__image">
-                            <img src="{{ asset('storage/image/' .$product->image) }}" alt="{{ $product->name }}">
+                            <img src="{{ asset('storage/image/' .$listings->product->image) }}" alt="{{ $listings->product->name }}">
                         </div>
-                        <div class="product-list__name">{{ $product->name }}</div>
+                        <div class="product-list__name">{{ $listings->product->name }}</div>
                     </div>
                 @endforeach
             @elseif ($page === 'buy')

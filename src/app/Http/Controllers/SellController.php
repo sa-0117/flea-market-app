@@ -28,24 +28,24 @@ class SellController extends Controller
         $path = $request->file('image')->store('image', 'public');         
 
         //商品情報保存
-        $item = new Product();
-        $item->name = $request->input('name');
-        $item->brand = $request->input('brand');
-        $item->description = $request->input('description');
-        $item->condition = $request->input('condition') ?: '未設定';
-        $item->image = $path;
-        $item->save();
+        $product = new Product();
+        $product->name = $request->input('name');
+        $product->brand = $request->input('brand');
+        $product->description = $request->input('description');
+        $product->condition = $request->input('condition') ?: '未設定';
+        $product->image = $path;
+        $product->save();
 
         //出品情報
         $listing = new Listing();
         $listing->user_id = Auth::id(); 
-        $listing->product_id = $item->id;
+        $listing->product_id = $product->id;
         $listing->listing_price = preg_replace('/[^\d]/', '', $request->input('listing_price'));
         $listing->status = 'listed';
         $listing->save();
 
         //カテゴリーの紐づけ
-        $item->categories()->sync($request->input('categories', []));
+        $product->categories()->sync($request->input('categories', []));
         
         return redirect('/mypage');
     }

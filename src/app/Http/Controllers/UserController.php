@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Listing;
 
 class UserController extends Controller
 {   
@@ -14,15 +16,21 @@ class UserController extends Controller
 
         $user = auth()->user();
 
-        $userName = $request->user()->name;
-
-        if ($page === 'buy') {
-            $products = $user->orders()->with('product')->get();
+        if ($page === 'sell') {
+            $listings = Listing::with('product')->where('user_id', 'user_id')->get();
+        } elseif ($page === 'buy') {
+            $products = Product::whereHas('order', function($query) use($user){
+                $query->where('user_id', $user->id);
+            })->get();
         } else {
-            $products = $user->listings()->with('product')->get();
+            $products = collect();
         }
-
-        return view('mypage.mypage',compact('products','page','user','userName'));
+        return view('mypage.mypage',[
+            'products' => $listings,
+            'page'=> $page,
+            'user' => $user,
+            'userName' => $user->name,
+        ]);
     }
 
     public function update(Request $request)

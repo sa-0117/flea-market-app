@@ -21,10 +21,15 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'favorite_products');
     }
 
-    public function listings() {
+    public function listing() {
         
-        return $this->hasMany(Listing::class);
+        return $this->hasOne(Listing::class);
     }
+
+    public function orders()
+{
+    return $this->hasMany(Order::class);
+}
 
     public function categories()
     {

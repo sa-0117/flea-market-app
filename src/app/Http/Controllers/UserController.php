@@ -17,7 +17,7 @@ class UserController extends Controller
         $user = auth()->user();
 
         if ($page === 'sell') {
-            $listings = Listing::with('product')->where('user_id', 'user_id')->get();
+            $listings = Listing::with('product')->where('user_id', $user->id)->get();
         } elseif ($page === 'buy') {
             $products = Product::whereHas('order', function($query) use($user){
                 $query->where('user_id', $user->id);
@@ -31,6 +31,7 @@ class UserController extends Controller
             'user' => $user,
             'userName' => $user->name,
         ]);
+        
     }
 
     public function update(Request $request)

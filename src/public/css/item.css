@@ -45,10 +45,10 @@
 .item__button-submit {
     width: 100%;
     cursor: pointer;
-    background: #fb8e8e;
+    background: #ff4b4b;
     color: #fff;
     padding: 5px 10px;
-    border: 1px solid #fb8e8e;
+    border: 1px solid #ff4b4b;
     border-radius: 5px;
 }
 .item__image-preview {

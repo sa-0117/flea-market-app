@@ -82,14 +82,15 @@
 }
 
 .product-list__item {
-    border: 1px solid #e7e7e7;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 .product-list__image img {
     width: 100%;
     height: auto;
+    border: 1px solid #e7e7e7;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-list__item a {

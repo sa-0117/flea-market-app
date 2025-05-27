@@ -20,7 +20,7 @@
                     @csrf
                         <div class="item__group-index">
                             <h2>{{$product->name}}</h2>
-                            <small>ブランド名</small>
+                            <small>{{$product->brand}}</small>
                             <div class="item__group-price">
                                 <span>&yen{{$product->price}}</span>
                                 <span>(税込)</span>

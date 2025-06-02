@@ -19,8 +19,8 @@
         </div>
         @empty($HeaderParts)
         <div class="header__form">
-          <form class="header__form-search" action="" method="get">
-            <input type="text" name="keyword" placeholder="なにをお探しですか？">
+          <form class="header__form-search" action="{{ route('product.index') }}" method="get">
+            <input type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
           </form>
         </div> 
         <div class="header-nav__group">

@@ -94,3 +94,9 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.form__error-message {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
+}

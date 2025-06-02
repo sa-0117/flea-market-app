@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -16,12 +16,29 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        $images = [
+            'clock.jpg',
+            'hdd.jpg',
+            'onion.jpg',
+            'shoes.jpg',
+            'pc.jpg',
+            'mic.jpg',
+            'bag.jpg',
+            'tumbler.jpg',
+            'coffeemill.jpg',
+            'makeupset.jpg',
+        ];
+    
+        foreach ($images as $image) {
+            Storage::disk('public')->put("image/{$image}", file_get_contents(database_path("seed_images/{$image}")));
+        }
+        
         $productId = DB::table('products')->insert([
             [
                 "name" => "腕時計",
                 "description" => "スタイリッシュなデザインのメンズ腕時計",
                 "condition" => "良好",
-                "image" => "clock.jpg",
+                "image" => "image/clock.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -30,7 +47,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "HDD",
                 "description" => "高速で信頼性の高いハードディスク",
                 "condition" => "目立った傷や汚れなし",
-                "image" => "hdd.jpg",
+                "image" => "image/hdd.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -39,7 +56,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "玉ねぎ3束",
                 "description" => "新鮮な玉ねぎ3束のセット",
                 "condition" => "やや傷や汚れあり",
-                "image" => "onion.jpg",
+                "image" => "image/onion.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -48,7 +65,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "革靴",
                 "description" => "クラシックなデザインの革靴",
                 "condition" => "状態が悪い",
-                "image" => "shoes.jpg",
+                "image" => "image/shoes.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -57,7 +74,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "ノートPC",
                 "description" => "高性能なノートパソコン",
                 "condition" => "良好",
-                "image" => "pc.jpg",
+                "image" => "image/pc.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -66,7 +83,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "マイク",
                 "description" => "高音質のレコーディング用マイク",
                 "condition" => "目立った傷や汚れなし",
-                "image" => "mic.jpg",
+                "image" => "image/mic.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -75,7 +92,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "ショルダーバッグ",
                 "description" => "おしゃれなショルダーバッグ",
                 "condition" => "やや傷や汚れあり",
-                "image" => "bag.jpg",
+                "image" => "image/bag.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -84,7 +101,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "タンブラー",
                 "description" => "使いやすいタンブラー",
                 "condition" => "状態が悪い",
-                "image" => "tumbler.jpg",
+                "image" => "image/tumbler.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -93,7 +110,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "コーヒーミル",
                 "description" => "手動のコーヒーミル",
                 "condition" => "良好",
-                "image" => "coffeemill.jpg",
+                "image" => "image/coffeemill.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -102,7 +119,7 @@ class ProductsTableSeeder extends Seeder
                 "name" => "メイクセット",
                 "description" => "便利なメイクアップセット",
                 "condition" => "目立った傷や汚れなし",
-                "image" => "makeupset.jpg",
+                "image" => "image/makeupset.jpg",
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

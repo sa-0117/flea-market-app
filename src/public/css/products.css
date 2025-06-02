@@ -57,7 +57,11 @@
 
 .product-list__image-title {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     padding: 5px 10px;
+}
+
+.product-status {
+    color: #FF0000;
 }
 

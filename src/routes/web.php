@@ -22,7 +22,6 @@ use Laravel\Fortify\Fortify;
 
 Route::get('/', [ItemController::class, 'index'])->name('product.index');
 Route::get('/item/{item_id}', [ItemController::class, 'show']);
-
 Route::middleware(['auth'])->group(function (){
     Route::get('/mylist',[FavoriteController::class, 'index'])->name('mylist.index');
 });

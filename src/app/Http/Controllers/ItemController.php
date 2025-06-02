@@ -9,14 +9,21 @@ use App\Models\Listing;
 
 class ItemController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
 
         $userId = Auth::id();
+        $keyword = $request->input('keyword');
 
         $query = Listing::with('product')->whereIn('status', ['listed','sold']);
 
         if($userId !== null) {
             $query->where('user_id', '!=', $userId);
+        }
+
+        if (!empty('keyword')) {
+            $query->whereHas('product', function ($q) use ($keyword) {
+                $q->where('name', 'like', '%' . $keyword . '%');
+            });
         }
 
         $listings = $query->get();
@@ -28,9 +35,4 @@ class ItemController extends Controller
         $listing = Listing::with('product')->findOrFail($item_id);
         return view('item', compact('listing'));
     }
-
-
-
-
-
 }

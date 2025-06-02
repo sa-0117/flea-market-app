@@ -36,9 +36,11 @@ Route::middleware(['auth'])->prefix('mypage')->group(function(){
     Route::post('/profile', [UserController::class, 'update']); 
 });
 
-Route::get('/purchase/address/{item_id}', [UserController::class, 'store']);
+Route::get('/purchase/address/{item_id}', [UserController::class, 'editFromPurchase'])->name('purchase.address.edit');
+Route::post('/purchase/address/{item_id}', [UserController::class, 'updateFromPurchase'])->name('purchase.address.update');
 
-Route::get('/purchase/{item_id}',[PurchaseController::class, 'store']);
+Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
+Route::post('/purchase/{item_id}',[PurchaseController::class, 'store'])->name('purchase.store');
 
 
 

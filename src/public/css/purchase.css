@@ -64,6 +64,12 @@
     width: 40%;
 }
 
+.purchase-address__list {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 40px;
+}
+
 .purchase-address__header {
     display: flex;
     justify-content: space-between;
@@ -75,18 +81,21 @@
     color: rgb(118, 163, 241);
 }
 
-
-
 .purchase-summary__item {
     display: flex;
     justify-content: space-between;
     border: 1px solid #ddd;
-    padding: 40px;
+    padding: 20px;
 }
 
 .purchase-summary__payment {
     border: 1px solid #ddd;
-    padding: 40px;
+    padding: 20px;
+}
+
+.purchase-summary__payment-method {
+    display: flex;
+    justify-content: space-between;
 }
 
 .purchase__button {
@@ -103,4 +112,10 @@
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.form__error-message {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
 }

@@ -10,14 +10,19 @@ class Listing extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'buyer_id',
         'product_id',
         'listing_price',
         'status',
     ]; 
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function order() {
+        return $this->hasOne(Order::class);
+    }
+
+    public function buyer(){
+
+        return $this->belongsTo(User::class, buyer_id);
     }
 
     public function product() {

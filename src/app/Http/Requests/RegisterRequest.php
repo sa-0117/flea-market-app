@@ -4,9 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
-
-class LoginRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,31 +24,19 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|string|max:255',
             'email' => 'required | email',
-            'password' => 'required',
+            'password' => 'required | min:8 | confirmed',
         ];
     }
 
     public function messages() {
         return [
+            'name.required' => 'お名前を入力してください',
             'email.required' => 'メールアドレスを入力してください',
             'password.required' => 'パスワードを入力してください',
-            
+            'password.min' => 'パスワードは8文字以上で入力してください',
+            'password.confirmed' => 'パスワードと一致しません',
         ];
-    }
-
-    protected function failedAuthorization()
-    {
-        Fortify::authenticateUsing(function (LoginRequest $request) {
-            $user = \App\Models\User::where('email', $request->email)->first();
-        
-            if ($user && \Hash::check($request->password, $user->password)) {
-                return $user;
-            }
-
-            session()->flash('login_error', 'ログイン情報が登録されていません');
-            return null;
-        });
-        
     }
 }

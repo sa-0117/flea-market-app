@@ -11,15 +11,20 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id',
+        'listing_id',
         'purchase_price',
         'shopping_post_code',
         'shopping_address',
         'shopping_building'
     ]; 
 
-    public function product(){
+    public function buyer(){
 
-        return $this->belingsTo(Product::class);
+        return $this->belongsTo(User::class, buyer_id);
+    }
+
+    public function listing() {
+        return $this->belongsTo(Listing::class);
+        
     }
 }

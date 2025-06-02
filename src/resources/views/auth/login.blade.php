@@ -18,21 +18,22 @@
         <div class="login-form__group">
             <label class="login-form__label" for="email">メールアドレス</label>          
             <input class="login-form__input" type="email" name="email" id="email" value="{{ old('email') }}">
-            <p class="login-form__error-message">
-              @error('email')
-                {{ $message }}
-              @enderror
-            </p>
+            @error('email')
+              <div class="login-form__error-message">{{ $message }}</div>
+            @enderror
         </div>
-
-        <div class="login-form__group">
+        <div class="logdiv>in-form__group">
             <label class="login-form__label" for="password">パスワード</label>          
             <input class="login-form__input" type="password" name="password" id="password">
-            <p class="login-form__error-message">
-              @error('password')
-                  {{ $message }}
-                @enderror
-            </p>
+            
+            @error('password')
+              <div class="login-form__error-message">{{ $message }}</div>
+            @enderror
+
+            @if (session('login_error'))
+              <div class="login-form__error-message">{{ session('login_error') }}</div>
+            @endif
+            
         </div>  
         <div class="login-form__button">
           <button class="login-form__button-submit" type="submit">ログインする</button>

@@ -21,29 +21,29 @@
         </div>
         <ul class="product-tab">
             <li class="product-tab-name">
-                <a href="{{ url('/mypage?page=sell') }}" class="{{ $page === 'sell' ? 'active' : '' }}">出品した商品</a>
+                <a href="{{ url('/mypage?tab=sell') }}" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
             </li>
             <li class="product-tab-name">
-                <a href="{{ url('/mypage?page=buy') }}" class="{{ $page === 'buy' ? 'active' : '' }}">購入した商品</a>
+                <a href="{{ url('/mypage?tab=buy') }}" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
             </li>
         </ul>
         <div class="product-list">
-            @if ($page === 'sell')            
-                @foreach ($products as $product)
+            @if ($tab === 'sell')            
+                @foreach ($listings as $listing)
                     <div class="product-list__item">
                         <div class="product-list__image">
-                            <img src="{{ asset('storage/' .$product->product->image) }}" alt="{{ $product->product->name }}">
+                            <img src="{{ asset('storage/' .$listing->product->image) }}" alt="{{ $listing->product->name }}">
                         </div>
-                        <div class="product-list__name">{{ $product->product->name }}</div>
+                        <div class="product-list__name">{{ $listing->product->name }}</div>
                     </div>
                 @endforeach
-            @elseif ($page === 'buy')
-            @foreach ($products as $product)
+            @elseif ($tab === 'buy')
+            @foreach ($orders as $order)
                     <div class="product-list__item">
                         <div class="product-list__image">
-                            <img src="{{ asset('storage/image/' .$product->image) }}" alt="{{ $product->name }}">
+                            <img src="{{ asset('storage/' .$order->listing->product->image) }}" alt="{{ $order->listing->product->name }}">
                         </div>
-                        <div class="product-list__name">{{ $product->name }}</div>
+                        <div class="product-list__name">{{ $order->listing->product->name }}</div>
                     </div>
                 @endforeach
             @endif

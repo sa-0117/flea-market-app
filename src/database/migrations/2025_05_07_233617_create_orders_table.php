@@ -16,11 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('listing_id')->constrained()->cascadeOnDelete();
             $table->integer('purchase_price');
-            $table->string('shiopping_post_code');
-            $table->string('shiopping_address');
-            $table->string('shiopping_building')->nullable();
+            $table->string('shopping_post_code');
+            $table->string('shopping_address');
+            $table->string('shopping_building')->nullable();
             $table->timestamps();
         });
     }

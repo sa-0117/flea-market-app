@@ -7,39 +7,46 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Listing;
+use App\Http\Requests\AddressRequest;
+use App\Http\Requests\ProfileRequest;
 
 class UserController extends Controller
 {   
     public function show(Request $request) {
 
-        $page = $request->query('page','sell');
+        $tab = $request->query('tab','sell');
 
         $user = auth()->user();
 
-        if ($page === 'sell') {
+        $listings = collect();
+        $products = collect();
+        $orders = collect();
+
+        if ($tab === 'sell') {
             $listings = Listing::with('product')->where('user_id', $user->id)->get();
-        } elseif ($page === 'buy') {
-            $products = Product::whereHas('order', function($query) use($user){
-                $query->where('user_id', $user->id);
-            })->get();
-        } else {
-            $products = collect();
+        } elseif ($request->tab === 'buy') {
+            $orders = $user->orders()->with('listing.product')->latest()->get();
         }
+
         return view('mypage.mypage',[
-            'products' => $listings,
-            'page'=> $page,
+            'listings' => $listings ?? collect(),
+            'tab'=> $tab,
             'user' => $user,
             'userName' => $user->name,
+            'orders' => $orders
         ]);
         
     }
 
-    public function update(Request $request)
+    public function update(ProfileRequest $request)
     {
         $user = Auth::user();
-        $user->name = $request->input('name');
-        $user->post_code = $request->input('post_code');
-        $user->address = $request->input('address');
+
+        $validated = $request->validated();
+
+        $user->name = $validated['name'] ?? $user->name;
+        $user->post_code = $validated['post_code'] ?? $user->post_code;
+        $user->address = $validated['address'] ?? $user->address;
         $user->building = $request->input('building');
 
         // プロフィール更新
@@ -76,7 +83,19 @@ class UserController extends Controller
         return view('mypage.profile', compact('user'));
     }
 
-    public function store() {
-        return view('purchase.address');
+    public function editFromPurchase($item_id) {   
+
+        $user = auth()->user();
+        return view('purchase.address', compact('user', 'item_id'));
+    }
+
+    public function updateFrompurchase(AddressRequest $request, $item_id) {
+
+        $user = auth()->user();
+        $user->post_code = $request->input('post_code');
+        $user->address = $request->input('address');
+        $user->save();
+
+        return redirect()->route('purchase.show', ['item_id' => $item_id]);
     }
 }

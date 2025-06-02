@@ -16,9 +16,10 @@ class CreateListingsTable extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('buyer_id')->nullable()->constrained('users')->cascadeOnDelete('set null');
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->integer('listing_price');
-            $table->string('status');
+            $table->string('status')->default('listed');
             $table->timestamps();
         });
     }

@@ -26,21 +26,39 @@
                     <input type="file" name="avatar" id="avatar" accept="image/*" style="display:none;">
                     <label for="avatar" class="profile-image-edit__label">画像を選択する</label>
                 </div>
-            </div>
-            
-  
+                <div class="form__error-message">
+                    @error('file')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div> 
             <div class="profile-form__group">
                 <label class="profile-form__label" for="name">ユーザー名</label>          
                 <input class="profile-form__input" type="text" name="name" id="name" value="{{ old('name', $user->name) }}">
+                <div class="form__error-message">
+                    @error('name')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="profile-form__group">
                 <label class="profile-form__label" for="post_code">郵便番号</label>          
                 <input class="profile-form__input" type="text" name="post_code" id="post_code" value="{{ old('post_code', $user->post_code) }}">
+                <div class="form__error-message">
+                    @error('post_code')
+                    {{ $message }}
+                    @enderror
+                </div>
             </div>
             <div class="profile-form__group">
                 <label class="profile-form__label" for="address">住所</label>          
                 <input class="profile-form__input" type="text" name="address" id="address" value="{{ old('address', $user->address) }}">
             </div>
+            <div class="form__error-message">
+                    @error('address')
+                    {{ $message }}
+                    @enderror
+                </div>
             <div class="profile-form__group">
                 <label class="profile-form__label" for="building">建物名</label>          
                 <input class="profile-form__input" type="text" name="building" id="building" value="{{ old('building', $user->building) }}">

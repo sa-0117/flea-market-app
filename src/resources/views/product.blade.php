@@ -20,15 +20,18 @@
         </div>
 
         <div class="product-list">            
-        @foreach ($products as $product)
+        @foreach ($listings as $listing)
             <div class="product-list__item">
                 <div class="product-list__image">
-                    <a href="{{ url('item/' . $product->id) }}">
-                        <img src="{{ asset('storage/image/' .$product->image) }}" alt="{{ $product->name }}">
+                    <a href="{{ url('item/' . $listing->id) }}">
+                        <img src="{{ asset('storage/' .$listing->product->image) }}" alt="{{ $listing->product->name }}">
                     </a>
                 </div>
                 <div class="product-list__image-title">
-                    <span class="product-list__name">{{ $product->name }}</span>
+                    <div class="product-list__name">{{ $listing->product->name }}</div>
+                    @if ($listing->buyer_id)
+                        <div class="product-status">Sold</div>
+                    @endif
                 </div>
             </div>
         @endforeach

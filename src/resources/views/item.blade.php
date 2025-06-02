@@ -5,12 +5,12 @@
 @endsection
 
 @section('content')
-    <div class="item">
-    
+    <div class="item">    
         <div class="item__inner">
             <div class="item-row">
                 <div class="item__group">
-                    <div class="item__image-preview"  style="background-image: url('{{ old('image_path') }}')">
+                    <div class="item__image-preview">
+                        <img src="{{ asset('storage/' .$listing->product->image) }}" class="item__image" alt="{{ $listing->product->name }}">
                     </div>
                 </div>
             </div>
@@ -19,10 +19,10 @@
                     <div class="item-purchase">
                     @csrf
                         <div class="item__group-index">
-                            <h2>{{$product->name}}</h2>
-                            <small>{{$product->brand}}</small>
+                            <h1>{{$listing->product->name}}</h1>
+                            <small>{{$listing->product->brand}}</small>
                             <div class="item__group-price">
-                                <span>&yen{{$product->price}}</span>
+                                <span>&yen{{ number_format($listing->listing_price) }}</span>
                                 <span>(税込)</span>
                             </div>
                         </div>
@@ -39,12 +39,11 @@
                             </div>
                         </div>
                         <div class="item__button">
-                            <a href="{{ url('purchase/' . $product->id) }}" class="item__button-submit">購入手続きへ</a>
-                            
+                            <a href="{{ url('purchase/' . $listing->product->id) }}" class="item__button-submit">購入手続きへ</a>                           
                         </div>
                     </div>
                 </div>
-            
+           
                 <div class="item__group">
                     <div class="item__group-index">
                         <h3>商品説明</h3>

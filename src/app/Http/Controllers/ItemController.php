@@ -3,20 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use App\Models\Listing;
 
 class ItemController extends Controller
 {
     public function index() {
-            
-        $products = Product::latest()->get();
 
-        return view('product', compact('products'));
+        $userId = Auth::id();
+
+        $query = Listing::with('product')->whereIn('status', ['listed','sold']);
+
+        if($userId !== null) {
+            $query->where('user_id', '!=', $userId);
+        }
+
+        $listings = $query->get();
+
+        return view('product', compact('listings'));
     }
 
     public function show($item_id) {
-        $product = Product::findOrFail($item_id);
-        return view('item', compact('product'));
+        $listing = Listing::with('product')->findOrFail($item_id);
+        return view('item', compact('listing'));
     }
 
 

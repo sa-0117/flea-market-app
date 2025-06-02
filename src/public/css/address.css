@@ -24,12 +24,6 @@
     text-align: left;
 }
 
-.address-form__error-message {
-    height: 20px;
-    color: #ff0000;
-    text-align: left;
-}
-
 .address-form__input {
     display: block;
     padding: 10px;
@@ -54,4 +48,10 @@
     background: #ff4b4b;
     color: #fff;
     cursor: pointer;
+}
+
+.form__error-message {
+    height: 20px;
+    color: #ff0000;
+    text-align: left;
 }

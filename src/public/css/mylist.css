@@ -40,17 +40,22 @@
 
 }
 
-.product-list__item {
-    width: calc(33.333% - 20px);
+
+.product-list__name {
+    margin-top: 10px;
+}
+
+.product-list__image {
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .product-list__image img {
     width: 100%;
     height: auto;
-    max-width: 200px;
-    padding: 10px;
-    box-sizing: border-box;
 }
-.product-list__name {
-    margin-top: 10px;
+
+.product-status {
+    color: #FF0000;
 }

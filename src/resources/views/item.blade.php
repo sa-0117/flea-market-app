@@ -26,18 +26,19 @@
                                 <span>(税込)</span>
                             </div>
                         </div>
-                        <div class="item__iconbutton">
-                            <div class="item__iconbutton-container">
-                                <button class="item__iconbutton-favorite" type="button" name="favorite" value="">☆</button>
-                                <p class="item__iconbutton-text">1</p>
+                        <form action="{{ route('favorite.toggle', $listing->product->id) }}" method="post">
+                                @csrf
+                            <div class="item__iconbutton">                           
+                                <button type="submit" class="star-button {{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id) ? 'favoriteBy' : '' }}"></button>
+                                <p class="item__iconbutton-text">{{ $listing->product->favoriteBy ? $listing->product->favoriteBy->count() : 0 }}</p>
                             </div>
                             <div class="item__iconbutton">
                                 <div class="item__iconbutton-container">
-                                    <button class="item__iconbutton-comment" type="button" name="favorite" value="">□</button>
+                                    <button type="submit" class="comment-button"></button>
                                     <p class="item__iconbutton-text">1</p>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <div class="item__button">
                             <a href="{{ url('purchase/' . $listing->product->id) }}" class="item__button-submit">購入手続きへ</a>                           
                         </div>
@@ -48,7 +49,9 @@
                     <div class="item__group-index">
                         <h3>商品説明</h3>
                     </div>
-                    <textarea class="item-group__textarea" name="description" id="description"></textarea>
+                    <div class="item-group__description">
+                        {{ $listing->product->description }}
+                    </div>
                     
                 </div>
                 <div class="item__group">
@@ -57,14 +60,16 @@
                     </div>
                 
                     <div class="item__group">
-                        <label class="item__group__label">カテゴリー</label>
-                    
+                        <div class="item__group__category">
+                            <p>カテゴリー</p>
+                            <p>{{ $listing->product->category }}</p>
+                        </div>
                     </div>
                 </div>
                 <div class="item__group">
-                    <label class="item__group__label" for="condition">商品の状態</label>
-                    <div class="item__group-select">
-                        
+                    <div class="item__group__category">
+                        <p>商品の状態</p>
+                        <p>{{ $listing->product->condition }}</p>
                     </div>
                 </div>
 

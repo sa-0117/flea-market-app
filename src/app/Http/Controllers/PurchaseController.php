@@ -41,10 +41,11 @@ class PurchaseController extends Controller
 
         //購入処理
         $listing->buyer_id = $user->id;
+        $listing->status = 'sold';
         $listing->save();
 
         $user->orders()->create([
-     
+            
             'listing_id' => $listing->id,
             'purchase_price' => $listing->listing_price,
             'shopping_post_code' => $validated['post_code'], 

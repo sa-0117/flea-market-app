@@ -24,6 +24,10 @@
     align-items: flex-start;
 }
 
+.item__group-price {
+    margin-bottom: 20px;
+}
+
 .item__iconbutton {
     display: flex;
 }
@@ -33,11 +37,11 @@
 }
 
 
-.item__group label {
+.item__group__category {
     margin-bottom: 5px;
 }
 
-.item__group textarea {
+.item__group-description {
     height: 180px;
     width: 100%;
 }
@@ -62,4 +66,84 @@
 .item-purchase,
 .form-comment {
     width: 100%;
+}
+.star-button {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-right: 8px solid transparent;
+    border-bottom: 5px solid black;
+    border-radius: 8px;
+    border-left: 8px solid transparent;
+    transform: rotate(35deg);
+    background: none;
+    cursor: pointer;
+}
+
+.star-button::before,
+.star-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 0;
+    height: 0;
+    border-right: 8px solid transparent;
+    border-bottom: 5px solid black;
+    border-radius: 8px;
+    border-left: 8px solid transparent;
+}
+
+.star-button::before {
+    transform: rotate(-70deg);
+}
+
+.star-button::after {
+    transform: rotate(70deg);
+}
+
+.star-button.favorited,
+.star-button.favorited::before,
+.star-button.favorited::after {
+    border-bottom-color: #f2c820;
+}
+
+
+.comment-button {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: left;
+    line-height: 1.5;
+    color: #000000;
+}
+    
+.comment-button::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    border-style: solid;
+    border-width: 10px 10px 0 0;
+    border-color: #000000 transparent transparent;
+    translate: -50% 100%;
+    transform: skew(-25deg);
+    transform-origin: top;
+}
+    
+.comment-button::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    border-style: solid;
+    border-width: 5px 5px 0 0;
+    border-color: #fff transparent transparent;
+    translate: calc(-50% - 0.4px) 100%;
+    transform: skew(-25deg);
+    transform-origin: top;     
 }

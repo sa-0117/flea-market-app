@@ -27,10 +27,9 @@ class User extends Authenticatable
         'profile_image'
     ];
 
-    public function favorites()
+    public function favoriteproducts()
     {
-        return $this->belongsToMany(Product::class, 'favorite_products')
-        ->withTimestamps();
+        return $this->belongsToMany(Product::class, 'favorite_products', 'user_id', 'product_id')->withTimestamps();
     }
 
     public function listings() {
@@ -41,6 +40,10 @@ class User extends Authenticatable
     public function orders(){
    
         return $this->hasMany(Order::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
     }
 
     /**

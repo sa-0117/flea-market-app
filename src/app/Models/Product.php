@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Product extends Model
 {
@@ -16,9 +17,9 @@ class Product extends Model
         'condition'
     ]; 
 
-    public function favoretes()
+    public function favoriteBy()
     {
-        return $this->belongsToMany(User::class, 'favorite_products');
+        return $this->belongsToMany(User::class, 'favorite_products', 'product_id', 'user_id')->withTimestamps();
     }
 
     public function listing() {
@@ -36,4 +37,7 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
 }

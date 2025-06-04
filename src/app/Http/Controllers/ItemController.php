@@ -33,7 +33,7 @@ class ItemController extends Controller
 
     public function show($item_id) {
 
-        $listing = Listing::with(['product.favoriteBy'])->findOrFail($item_id);
+        $listing = Listing::with(['product.favoriteBy', 'product.categories'])->findOrFail($item_id);
         return view('item', compact('listing'));
     }
 }

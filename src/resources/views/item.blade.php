@@ -8,74 +8,82 @@
     <div class="item">    
         <div class="item__inner">
             <div class="item-row">
-                <div class="item__group">
-                    <div class="item__image-preview">
-                        <img src="{{ asset('storage/' .$listing->product->image) }}" class="item__image" alt="{{ $listing->product->name }}">
+                <div class="item-group">
+                    <div class="item-image-preview">
+                        <img src="{{ asset('storage/' .$listing->product->image) }}" class="item-image" alt="{{ $listing->product->name }}">
                     </div>
                 </div>
             </div>
             <div class="item-column">
-                <div class="item__group">
+                <div class="item-group">
                     <div class="item-purchase">
                     @csrf
-                        <div class="item__group-index">
+                        <div class="item-group-index">
                             <h1>{{$listing->product->name}}</h1>
                             <small>{{$listing->product->brand}}</small>
-                            <div class="item__group-price">
-                                <span>&yen{{ number_format($listing->listing_price) }}</span>
-                                <span>(税込)</span>
+                            <div class="item-group-price">
+                                <div class="item-group-price-price">
+                                    <span>&yen{{ number_format($listing->listing_price) }}</span>
+                                </div>
+                                <div class="item-group-price-tax">
+                                    <span>(税込)</span>
+                                </div>
                             </div>
                         </div>
-                        <form action="{{ route('favorite.toggle', $listing->product->id) }}" method="post">
+                        <form class="item-iconbutton" action="{{ route('favorite.toggle', $listing->product->id) }}" method="post">
                                 @csrf
-                            <div class="item__iconbutton">                           
-                                <button type="submit" class="star-button {{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id) ? 'favoriteBy' : '' }}"></button>
+                            <div class="item-iconbutton-favorite">                           
+                                <button type="submit" class="star-button {{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id) ? 'favorited' : '' }}"></button>
                                 <p class="item__iconbutton-text">{{ $listing->product->favoriteBy ? $listing->product->favoriteBy->count() : 0 }}</p>
                             </div>
-                            <div class="item__iconbutton">
-                                <div class="item__iconbutton-container">
+                            <div class="item-iconbutton-comment">
+                                <div class="item-iconbutton-container">
                                     <button type="submit" class="comment-button"></button>
-                                    <p class="item__iconbutton-text">1</p>
+                                    <p class="item-iconbutton__text"></p>
                                 </div>
                             </div>
                         </form>
-                        <div class="item__button">
-                            <a href="{{ url('purchase/' . $listing->product->id) }}" class="item__button-submit">購入手続きへ</a>                           
+                        <div class="item-button">
+                            <a href="{{ url('purchase/' . $listing->product->id) }}" class="item-button-submit">購入手続きへ</a>                           
                         </div>
                     </div>
                 </div>
            
-                <div class="item__group">
-                    <div class="item__group-index">
-                        <h3>商品説明</h3>
+                <div class="item-group">
+                    <div class="item-group-index">
+                        <h2>商品説明</h2>
                     </div>
                     <div class="item-group__description">
                         {{ $listing->product->description }}
                     </div>
                     
                 </div>
-                <div class="item__group">
-                    <div class="item__group-index">
-                        <h3>商品の情報</h3>
-                    </div>
-                
-                    <div class="item__group">
-                        <div class="item__group__category">
-                            <p>カテゴリー</p>
-                            <p>{{ $listing->product->category }}</p>
-                        </div>
+                <div class="item-group">
+                    <div class="item-group-index">
+                        <h2>商品の情報</h2>
                     </div>
                 </div>
-                <div class="item__group">
-                    <div class="item__group__category">
-                        <p>商品の状態</p>
-                        <p>{{ $listing->product->condition }}</p>
+                <div class="item-group">
+                    <div class="item-group__inner">
+                        <dl class="category__list">    
+                            <dt>カテゴリー</dt>                            
+                                @foreach($listing->product->categories as $category)
+                                    <dd>{{ $category->content }}</dd>
+                                @endforeach
+                        </dl>
                     </div>
                 </div>
-
-                <div class="item__group">
-                    <div class="item__group-index-comment">
-                        <h3>コメント</h3>
+                <div class="item-group">
+                    <div class="item-group__inner">
+                        <dl class="condition__list">
+                            <dt>商品の状態</dt>
+                            <dd>{{ $listing->product->condition }}
+                        </dl>
+                    </div>
+                </div>
+                <div class="item-group">
+                    <div class="item-group-index-comment">
+                        <h2>コメント</h2>
                         <span>(1)</span>
                     </div>
                     <div class="">
@@ -84,11 +92,11 @@
                     </div>
                     <form class="form-comment" action="" method="post">
                         @csrf
-                        <label class="item__group__label" for="comment">admin</label>
+                        <label class="item-group__label" for="comment">admin</label>
                         <textarea class="item-group__textarea" name="comment" id="comment"></textarea>
 
-                        <div class="item__button">
-                            <button class="item__button-submit" type="submit" name="action" value="send">コメントを送信する</button>
+                        <div class="item-button">
+                            <button class="item-button-submit" type="submit" name="action" value="send">コメントを送信する</button>
                         </div>   
                     </form>
                 </div>

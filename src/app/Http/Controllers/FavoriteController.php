@@ -26,9 +26,12 @@ class FavoriteController extends Controller
         ]);
     }
 
-
     public function toggle(Product $product) {
         
+        if(!auth()->check()){
+            return redirect()->route('login');
+        }
+
         $user = auth()->user();
 
         if ($user->favoriteProducts()->where('product_id', $product->id)->exists()) {

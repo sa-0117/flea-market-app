@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Listing;
@@ -17,12 +17,7 @@ class SellController extends Controller
         return view('sell', compact('categories'));
     }
 
-    public function store(Request $request) {
-
-        //imageがあるかチェック
-        if(!$request->hasfile('image')) {
-            return redirect('/sell');
-        }
+    public function store(ExhibitionRequest $request) {
         
         //画像保存
         $path = $request->file('image')->store('image', 'public');         

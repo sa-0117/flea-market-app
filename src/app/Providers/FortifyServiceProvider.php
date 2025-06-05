@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 use App\Actions\Fortify\CreateNewUser;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use App\Http\Responses\LoginResponse as CustomLoginResponse;
+use App\Http\Controllers\Auth\CustomAuthenticatedSessionController;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -32,20 +33,17 @@ class FortifyServiceProvider extends ServiceProvider
     }
 
     public function boot(): void
-    {
-        Fortify::createUsersUsing(CreateNewUser::class);
+{
+    Fortify::ignoreRoutes();
 
-        Fortify::registerView(function () {
-            return view('auth.register');
-        });
+    Route::middleware('web')->group(function () {
+        Route::get('/register', [CustomRegisteredUserController::class, 'create'])->name('register');
+        Route::post('/register', [CustomRegisteredUserController::class, 'store']);
 
-        Fortify::loginView(function () {
-            return view('auth.login');
-        });
+        Route::get('/login', [CustomAuthenticatedSessionController::class, 'create'])->name('login');
+        Route::post('/login', [CustomAuthenticatedSessionController::class, 'store']);
+    });
+}
 
-        RateLimiter::for('login', function (Request $request) {
-            $email = (string) $request->email;
-            return Limit::perMinute(10)->by($email . $request->ip());
-        });
-    }
+
 }

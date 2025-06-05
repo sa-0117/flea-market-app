@@ -6,8 +6,7 @@ use App\Http\Controllers\SellController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\Auth\CustomAuthenticatedSessionController;
-use Laravel\Fortify\Fortify;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +18,7 @@ use Laravel\Fortify\Fortify;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', [ItemController::class, 'index'])->name('product.index');
 Route::get('/item/{item_id}', [ItemController::class, 'show']);

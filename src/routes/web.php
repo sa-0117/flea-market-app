@@ -24,8 +24,11 @@ Route::get('/', [ItemController::class, 'index'])->name('product.index');
 Route::get('/item/{item_id}', [ItemController::class, 'show']);
 
 Route::middleware(['auth'])->group(function (){
+    Route::post('/item/{product}/comment', [CommentController::class, 'store'])->name('comment.store');
+});
+
+Route::middleware(['auth'])->group(function (){
     Route::get('/mylist',[FavoriteController::class, 'index'])->name('mylist.index');
-    Route::post('/comment/{product}', [CommentController::class, 'store'])->name('comment.store');
 });
 
 Route::post('/favorite/{product}', [FavoriteController::class, 'toggle'])->name('favorite.toggle');

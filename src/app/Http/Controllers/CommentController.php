@@ -10,13 +10,11 @@ use App\Http\Requests\CommentRequest;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, Product $product) {
+    public function store(CommentRequest $request, Product $product) {
         
-        $validated = $request->validated();
-
         $product->comments()->create([
-            'comment' => $validated['comment'], 
-            'user_id' => auth::id(),
+            'comment' => $request->comment, 
+            'user_id' => auth()->id(),
         ]);
 
         return back();

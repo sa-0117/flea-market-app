@@ -14,6 +14,12 @@ class ItemController extends Controller
         $userId = Auth::id();
         $keyword = $request->input('keyword');
 
+        if(!empty($keyword)) {
+            session(['key' => $keyword]);
+        } else {
+            session()->forget('key');
+        }
+
         $query = Listing::with('product')->whereIn('status', ['listed','sold']);
 
         if($userId !== null) {
@@ -25,7 +31,7 @@ class ItemController extends Controller
                 $q->where('name', 'like', '%' . $keyword . '%');
             });
         }
-
+        
         $listings = $query->get();
 
         return view('product', compact('listings'));

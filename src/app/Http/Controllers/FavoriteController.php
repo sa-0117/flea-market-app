@@ -6,23 +6,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Favorite;
 use App\Models\Product;
-use App\Models\Listing;
 
 class FavoriteController extends Controller
 {
     public function index(Request $request) {
 
         $user = auth()->user();
+        $key = session('key');
 
-        $query = Listing::with('product')->whereIn('status', ['listed','sold']);
+        $productsQuery = $user->favoriteProducts()->with(['listing', 'favoriteBy']);
 
-        $products = $user->favoriteProducts()->with(['listing', 'favoriteBy'])->paginate(10);
+        if ($key) {
+            $productsQuery->where('name', 'like', '%' . $key . '%');
+        }
 
-        $listings = $query->get();
+        $products = $productsQuery->paginate(10);
 
         return view('mylist', [
-            'products'=> $products, 
-            'listings' => $listings
+            'products'=> $products
         ]);
     }
 

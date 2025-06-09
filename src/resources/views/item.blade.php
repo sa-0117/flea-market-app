@@ -84,38 +84,38 @@
                     </div>
                 </div>
                 <div class="item-group">
-                <form class="form-comment" action="{{ route('comment.store', $listing->product->id) }}" method="post">
-                @csrf
-                <div class="item-group-index-comment">
-                        <h2>コメント({{ $listing->product->comments->count() }})</h2>     
-                </div>
-                <div class="comments-list">
-                    @foreach($listing->product->comments as $comment)
-                        <div class="comment-item">
-                            <div class="comment-user">
-                                @if($comment->user->avatar !== null)
-                                    <img src="{{ asset('storage/image/'. $comment->user->avatar) }}" alt="avatar" class="avatar">
-                                @else
-                                    <div class="avatar avatar-placeholder"></div>
-                                @endif
-                            </div>
-                            <div class="comment-user-name">{{ $comment->user->name }}</div>
+                    <form class="form-comment" action="{{ route('comment.store', $listing->product->id) }}" method="post">
+                        @csrf
+                        <div class="item-group-index-comment">
+                            <h2>コメント({{ $listing->product->comments->count() }})</h2>     
                         </div>
-                        <div class="comment-content">{{ $comment->comment }}</div>
-                    @endforeach
-                </div>
-                <div class="error-message">
-                        @error('comment')  
-                            {{ $message }}
-                        @enderror
-                </div>
-                <div class="product-comment">
-                    <h3>商品へのコメント</h3>
-                    <textarea class="product-comment__textarea" name="comment" id="comment">{{ old('comment') }}</textarea>
-                </div>
-                <div class="item-button">
-                    <button class="item-button-submit" type="submit" name="action" value="send">コメントを送信する</button>
-                </div>   
+                        <div class="comments-list">
+                            @foreach($listing->product->comments as $comment)
+                                <div class="comment-item">
+                                    <div class="comment-user">
+                                        @if($comment->user->avatar !== null)
+                                            <img src="{{ asset('storage/image/'. $comment->user->avatar) }}" alt="avatar" class="avatar">
+                                        @else
+                                            <div class="avatar avatar-placeholder"></div>
+                                        @endif
+                                    </div>                                
+                                    <div class="comment-user-name">{{ $comment->user->name }}</div> 
+                                </div>                       
+                                <div class="comment-content">{{ $comment->comment }}</div>
+                            @endforeach
+                        </div>
+                        <div class="error-message">
+                            @error('comment')  
+                                {{ $message }}
+                            @enderror
+                        </div>
+                        <div class="product-comment">
+                            <h3>商品へのコメント</h3>
+                            <textarea class="product-comment__textarea" name="comment" id="comment">{{ old('comment') }}</textarea>
+                        </div>
+                        <div class="item-button">
+                            <button class="item-button-submit" type="submit" name="action" value="send">コメントを送信する</button>
+                        </div>   
                     </form>
                 </div>
             </div>

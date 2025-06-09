@@ -94,6 +94,7 @@ class UserController extends Controller
         $user = auth()->user();
         $user->post_code = $request->input('post_code');
         $user->address = $request->input('address');
+        $user->building = $request->input('building');
         $user->save();
 
         return redirect()->route('purchase.show', ['item_id' => $item_id]);

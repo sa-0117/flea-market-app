@@ -19,7 +19,7 @@ class PurchaseController extends Controller
 
         $payment = $request->query('payment');
 
-        $user = auth()->user();
+        $user = auth()->user()->fresh();
 
         return view('purchase.purchase', [
             'listing' => $listing,
@@ -46,12 +46,12 @@ class PurchaseController extends Controller
 
         $user->orders()->create([
             
-            'listing_id' => $listing->id,
-            'purchase_price' => $listing->listing_price,
-            'shopping_post_code' => $validated['post_code'], 
-            'shopping_address' => $validated['address'], 
-            ]);  
+        'listing_id' => $listing->id,
+        'purchase_price' => $listing->listing_price,
+        'shopping_post_code' => $validated['post_code'], 
+        'shopping_address' => $validated['address']
+        ]);  
 
-        return  redirect('/mypage?page=buy')->with('status', '購入が完了しました。');
+        return  redirect('/mypage?page=buy');
     }
 }

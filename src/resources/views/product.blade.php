@@ -6,17 +6,19 @@
 
 @section('content')
     <div class="product">
-        <div class="product-index">
-            <li class="product-index__item">
-                <a href="{{ route('product.index') }}" class="{{ request()->routeIs('product.index') ? 'active' : '' }}">おすすめ</a>
-            </li>
-            <li class="product-index__item">
-                @auth
-                    <a href="{{ route('mylist.index') }}" class="{{ request()->routeIs('mylist.index') ? 'active' : '' }}">マイリスト</a>
-                @else
-                    <span class="disabled">マイリスト</span>
-                @endauth
-            </li>
+        <div class="product-index__inner">
+            <div class="product-index">    
+                <li class="product-index__item">
+                    <a href="{{ route('product.index') }}" class="{{ request()->routeIs('product.index') ? 'active' : '' }}">おすすめ</a>
+                </li> 
+                <li class="product-index__item">
+                    @auth
+                        <a href="{{ route('mylist.index') }}" class="{{ request()->routeIs('mylist.index') ? 'active' : '' }}">マイリスト</a>
+                    @else
+                        <span class="disabled">マイリスト</span>
+                    @endauth
+                </li>
+            </div>
         </div>
 
         <div class="product-list">            

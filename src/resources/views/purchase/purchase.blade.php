@@ -42,6 +42,7 @@
                 <div class="purchase-address__list">
                     <span class="purchase-address__list-postcode">〒{{ $user->post_code }}</span>
                     <span class="purchase-address__list-address">{{ $user->address }}</span>
+                    <span class="purchase-address__list-building">{{ $user->building }}</span>
                 </div>
                 <div class="form__error-message">
                     @error('address')
@@ -56,6 +57,7 @@
             @csrf
                 <input type="hidden" name="post_code" value="{{ $user->post_code }}">
                 <input type="hidden" name="address" value="{{ $user->address }}" >
+                <input type="hidden" name="address" value="{{ $user->building }}">
 
                 <div class="purchase-summary__list">
                     <div class="purchase-summary__item">
@@ -80,6 +82,7 @@
                 <input type="hidden" name="payment" value="{{ request('payment') }}">
                 <div class="purchase__button">
                     <button class="purchase__button-submit" type="submit">購入する</button>
+                </div>
             </form>
         </div>
     </div> 

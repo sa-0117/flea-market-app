@@ -156,3 +156,59 @@
     color: #ff0000;
     text-align: left;
 }
+
+@media (min-width: 768px) and (max-width: 800px) {
+    .sell-form {
+        width: 85%;
+        padding: 0 10px;
+    }
+
+    .sell-button {
+        width: 100%;
+        font-size: 13px;
+        padding: 10px;
+    }
+
+    .sell-form__input,
+    .sell-form__select,
+    .sell-form__textarea {
+        height: auto;
+        font-size: 14px;
+    }
+
+    .sell-form__button-submit {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .category-label {
+        font-size: 13px;
+        padding: 5px 10px;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1500px) {
+    .sell-form {
+        width: 35%;
+    }
+
+    .sell-button {
+        font-size: 15px;
+        padding: 10px 16px;
+    }
+
+    .sell-form__input,
+    .sell-form__select,
+    .sell-form__textarea {
+        font-size: 15px;
+    }
+
+    .sell-form__button-submit {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    .category-label {
+        font-size: 14px;
+    }
+}

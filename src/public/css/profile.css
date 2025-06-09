@@ -21,7 +21,6 @@
 
 .profile-image {
     display: flex;
-    align-items: flex-start;
     margin-bottom: 30px;
 }
 
@@ -45,6 +44,8 @@
 .profile-image-edit {
     align-self: center;
     margin-left: 20px;
+    height: 40px;
+    width: 140px;
 }
 
 .profile-image-edit__label {
@@ -53,8 +54,7 @@
     color: #fb8e8e;
     background: #fff;
     border-radius: 8px;
-    height: 40px;
-    width: 120px;
+
     padding: 3px;
 }
 
@@ -99,4 +99,67 @@
     height: 20px;
     color: #ff0000;
     text-align: left;
+}
+
+@media (min-width: 768px) and (max-width: 800px) {
+    .profile__form {
+        width: 80%;
+        padding: 0 10px;
+    }
+
+    .profile-image__inner,
+    .avatar,
+    .avatar-placeholder {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profile-image-edit {
+        width: 140px;
+        height: 30px;
+    }
+        
+    .profile-image-edit__label {
+        line-height: 36px;
+        font-size: 14px;
+    }
+
+    .profile-form__input {
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .profile-form__button-submit {
+        padding: 10px;
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1500px) {
+    .profile__form {
+        width: 35%;
+    }
+
+    .profile-image__inner,
+    .avatar,
+    .avatar-placeholder {
+        width: 110px;
+        height: 110px;
+    }
+
+    .profile-image-edit {
+        width: 130px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .profile-form__input {
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .profile-form__button-submit {
+        padding: 14px;
+        font-size: 17px;
+    }
 }

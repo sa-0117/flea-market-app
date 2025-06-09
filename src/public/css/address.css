@@ -55,3 +55,36 @@
     color: #ff0000;
     text-align: left;
 }
+
+@media (min-width: 768px) and (max-width: 800px) {
+    .address-form {
+        width: 80%;
+        padding: 0 10px;
+    }
+
+    .address-form__input {
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .address-form__button-submit {
+        padding: 10px;
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1500px) {
+    .address-form {
+        width: 35%;
+    }
+
+    .address-form__input {
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .address-form__button-submit {
+        padding: 14px;
+        font-size: 17px;
+    }
+}

@@ -2,7 +2,12 @@
     max-width: 1540px;
     margin: 0 auto;
     width: 100%;
-    padding: 40px;
+}
+
+.mypage__inner {
+    padding-top: 40px;
+    margin: 0 auto;
+    width: 60%;
 }
 
 .mypage-top {
@@ -53,9 +58,13 @@
 
 .product-tab {
     display: flex;
-    justify-content: center;
     border-bottom: 2px solid #aaa;
-}
+        width: 100vw;
+        /* ビューポートの横幅に */
+        margin-left: calc(-50vw + 50%);
+        /* 中央寄せされた幅から左に引き戻す */
+        padding-left: 40px;
+    }
 
 .product-tab-name {
     list-style: none;
@@ -77,8 +86,9 @@
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(4, 1fr);
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
+    padding: 40px;
 }
 
 .product-list__image img {
@@ -91,4 +101,21 @@
 
 .product-list__item a {
     text-decoration: none;
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .product-list {
+        grid-template-columns: repeat(3, 1fr);
+        width: 85%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .product-list {
+        grid-template-columns: repeat(4, 1fr);
+        width: 80%;
+        gap: 2rem;
+        padding: 30px 40px;
+    }
+
 }

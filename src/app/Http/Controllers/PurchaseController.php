@@ -72,7 +72,6 @@ class PurchaseController extends Controller
             'mode' => 'payment',
             'success_url' => url('/mypage?page=buy'),
         ]);
-        dd(asset('storage/' . $listing->product->image)); 
 
         return  redirect($session->url);
     }

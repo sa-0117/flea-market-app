@@ -2,6 +2,7 @@
     margin: 0 auto;
     padding: 30px 15px;
     max-width: 1540px;
+    width: 100%;
 }
 
 .login-form__heading {
@@ -11,23 +12,26 @@
 
 .login-form__form {
     margin: 0 auto;
-    width: 40%;
+    width: 90%;
+    max-width: 500px;
     text-align: center;
 }
 
 .login-form__group {
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .login-form__label {
     display: block;
     text-align: left;
+    margin-bottom: 5px;
 }
 
 .login-form__error-message {
-    height: 20px;
+    min-height: 20px;
     color: #ff0000;
     text-align: left;
+    font-size: 0.9em;
 }
 
 .login-form__input {
@@ -37,8 +41,8 @@
     height: 40px;
     border: 1px solid #9a9a9ae4;
     border-radius: 3px;
-
     appearance: none;
+    box-sizing: border-box;
 }
 
 .login-form__button {
@@ -54,14 +58,39 @@
     background: #ff4b4b;
     color: #fff;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form__button-submit:hover {
+    background-color: #e43e3e;
+}
+
+.login-form__button-submit:active {
+    background-color: #c23636;
 }
 
 .register-form__link {
     margin-top: 20px;
-    text-align: center;   
+    text-align: center;
 }
 
 .register-form__button-submit {
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    color: #3366ff;
     text-decoration: none;
-    color: rgb(51, 51, 252);
+}
+
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .login-form__form {
+        width: 50%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .login-form__form {
+        width: 70%;
+    }
 }

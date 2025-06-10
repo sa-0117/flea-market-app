@@ -57,7 +57,7 @@
             @csrf
                 <input type="hidden" name="post_code" value="{{ $user->post_code }}">
                 <input type="hidden" name="address" value="{{ $user->address }}" >
-                <input type="hidden" name="address" value="{{ $user->building }}">
+                <input type="hidden" name="building" value="{{ $user->building }}">
 
                 <div class="purchase-summary__list">
                     <div class="purchase-summary__item">

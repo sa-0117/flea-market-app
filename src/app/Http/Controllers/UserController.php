@@ -48,11 +48,8 @@ class UserController extends Controller
         $user->post_code = $validated['post_code'] ?? $user->post_code;
         $user->address = $validated['address'] ?? $user->address;
         $user->building = $request->input('building');
-
-        // プロフィール更新
         $user->save();
 
-        // ファイルアップロード処理
     if ($request->hasFile('avatar')) {
         $filename = $request->file('avatar')->getClientOriginalName();
         $path = $request->file('avatar')->storeAs('public/image', $filename);
@@ -66,7 +63,6 @@ class UserController extends Controller
 
         $user->save();
 
-        // リダイレクト先を条件で分岐
         if (!$user->wasChanged('profile_completed')) {
             // 編集時 → プロフィール画面
             return redirect('/mypage');

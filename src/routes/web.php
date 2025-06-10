@@ -46,9 +46,7 @@ Route::get('/purchase/address/{item_id}', [UserController::class, 'editFromPurch
 Route::post('/purchase/address/{item_id}', [UserController::class, 'updateFromPurchase'])->name('purchase.address.update');
 
 Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
-Route::post('/purchase/{item_id}',[PurchaseController::class, 'store'])->name('purchase.store');
-
-
+Route::post('/purchase/{item_id}/pay', [PurchaseController::class, 'pay'])->name('purchase.pay');
 
 
 

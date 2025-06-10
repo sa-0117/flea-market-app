@@ -53,7 +53,7 @@
         </div> 
 
         <div class="purchase-right">
-            <form action="{{ route('purchase.store', ['item_id' => $listing->id]) }}" method="post">
+            <form action="{{ route('purchase.pay', ['item_id' => $listing->id]) }}" method="post">
             @csrf
                 <input type="hidden" name="post_code" value="{{ $user->post_code }}">
                 <input type="hidden" name="address" value="{{ $user->address }}" >

@@ -4,7 +4,7 @@
 
 ###Docerビルド  
 ```  
-git clone github.com:coachtech-material/laravel-docker-template.git
+git clone git@github.com:sa-0117/flea-market-app.git
 docker-compose up -d --build  
 ``` 
 
@@ -15,7 +15,8 @@ composer install
 .env.example  
 php artisan key:generate  
 php artisan migrate  
-php artisan db:seed  
+php artisan db:seed 
+php artisan storage:link 
 ```  
 
 ##使用技術  
@@ -26,7 +27,7 @@ php artisan db:seed
 
 ##ER図
 
-![er](https://github.com/user-attachments/assets/a5efe6ec-19d9-4037-88be-e85bd37a9cd2)
+![er](https://github.com/user-attachments/assets/5f4bc1b0-e129-4b52-9a7b-e24d30d24e11)
 
 
 ##URL  

@@ -20,7 +20,7 @@ class CustomAuthenticatedSessionController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'メールアドレスまたはパスワードをご確認ください。',
+            'email' => 'ログイン情報が登録されていません。',
         ])->withInput($request->only('email'));
     }
 

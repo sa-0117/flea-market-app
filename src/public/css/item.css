@@ -18,7 +18,7 @@
 }
 
 .item-group {
-    margin: 0 0 20px;
+    margin: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;   
@@ -34,18 +34,42 @@
     margin-right: 5px;
 }
 
-.item-iconbutton {
+.item-iconbutton-group {
     display: flex;
-    padding: 10px 20px;
+    gap: 16px;
+    margin: 10px;
 }
 
-.item__iconbutton-text {
-    padding: 5px;
-    margin: 0 auto;
-}
-
+.item-iconbutton-favorite,
 .item-iconbutton-comment {
-    padding: 10px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.icon-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    display: block;
+}
+
+.icon-text {
+    margin-top: 4px;
+    font-size: 14px;
+    text-align: center;
 }
 
 .item-group__inner dl {
@@ -164,87 +188,6 @@
     height: 180px;
     border: 1px solid #3433336d;
     border-radius: 5px;
-}
-
-.star-button {
-    position: relative;
-    width: 0;
-    height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-bottom: 8px solid #000;
-    transform: rotate(35deg);
-    background: none;
-    cursor: pointer;
-    text-align: center;
-}
-
-.star-button::before,
-.star-button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -12px;
-    width: 0;
-    height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-bottom: 8px solid black;
-}
-
-.star-button::before {
-    transform: rotate(-70deg);
-}
-
-.star-button::after {
-    transform: rotate(70deg);
-}
-
-.star-button.favorited,
-.star-button.favorited::before,
-.star-button.favorited::after {
-    border-bottom-color: #f2c820;
-}
-.comment-button {
-    position: relative;
-    display: inline-block;
-    width: 24px;
-    height: 18px;
-    border: 1px solid #000;
-    border-radius: 60%;
-    background-color: #fff;
-    text-indent: -9999px;
-    overflow: visible;
-    cursor: pointer;
-    padding: 0;
-}
-
-.comment-button::before {
-    content: "";
-    position: absolute;
- 
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 10px 10px 0 0;
-    border-color: #000 transparent transparent;
-    transform: translateX(-130%) rotate(-95deg);
-    z-index: 1;
-}
-
-.comment-button::after {
-    content: "";
-    position: absolute;
-   
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 8px 8px 0 0;
-    border-color: #fff transparent transparent;
-    transform: translateX(calc(-130% - 0.4px)) rotate(-95deg);
-    z-index: 2;
 }
 
 .error-message {

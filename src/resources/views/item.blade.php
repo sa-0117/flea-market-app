@@ -30,21 +30,26 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="item-iconbutton" action="{{ route('favorite.toggle', $listing->product->id) }}" method="post">
-                                @csrf
-                            <div class="item-iconbutton-favorite">                           
-                                <button type="submit" class="star-button {{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id) ? 'favorited' : '' }}"></button>
-                                <p class="item__iconbutton-text">{{ $listing->product->favoriteBy ? $listing->product->favoriteBy->count() : 0 }}</p>
-                            </div>
-                            <div class="item-iconbutton-comment">
-                                <div class="item-iconbutton-container">
-                                    <button type="submit" class="comment-button"></button>
-                                    <p class="item-iconbutton__text">
-                                        {{ $listing->product->comments->count() }}
-                                    </p>
-                                </div>
-                            </div>
-                        </form>
+                        <div class="item-iconbutton-group">
+    <form class="item-iconbutton" action="{{ route('favorite.toggle', $listing->product->id) }}" method="post">
+        @csrf
+        <div class="item-iconbutton-favorite">
+            <button type="submit" class="icon-button {{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id) ? 'favorited' : '' }}">
+                <img src="{{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id)
+                    ? asset('storage/image/star-yellow.svg') 
+                    : asset('storage/image/star.svg') }}" alt="star" class="icon-img">
+            </button>
+            <p class="icon-text">{{ $listing->product->favoriteBy ? $listing->product->favoriteBy->count() : 0 }}</p>
+        </div>
+    </form>
+    <div class="item-iconbutton-comment">
+        <button class="icon-button">
+            <img src="{{ asset('storage/image/comment.svg') }}" alt="comment" class="icon-img">
+        </button>
+        <p class="icon-text">{{ $listing->product->comments->count() }}</p>
+    </div>
+</div>
+
                         <div class="item-button">
                             <a href="{{ url('purchase/' . $listing->product->id) }}" class="item-button-submit">購入手続きへ</a>                           
                         </div>

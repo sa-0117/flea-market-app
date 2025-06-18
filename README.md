@@ -32,6 +32,6 @@ php artisan storage:link
 
 ##URL  
 
-* 開発環境：[http://localhost/]  
-* phpMyAdmin:[http://localhost:8080]
+* 開発環境：http://localhost/ 
+* phpMyAdmin:http://localhost:8080
 

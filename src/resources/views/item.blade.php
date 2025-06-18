@@ -34,12 +34,12 @@
     <form class="item-iconbutton" action="{{ route('favorite.toggle', $listing->product->id) }}" method="post">
         @csrf
         <div class="item-iconbutton-favorite">
-            <button type="submit" class="icon-button {{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id) ? 'favorited' : '' }}">
+            <button type="submit" class="icon-button {{ auth()->check() && $listing->product->isFavoritedBy(auth()->user()) ? 'favorited' : '' }}">
                 <img src="{{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id)
                     ? asset('storage/image/star-yellow.svg') 
                     : asset('storage/image/star.svg') }}" alt="star" class="icon-img">
             </button>
-            <p class="icon-text">{{ $listing->product->favoriteBy ? $listing->product->favoriteBy->count() : 0 }}</p>
+            <p class="icon-text">{{ $listing->product->favoriteBy()->count() }}</p>
         </div>
     </form>
     <div class="item-iconbutton-comment">

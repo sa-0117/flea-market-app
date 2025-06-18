@@ -33,7 +33,7 @@ class ProductsTableSeeder extends Seeder
             Storage::disk('public')->put("image/{$image}", file_get_contents(database_path("seed_images/{$image}")));
         }
         
-        $productId = DB::table('products')->insert([
+        DB::table('products')->insert([
             [
                 "name" => "腕時計",
                 "description" => "スタイリッシュなデザインのメンズ腕時計",

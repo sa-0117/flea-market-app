@@ -26,7 +26,7 @@ class ItemController extends Controller
             $query->where('user_id', '!=', $userId);
         }
 
-        if (!empty('keyword')) {
+        if (!empty($keyword)) {
             $query->whereHas('product', function ($q) use ($keyword) {
                 $q->where('name', 'like', '%' . $keyword . '%');
             });
@@ -40,6 +40,13 @@ class ItemController extends Controller
     public function show($item_id) {
 
         $listing = Listing::with(['product.favoriteBy', 'product.categories'])->findOrFail($item_id);
-        return view('item', compact('listing'));
+
+        if (auth()->check()) {
+            auth()->user()->load('favoriteProducts');
+        }
+        return view('item', [
+            'listing' => $listing,
+            'product' => $listing->product,
+        ]);
     }
 }

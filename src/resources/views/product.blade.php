@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href=" {{ asset('css/products.css') }}">
+<link rel="stylesheet" href="{{ asset('css/products.css') }}">
 @endsection
 
 @section('content')
     <div class="product">
         <div class="product-index__inner">
-            <div class="product-index">    
+            <ul class="product-index">    
                 <li class="product-index__item">
                     <a href="{{ route('product.index') }}" class="{{ request()->routeIs('product.index') ? 'active' : '' }}">おすすめ</a>
                 </li> 
@@ -18,7 +18,7 @@
                         <span class="disabled">マイリスト</span>
                     @endauth
                 </li>
-            </div>
+            </ul>
         </div>
 
         <div class="product-list">            

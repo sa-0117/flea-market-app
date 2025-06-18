@@ -13,7 +13,8 @@ class RegisterTest extends TestCase
     /** @test */
     
     public function RegisterTest()
-    {
+    {   
+        //
         $response = $this->from('/register')->post('/register', [
             'name' => '',
             'email' => 'aaa@exsample.com',
@@ -21,10 +22,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => '12345678',
         ]);
     
-        // バリデーション失敗 → 元のページへリダイレクトされる
         $response->assertRedirect('/register');
-    
-        // name フィールドにバリデーションエラーが存在する
         $response->assertSessionHasErrors(['name']);
 
         $response = $this->from('/register')->post('/register', [
@@ -79,13 +77,12 @@ class RegisterTest extends TestCase
             'password_confirmation' => '12345678',
         ]);
     
-        $response->assertRedirect('/mypage/profile');
-
         $this->assertDatabaseHas('users', [
             'name' => 'a',
-            'email' => 'test@example.com',
-            'password' => '12345678',
+            'email' => 'aaa@exsample.com',
         ]);
-    
+
+        $response->assertRedirect('/mypage/profile');
+
     }
 }

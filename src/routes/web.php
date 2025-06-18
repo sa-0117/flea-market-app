@@ -21,7 +21,7 @@ use App\Http\Controllers\CommentController;
 
 
 Route::get('/', [ItemController::class, 'index'])->name('product.index');
-Route::get('/item/{item_id}', [ItemController::class, 'show']);
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
 Route::middleware(['auth'])->group(function (){
     Route::post('/item/{product}/comment', [CommentController::class, 'store'])->name('comment.store');

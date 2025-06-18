@@ -21,6 +21,11 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'favorite_products', 'product_id', 'user_id')->withTimestamps();
     }
 
+    public function isFavoritedBy(User $user)
+    {
+        return $this->favoriteBy()->where('user_id', $user->id)->exists();
+    }
+
     public function listing() {
         
         return $this->hasOne(Listing::class);

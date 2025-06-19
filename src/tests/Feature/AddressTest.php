@@ -1,0 +1,87 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\User;
+use App\Models\Product;
+use App\Models\Listing;
+use App\Models\Order;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
+use Tests\TestCase;
+
+class AddressTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(); 
+    }
+
+    /** @test */
+    public function address_update_is_reflected_on_purchase_page()
+    {
+        // 購入者ユーザーを取得・ログイン
+        $user = User::find(1);
+        $this->actingAs($user);
+
+        // 出品商品（購入対象）を取得
+        $listing = Listing::find(2);
+
+        //住所を更新
+        $response = $this->post(route('purchase.address.update', ['item_id' => $listing->id]), [
+            'post_code' => '160-0022',
+            'address' => '東京都新宿区新宿1-1-1',
+            'building' => 'ビル101',
+        ])->assertSessionHasNoErrors();
+
+        // リダイレクト先を確認（購入画面へ）
+        $response->assertRedirect(route('purchase.show', ['item_id' => $listing->id]));
+
+        // 購入画面へGETリクエスト
+        $response = $this->get(route('purchase.show', ['item_id' => $listing->id]));
+
+        // 内容が反映されているか確認
+        $response->assertSee('〒160-0022');
+        $response->assertSee('東京都新宿区新宿1-1-1');
+        $response->assertSee('ビル101');
+
+
+    }
+
+    /** @test */
+    public function shipping_address_is_saved_in_order_on_purchase()
+    {
+        // ログインユーザーを取得
+        $user = User::find(1);
+        $this->actingAs($user);
+
+        // 出品商品を取得
+        $listing = Listing::find(2);
+
+        // 送付先住所の変更
+        $this->post(route('purchase.address.update', ['item_id' => $listing->id]), [
+            'post_code' => '160-0022',
+            'address' => '東京都新宿区新宿1-1-1',
+            'building' => 'ビル101',
+        ])->assertSessionHasNoErrors();
+
+        // 商品を購入（POST）
+        $this->post(route('purchase.pay', ['item_id' => $listing->id]), [
+            'post_code' => '160-0022',
+            'address' => '東京都新宿区新宿1-1-1',
+            'building' => 'ビル101',
+            'payment' => 'credit',
+        ]);
+
+        // ordersテーブルに注文が登録されているか確認
+        $order = Order::where('user_id', $user->id)->latest()->first();
+
+        // 登録された配送先が一致しているか確認
+        $this->assertEquals('160-0022', $order->shopping_post_code);
+        $this->assertEquals('東京都新宿区新宿1-1-1', $order->shopping_address);
+        $this->assertEquals('ビル101', $order->shopping_building);
+    }
+}

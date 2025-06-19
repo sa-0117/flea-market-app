@@ -17,18 +17,23 @@ class ItemTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        Storage::fake('public');
+        Storage::disk('public')->put('image/sample01.jpg', 'dummy');
+        Storage::disk('public')->put('image/clock.jpg', 'dummy');
+
         $this->seed(); 
     }
 
     /** @test */
     public function mylist_item_shows_correct_information()
     {
-        // 最初の出品商品を取得
-        $listing = Listing::first();
-        $product = $listing->product;
+        $user = User::find(1);
+        $user->avatar = 'sample01.jpg';
+        $uesr->save();
 
         // 商品詳細ページにアクセス
-        $response = $this->get('/item/' . $listing->id);
+        $response = $this->get('/item' . $listing->id);
 
         // ステータスコードが200か
         $response->assertStatus(200);

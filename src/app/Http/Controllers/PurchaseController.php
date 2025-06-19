@@ -49,7 +49,8 @@ class PurchaseController extends Controller
             'listing_id' => $listing->id,
             'purchase_price' => $listing->listing_price,
             'shopping_post_code' => $validated['post_code'], 
-            'shopping_address' => $validated['address']
+            'shopping_address' => $validated['address'],
+            'shopping_building' => $request->building,
         ]);  
 
         if (app()->environment('testing')) {

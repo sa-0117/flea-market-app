@@ -24,7 +24,7 @@ class User extends Authenticatable
         'post_code',
         'address',
         'building',
-        'profile_image'
+        'avatar'
     ];
 
     public function favoriteproducts()

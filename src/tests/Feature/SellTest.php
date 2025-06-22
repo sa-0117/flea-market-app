@@ -20,7 +20,7 @@ class SellTest extends TestCase
 
         Storage::fake('public');
 
-        $this->seed(); 
+        $this->seed();      
         
         $user = User::find(1);
         $user->avatar = 'sample01.jpg';

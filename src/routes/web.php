@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CommentController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +38,7 @@ Route::post('/favorite/{product}', [FavoriteController::class, 'toggle'])->name(
 Route::get('/sell', [SellController::class, 'create']);
 Route::post('/sell', [SellController::class, 'store']);
 
-Route::middleware(['auth'])->prefix('mypage')->group(function(){
+Route::middleware(['auth', 'verified'])->prefix('mypage')->group(function(){
     Route::get('/', [UserController::class, 'show']);
     Route::get('/profile', [UserController::class, 'edit']);
     Route::post('/profile', [UserController::class, 'update']); 
@@ -48,6 +50,30 @@ Route::post('/purchase/address/{item_id}', [UserController::class, 'updateFromPu
 Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
 Route::post('/purchase/{item_id}/pay', [PurchaseController::class, 'pay'])->name('purchase.pay');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/email/verify', function () {
+        return view('auth.verify-email');
+    })->name('verification.notice');
 
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect('/mypage/profile'); 
+    })->middleware(['signed'])->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'verification-link-sent');
+    })->middleware(['throttle:6,1'])->name('verification.send');
+
+    Route::get('/email/verify/check', function () {
+        if (auth()->user()->hasVerifiedEmail()) {
+            return redirect('/mypage/profile'); // 認証済み → プロフィールへ
+        }
+
+        return back()->with('status', 'まだ認証が完了していません');  
+    })->name('verification.check');
+});
 
 

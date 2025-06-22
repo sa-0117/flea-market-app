@@ -70,36 +70,31 @@
     font-weight: bold;
 }
 
-@media (min-width: 768px) and (max-width: 800px) {
+@media (min-width: 768px) and (max-width: 851px) {
     .header__inner {
         flex-wrap: wrap;
+        justify-content: center;
         gap: 10px;
-        justify-content: center;
     }
 
-    .header__form-search input {
-        width: 300px;
-    }
-
-    .header-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 10px 0;
-    }
-
-    .header-nav__item {
-        margin: 5px 10px;
-    }
-
-    .header__logo img {
-        height: 26px;
-    }
-
-    .header__form {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
+        .header__form {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+    
+        .header__form-search {
+            width: 100%;
+            max-width: 400px;
+        }
+    
+        .header__form-search input {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
 }
 
 @media (min-width: 1400px) and (max-width: 1500px) {

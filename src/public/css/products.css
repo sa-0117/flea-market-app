@@ -45,12 +45,12 @@
 }
 
 .product-list__image {
-    border: 1px solid #e7e7e7;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.1);
 }
 
 .product-list__image img {
+    border-radius: 5px;
     width: 100%;
     height: auto;
 }

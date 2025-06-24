@@ -65,7 +65,6 @@ class PurchaseTest extends TestCase
 
         $response = $this->get('/');
 
-        // Sold の文字が表示されていることを確認
         $this->assertStringContainsString('Sold', $response->getContent());
 }
 
@@ -92,7 +91,6 @@ class PurchaseTest extends TestCase
 
         $response = $this->get(url('/mypage?tab=buy'));
 
-        // 購入済み商品がマイページの購入一覧に表示される
         $response->assertStatus(200);
         $response->assertSee($order->listing->product->name);
     }

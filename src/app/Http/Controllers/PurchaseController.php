@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
 use App\Models\Listing;
 use App\Http\Requests\PurchaseRequest;
 use Stripe\Stripe;
@@ -17,7 +16,7 @@ class PurchaseController extends Controller
             return redirect()->route('login');
         }
 
-        $listing = Listing::with('Product')->findOrFail($item_id);
+        $listing = Listing::with('product')->findOrFail($item_id);
 
         $payment = $request->query('payment');
 

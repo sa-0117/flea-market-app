@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Product;
 use App\Models\Listing;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ProfileRequest;
@@ -19,7 +18,6 @@ class UserController extends Controller
         $user = auth()->user();
 
         $listings = collect();
-        $products = collect();
         $orders = collect();
 
         if ($tab === 'sell') {
@@ -29,7 +27,7 @@ class UserController extends Controller
         }
 
         return view('mypage.mypage',[
-            'listings' => $listings ?? collect(),
+            'listings' => $listings,
             'tab'=> $tab,
             'user' => $user,
             'userName' => $user->name,
@@ -41,6 +39,11 @@ class UserController extends Controller
     public function update(ProfileRequest $request)
     {
         $user = Auth::user();
+
+         // 初回プロフィール設定かつメール未認証ならブロック
+        if (!$user->profile_completed && !$user->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
 
         $validated = $request->validated();
 
@@ -75,7 +78,6 @@ class UserController extends Controller
     public function edit()
     {
         $user = auth()->user();
-
         return view('mypage.profile', compact('user'));
     }
 

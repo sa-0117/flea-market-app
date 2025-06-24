@@ -32,33 +32,26 @@ class ItemTest extends TestCase
         $user->avatar = 'sample01.jpg';
         $uesr->save();
 
-        // 商品詳細ページにアクセス
         $response = $this->get('/item' . $listing->id);
 
-        // ステータスコードが200か
         $response->assertStatus(200);
 
-        // 商品名、ブランド名、価格、商品説明が表示されているか
         $response->assertSee($product->name);
         $response->assertSee($product->brand);
         $response->assertSee(number_format($listing->listing_price));
         $response->assertSee($product->description);
         $response->assertSee($product->condition);
 
-        // 商品画像のパスが含まれているか
         $response->assertSee('storage/' . $product->image);
 
-        // コメント数やいいね数（0でもOK）
         $response->assertSee((string)$product->comments->count());
         $response->assertSee((string)$product->favoriteBy->count());
 
-        // コメントユーザー名・コメント内容（存在する場合）
         foreach ($product->comments as $comment) {
             $response->assertSee($comment->user->name);
             $response->assertSee($comment->comment);
         }
 
-        // カテゴリ情報（存在する場合）
         foreach ($product->categories ?? [] as $category) {
             $response->assertSee($category->content);
         }

@@ -51,7 +51,6 @@ class SellTest extends TestCase
 
         $response->assertRedirect('/mypage');
 
-        // 商品テーブルにデータ保存されているか
         $this->assertDatabaseHas('products', [
             'name' => 'テスト商品',
             'brand' => 'ブランド',
@@ -59,13 +58,11 @@ class SellTest extends TestCase
             'condition' => '良好',
         ]);
 
-        // 出品情報が listings テーブルに保存されているか
         $this->assertDatabaseHas('listings', [
             'user_id' => $user->id,
             'status' => 'listed',
         ]);
 
-        // カテゴリの関連付け（中間テーブル確認）
         $product = Product::where('name', 'テスト商品')->first();
         foreach ($categories as $categoryId) {
             $this->assertDatabaseHas('category_product', [

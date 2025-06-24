@@ -20,11 +20,9 @@ class ProductTest extends TestCase
         // UsersTableSeeder用のユーザーIDを固定で先に作成（id=1〜10）
         User::factory()->count(10)->sequence(fn ($sequence) => ['id' => $sequence->index + 1])->create();
 
-        // Seeder 実行
         $this->seed(\Database\Seeders\ProductsTableSeeder::class);
         $this->seed(\Database\Seeders\ListingsTableSeeder::class);
 
-        // 商品一覧ページにアクセスし、初期の商品名を確認
         $response = $this->get('/');
 
         $products = [
@@ -121,10 +119,9 @@ class ProductTest extends TestCase
         // ログイン状態で商品一覧にアクセス
         $response = $this->actingAs($user)->get('/');
 
-        // 確認項目
         $response->assertStatus(200);
-        $response->assertSee('腕時計'); // 購入されていない他人の商品は見える
-        $response->assertSee('Sold');   // 購入済み商品には "Sold" 表示
-        $response->assertDontSee('自分の商品'); // 自分の商品は表示されない
+        $response->assertSee('腕時計'); 
+        $response->assertSee('Sold'); 
+        $response->assertDontSee('自分の商品'); 
     }
 }

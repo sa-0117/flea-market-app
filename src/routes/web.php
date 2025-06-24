@@ -27,9 +27,6 @@ Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show'
 
 Route::middleware(['auth'])->group(function (){
     Route::post('/item/{product}/comment', [CommentController::class, 'store'])->name('comment.store');
-});
-
-Route::middleware(['auth'])->group(function (){
     Route::get('/mylist',[FavoriteController::class, 'index'])->name('mylist.index');
 });
 
@@ -38,7 +35,7 @@ Route::post('/favorite/{product}', [FavoriteController::class, 'toggle'])->name(
 Route::get('/sell', [SellController::class, 'create']);
 Route::post('/sell', [SellController::class, 'store']);
 
-Route::middleware(['auth', 'verified'])->prefix('mypage')->group(function(){
+Route::middleware(['auth'])->prefix('mypage')->group(function(){
     Route::get('/', [UserController::class, 'show']);
     Route::get('/profile', [UserController::class, 'edit']);
     Route::post('/profile', [UserController::class, 'update']); 
@@ -69,10 +66,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/email/verify/check', function () {
         if (auth()->user()->hasVerifiedEmail()) {
-            return redirect('/mypage/profile'); // 認証済み → プロフィールへ
+            return redirect('/mypage/profile'); 
         }
 
-        return back()->with('status', 'まだ認証が完了していません');  
+        return back();  
     })->name('verification.check');
 });
 

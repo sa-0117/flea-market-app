@@ -113,8 +113,8 @@ class MylistTest extends TestCase
 
         $response = $this->actingAs($user)->get('/mylist');
 
-        $response->assertSee('Sold');   // 購入済み商品には "Sold" 表示
-        $response->assertDontSee('自分の商品'); // 自分の商品は表示されない
+        $response->assertSee('Sold'); 
+        $response->assertDontSee('自分の商品'); 
     }
 
      /** @test */

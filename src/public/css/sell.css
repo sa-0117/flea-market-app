@@ -13,7 +13,6 @@
     margin-bottom: 20px;
 }
 
-/* プレビュー＆ボタンを囲う枠 */
 .sell-form-image__preview-area {
     border: 1px dashed #ccc;
     padding: 20px;
@@ -60,7 +59,7 @@
 }
 
 .category-label {
-    padding: 5px 12px;
+    padding: 3px 12px;
     border: 2px solid #fb8e8e;
     color: #fb8e8e;
     background: #fff;
@@ -157,23 +156,26 @@
     text-align: left;
 }
 
-@media (min-width: 768px) and (max-width: 800px) {
+@media (min-width: 768px) and (max-width: 850px) {
     .sell-form {
-        width: 85%;
+        width: 70%;
         padding: 0 10px;
     }
 
     .sell-button {
-        width: 100%;
+        width: 30%;
         font-size: 13px;
         padding: 10px;
     }
 
     .sell-form__input,
-    .sell-form__select,
-    .sell-form__textarea {
+    .sell-form__select {
         height: auto;
         font-size: 14px;
+    }
+
+    .sell-form__textarea {
+        height: 150px;
     }
 
     .sell-form__button-submit {
@@ -183,13 +185,13 @@
 
     .category-label {
         font-size: 13px;
-        padding: 5px 10px;
+        padding: 3px 10px;
     }
 }
 
 @media (min-width: 1400px) and (max-width: 1500px) {
     .sell-form {
-        width: 35%;
+        width: 45%;
     }
 
     .sell-button {
@@ -198,9 +200,13 @@
     }
 
     .sell-form__input,
-    .sell-form__select,
+    .sell-form__select {
+        height: auto;
+        font-size: 14px;
+    }
+
     .sell-form__textarea {
-        font-size: 15px;
+        height: 150px;
     }
 
     .sell-form__button-submit {

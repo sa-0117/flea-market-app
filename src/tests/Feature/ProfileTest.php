@@ -15,7 +15,6 @@ class ProfileTest extends TestCase
     {
         parent::setUp();
 
-        // public/image に必要なダミーファイル
         Storage::fake('public');
         Storage::disk('public')->put('image/sample01.jpg', 'dummy');
 

@@ -4,8 +4,7 @@
 <link rel="stylesheet" href=" {{ asset('css/purchase.css') }}">
 @endsection
 
-@section('content')
-    
+@section('content')    
     <div class="purchase-container">
         <div class="purchase-left">
             <div class="purchase-product">
@@ -29,7 +28,7 @@
                     </div>
                     <div class="form__error-message">
                         @error('payment')  
-                        {{ $message }}
+                            {{ $message }}
                         @enderror
                     </div>
                 </form>
@@ -51,38 +50,37 @@
                 </div>
             </div>
         </div> 
-
         <div class="purchase-right">
             <form action="{{ route('purchase.pay', ['item_id' => $listing->id]) }}" method="post">
-            @csrf
-                <input type="hidden" name="post_code" value="{{ $user->post_code }}">
-                <input type="hidden" name="address" value="{{ $user->address }}" >
-                <input type="hidden" name="building" value="{{ $user->building }}">
+                @csrf
+                    <input type="hidden" name="post_code" value="{{ $user->post_code }}">
+                    <input type="hidden" name="address" value="{{ $user->address }}" >
+                    <input type="hidden" name="building" value="{{ $user->building }}">
 
-                <div class="purchase-summary__list">
-                    <div class="purchase-summary__item">
-                        <span>商品代金</span>
-                        <span>&yen{{ number_format($listing->listing_price) }}</span>
+                    <div class="purchase-summary__list">
+                        <div class="purchase-summary__item">
+                            <span>商品代金</span>
+                            <span>&yen{{ number_format($listing->listing_price) }}</span>
+                        </div>
+                        <div class="purchase-summary__payment">
+                            <div class="purchase-summary__payment-method">
+                                <span>支払い方法</span>
+                                <div class="purchase-summary__payment-select">
+                                    @if(request('payment') === 'convenience')
+                                        <span>コンビニ払い</span>
+                                    @elseif(request('payment') === 'credit')
+                                        <span>カード支払い</span>
+                                    @else
+                                        <span>コンビニ払い</span>
+                                    @endif
+                                </div>                        
+                            </div>                    
+                        </div>
                     </div>
-                    <div class="purchase-summary__payment">
-                        <div class="purchase-summary__payment-method">
-                            <span>支払い方法</span>
-                            <div class="purchase-summary__payment-select">
-                                @if(request('payment') === 'convenience')
-                                    <span>コンビニ払い</span>
-                                @elseif(request('payment') === 'credit')
-                                    <span>カード支払い</span>
-                                @else
-                                    <span>コンビニ払い</span>
-                                @endif
-                            </div>                        
-                        </div>                    
+                    <input type="hidden" name="payment" value="{{ request('payment') }}">
+                    <div class="purchase__button">
+                        <button class="purchase__button-submit" type="submit">購入する</button>
                     </div>
-                </div>
-                <input type="hidden" name="payment" value="{{ request('payment') }}">
-                <div class="purchase__button">
-                    <button class="purchase__button-submit" type="submit">購入する</button>
-                </div>
             </form>
         </div>
     </div> 

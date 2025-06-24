@@ -27,13 +27,11 @@ class SearchTest extends TestCase
 
         // ユーザーを作成してログイン
         $user = User::factory()->create([
-            'id' => 999, // Seederと被らないようにする
+            'id' => 999,
         ]);
 
-        // 商品一覧ページで「時計」で検索
         $response = $this->actingAs($user)->get('/?keyword=時計');
 
-        // 商品名「腕時計」が表示されているか
         $response->assertSee('腕時計');
     }
 
@@ -43,17 +41,15 @@ class SearchTest extends TestCase
         $user = User::first();
         $product = Product::first();
 
-        // ユーザーを作成してログイン
         $user = User::factory()->create([
-            'id' => 999, // Seederと被らないようにする
+            'id' => 999, 
         ]);
 
         $user->favoriteProducts()->attach($product->id);
 
         $response = $this->actingAs($user)->get('/mylist?keyword=時計');
 
-    // 検索結果に「腕時計」が表示されているか確認
-    $response->assertSee('腕時計');
+        $response->assertSee('腕時計');
 
     }
 }

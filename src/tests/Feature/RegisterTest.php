@@ -11,10 +11,8 @@ class RegisterTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    
     public function RegisterTest()
     {   
-        //
         $response = $this->from('/register')->post('/register', [
             'name' => '',
             'email' => 'aaa@exsample.com',

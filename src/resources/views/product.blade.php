@@ -22,21 +22,21 @@
         </div>
 
         <div class="product-list">            
-        @foreach ($listings as $listing)
-            <div class="product-list__item">
-                <div class="product-list__image">
-                    <a href="{{ url('item/' . $listing->id) }}">
-                        <img src="{{ asset('storage/' .$listing->product->image) }}" alt="{{ $listing->product->name }}">
-                    </a>
+            @foreach ($listings as $listing)
+                <div class="product-list__item">
+                    <div class="product-list__image">
+                        <a href="{{ url('item/' . $listing->id) }}">
+                            <img src="{{ asset('storage/' .$listing->product->image) }}" alt="{{ $listing->product->name }}">
+                        </a>
+                    </div>
+                    <div class="product-list__image-title">
+                        <div class="product-list__name">{{ $listing->product->name }}</div>
+                        @if ($listing->buyer_id)
+                            <div class="product-status">Sold</div>
+                        @endif
+                    </div>
                 </div>
-                <div class="product-list__image-title">
-                    <div class="product-list__name">{{ $listing->product->name }}</div>
-                    @if ($listing->buyer_id)
-                        <div class="product-status">Sold</div>
-                    @endif
-                </div>
-            </div>
-        @endforeach
+            @endforeach
         </div>         
     </div>
 @endsection

@@ -47,7 +47,7 @@ class CommentTest extends TestCase
             'comment' => '未ログインユーザーのコメント',
         ]);
 
-        $response->assertRedirect('/login'); // ミドルウェアによりログイン画面へ
+        $response->assertRedirect('/login');
         $this->assertDatabaseMissing('comments', [
             'comment' => '未ログインユーザーのコメント',
         ]);

@@ -16,7 +16,6 @@ class MypageTest extends TestCase
     {
         parent::setUp();
 
-        // public/image に必要なダミーファイル
         Storage::fake('public');
         Storage::disk('public')->put('image/sample01.jpg', 'dummy');
 
@@ -26,7 +25,6 @@ class MypageTest extends TestCase
         $user->avatar = 'sample01.jpg';
         $user->save();
 
-        // ユーザー1が listing_id = 2 を購入したとするダミーの購入履歴
         $order = Order::create([
             'user_id' => 1,
             'listing_id' => 2,
@@ -44,7 +42,6 @@ class MypageTest extends TestCase
     {
         $user = User::find(1);
 
-        // ログインして /mypage にアクセス
         $response = $this->actingAs($user)->get('/mypage');
 
         $response->assertStatus(200);
@@ -57,7 +54,6 @@ class MypageTest extends TestCase
 
         $response->assertStatus(200);
 
-        // 購入タブにアクセス
         $response = $this->actingAs($user)->get('/mypage?tab=buy');
 
         $response->assertStatus(200);

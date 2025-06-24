@@ -21,18 +21,17 @@
             </div>
         </div>
         <div class="product-list">            
-        @foreach ($products as $product)
-            <div class="product-list__item">
-                <div class="product-list__image">
-                    <img src="{{ asset('storage/' .$product->image) }}" alt="{{ $product->name }}">
+            @foreach ($products as $product)
+                <div class="product-list__item">
+                    <div class="product-list__image">
+                        <img src="{{ asset('storage/' .$product->image) }}" alt="{{ $product->name }}">
+                    </div>
+                    <div class="product-list__name">{{ $product->name }}</div>
+                    @if ($product->listing && $product->listing->status === 'sold')
+                        <div class="product-status">Sold</div>
+                    @endif
                 </div>
-                <div class="product-list__name">{{ $product->name }}</div>
-                @if ($product->listing && $product->listing->status === 'sold')
-                    <div class="product-status">Sold</div>
-                @endif
-            </div>
-        @endforeach
+            @endforeach
         </div>         
-    </div>
-    
+    </div>  
 @endsection

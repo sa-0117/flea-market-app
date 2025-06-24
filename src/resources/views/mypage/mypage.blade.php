@@ -40,7 +40,7 @@
                     </div>
                 @endforeach
             @elseif ($tab === 'buy')
-            @foreach ($orders as $order)
+                @foreach ($orders as $order)
                     <div class="product-list__item">
                         <div class="product-list__image">
                             <img src="{{ asset('storage/' .$order->listing->product->image) }}" alt="{{ $order->listing->product->name }}">

@@ -27,7 +27,7 @@
                         <label for="avatar" class="profile-image-edit__label">画像を選択する</label>
                     </div>
                     <div class="form__error-message">
-                        @error('file')
+                        @error('avatar')
                             {{ $message }}
                         @enderror
                     </div>
@@ -53,11 +53,12 @@
                 <div class="profile-form__group">
                     <label class="profile-form__label" for="address">住所</label>          
                     <input class="profile-form__input" type="text" name="address" id="address" value="{{ old('address', $user->address) }}">
-                </div>
-                <div class="form__error-message">
-                    @error('address')
-                        {{ $message }}
-                    @enderror
+                
+                    <div class="form__error-message">
+                        @error('address')
+                            {{ $message }}
+                        @enderror
+                    </div>
                 </div>
                 <div class="profile-form__group">
                     <label class="profile-form__label" for="building">建物名</label>          

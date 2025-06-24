@@ -38,7 +38,7 @@
                         @endforeach
                     </div> 
                     <div class="error-message">  
-                        @error('category')
+                        @error('categories')
                             {{ $message }}
                         @enderror
                     </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="sell-form__group">
                         <label class="sell-form__label" for="listing_price">販売価格</label>          
-                        <input class="sell-form__input" type="text" name="listing_price" id="listing_price" placeholder="￥" value="{{ old('listing_price') }}">
+                        <input class="sell-form__input" type="number" name="listing_price" id="listing_price" placeholder="￥" value="{{ old('listing_price') }}">
                     </div>
                     <div class="error-message">  
                         @error('listing_price')

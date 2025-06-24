@@ -25,19 +25,16 @@ class PurchaseTest extends TestCase
     /** @test */
     public function seeder_user_can_purchase_a_listing()
     {
-        // ユーザー2（出品者）→ Listing ID = 2（Product ID = 2）を出品
-        // ユーザー1が購入者としてログイン
         $buyer = User::find(1);
         $this->actingAs($buyer);
 
         $listing = Listing::find(2);
 
-        // 購入情報送信（ダミー支払い情報付き）
         $response = $this->post(route('purchase.pay', ['item_id' => $listing->id]), [
             'post_code' => '123-4567',
             'address' => '東京都新宿区',
             'building' => 'テストビル101',
-            'payment' => 'credit'
+            'payment' => 'card'
         ]);
 
         // 購入後のリダイレクト先確認

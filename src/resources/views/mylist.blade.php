@@ -7,7 +7,7 @@
 @section('content')
     <div class="container">
         <div class="product-index__inner">
-            <div class="product-index">
+            <ul class="product-index">
                 <li class="product-index__item">
                     <a href="{{ route('product.index') }}" class="{{ request()->routeIs('product.index') ? 'active' : '' }}">おすすめ</a>
                 </li>
@@ -18,7 +18,7 @@
                         <span class="disabled">マイリスト</span>
                     @endauth
                 </li>
-            </div>
+            </ul>
         </div>
         <div class="product-list">            
             @foreach ($products as $product)

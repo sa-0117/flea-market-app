@@ -15,7 +15,7 @@
                         <div class="avatar avatar-placeholder"></div>
                     @endif
                 </div>
-                <div class="mypage-top__middle">{{ $userName }} </div>
+                <div class="mypage-top__middle">{{ $user->name }} </div>
                 <div class="mypage-top__right-edit">
                     <a href="{{ url('/mypage/profile') }}" class="profile-image-edit__link">プロフィールを編集</a>
                 </div>

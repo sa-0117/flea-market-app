@@ -17,20 +17,19 @@
             <div class="item-column">
                 <div class="item-group">
                     <div class="item-purchase">
-                        @csrf
-                            <div class="item-group-index">
-                                <h1>{{$listing->product->name}}</h1>
-                                <small>{{$listing->product->brand}}</small>
-                                <div class="item-group-price">
-                                    <div class="item-group-price-price">
-                                        <span>&yen{{ number_format($listing->listing_price) }}</span>
-                                    </div>
-                                    <div class="item-group-price-tax">
-                                        <span>(税込)</span>
-                                    </div>
+                        <div class="item-group-index">
+                            <h1>{{$listing->product->name}}</h1>
+                            <small>{{$listing->product->brand}}</small>
+                            <div class="item-group-price">
+                                <div class="item-group-price-price">
+                                    <span>&yen{{ number_format($listing->listing_price) }}</span>
+                                </div>
+                                <div class="item-group-price-tax">
+                                    <span>(税込)</span>
                                 </div>
                             </div>
-                            <div class="item-iconbutton-group">
+                        </div>
+                        <div class="item-iconbutton-group">
                             <form class="item-iconbutton" action="{{ route('favorite.toggle', $listing->product->id) }}" method="post">
                                 @csrf
                                 <div class="item-iconbutton-favorite">

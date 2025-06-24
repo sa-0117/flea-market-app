@@ -31,9 +31,9 @@
                     </div>
                     <div class="product-list__image-title">
                         <div class="product-list__name">{{ $listing->product->name }}</div>
-                        @if ($listing->buyer_id)
-                            <div class="product-status">Sold</div>
-                        @endif
+                            @if ($listing->status === 'sold')
+                                <div class="product-status">Sold</div>
+                            @endif
                     </div>
                 </div>
             @endforeach

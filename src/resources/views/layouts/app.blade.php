@@ -14,9 +14,9 @@
   <div class="app">
     <header class="header">
       <div class="header__inner">
-        <div class="header__logo">
-          <img src="{{ asset('storage/image/logo.svg') }}" alt="COACHTECH" onclick="location.href='/';">
-        </div>
+        <a href="/" class="header__logo">
+          <img src="{{ asset('storage/image/logo.svg') }}" alt="COACHTECH">
+        </a>
         @empty($HeaderParts)
         <div class="header__form">
           <form class="header__form-search" action="{{ route('product.index') }}" method="get">

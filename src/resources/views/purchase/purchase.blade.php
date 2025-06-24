@@ -22,8 +22,8 @@
                     <div class="purchase-section__select-inner">       
                         <select class="purchase-section__select" name="payment" id="payment" onchange="this.form.submit()">          
                             <option disabled {{ request('payment') ? '' : 'selected' }}>選択してください</option>
-                            <option value="convenience" {{ request('payment') == 'convenience' ? 'selected' : '' }}>コンビニ払い</option>
-                            <option value="credit" {{ request('payment') == 'credit' ? 'selected' : '' }}>カード支払い</option>
+                            <option value="konbini" {{ request('payment') == 'konbini' ? 'selected' : '' }}>コンビニ払い</option>
+                            <option value="card" {{ request('payment') == 'card' ? 'selected' : '' }}>カード支払い</option>
                         </select>                    
                     </div>
                     <div class="form__error-message">
@@ -35,7 +35,7 @@
             </div>              
             <div class="purchase-section">                             
                 <div class="purchase-address__header">
-                    <span class="purchase-address__label" for="address">配送先</span>
+                    <span class="purchase-address__label">配送先</span>
                     <a class="purchase-address__label-edit" href="{{ url('purchase/address/' . $listing->product->id) }}" >変更する</a>
                 </div>     
                 <div class="purchase-address__list">
@@ -66,9 +66,9 @@
                             <div class="purchase-summary__payment-method">
                                 <span>支払い方法</span>
                                 <div class="purchase-summary__payment-select">
-                                    @if(request('payment') === 'convenience')
+                                    @if(request('payment') === 'konbini')
                                         <span>コンビニ払い</span>
-                                    @elseif(request('payment') === 'credit')
+                                    @elseif(request('payment') === 'card')
                                         <span>カード支払い</span>
                                     @else
                                         <span>コンビニ払い</span>

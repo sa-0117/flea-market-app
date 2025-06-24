@@ -30,7 +30,6 @@ class UserController extends Controller
             'listings' => $listings,
             'tab'=> $tab,
             'user' => $user,
-            'userName' => $user->name,
             'orders' => $orders
         ]);
         

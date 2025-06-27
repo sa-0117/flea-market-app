@@ -24,6 +24,7 @@ php artisan storage:link
 * PHP 8.4  
 * Laravel 8.4  
 * MySQL 8.0  
+* mailtrap
 
 ##ER図
 

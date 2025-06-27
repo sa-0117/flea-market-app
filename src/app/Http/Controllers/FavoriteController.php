@@ -18,6 +18,8 @@ class FavoriteController extends Controller
             $productsQuery->where('name', 'like', '%' . $key . '%');
         }
 
+        $products = $productsQuery->get();
+
         return view('mylist', [
             'products'=> $products
         ]);

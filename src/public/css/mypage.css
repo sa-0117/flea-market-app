@@ -4,10 +4,15 @@
     width: 100%;
 }
 
+.mypage__border {
+    border-bottom: 2px solid #aaa;
+    width: 100%;
+}
+
 .mypage__inner {
     padding-top: 40px;
     margin: 0 auto;
-    width: 60%;
+    width: 80%;
 }
 
 .mypage-top {
@@ -58,11 +63,10 @@
 
 .product-tab {
     display: flex;
-    border-bottom: 2px solid #aaa;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    padding-left: 40px;
-    }
+    list-style: none;
+    gap: 2rem;
+    padding-left: 0;
+}
 
 .product-tab-name {
     list-style: none;

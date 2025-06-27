@@ -32,8 +32,10 @@ Route::middleware(['auth'])->group(function (){
 
 Route::post('/favorite/{product}', [FavoriteController::class, 'toggle'])->name('favorite.toggle');
 
-Route::get('/sell', [SellController::class, 'create']);
-Route::post('/sell', [SellController::class, 'store']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sell', [SellController::class, 'create']);
+    Route::post('/sell', [SellController::class, 'store']);
+});
 
 Route::middleware(['auth'])->prefix('mypage')->group(function(){
     Route::get('/', [UserController::class, 'show']);
@@ -46,6 +48,7 @@ Route::post('/purchase/address/{item_id}', [UserController::class, 'updateFromPu
 
 Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
 Route::post('/purchase/{item_id}/pay', [PurchaseController::class, 'pay'])->name('purchase.pay');
+Route::get('/purchase/{item_id}/success', [PurchaseController::class, 'success'])->name('purchase.success');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/email/verify', function () {

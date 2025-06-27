@@ -6,28 +6,30 @@
 
 @section('content')
     <div class="mypage-container">
-        <div class="mypage__inner">
-            <div class="mypage-top">
-                <div class="mypage-top__left">
-                    @if($user->avatar !== null)
-                        <img src="{{ asset('storage/image/'. $user->avatar) }}" alt="avatar" class="avatar">
-                    @else
-                        <div class="avatar avatar-placeholder"></div>
-                    @endif
+        <div class="mypage__border">
+            <div class="mypage__inner">
+                <div class="mypage-top">
+                    <div class="mypage-top__left">
+                        @if($user->avatar !== null)
+                            <img src="{{ asset('storage/image/'. $user->avatar) }}" alt="avatar" class="avatar">
+                        @else
+                            <div class="avatar avatar-placeholder"></div>
+                        @endif
+                    </div>
+                    <div class="mypage-top__middle">{{ $user->name }} </div>
+                    <div class="mypage-top__right-edit">
+                        <a href="{{ url('/mypage/profile') }}" class="profile-image-edit__link">プロフィールを編集</a>
+                    </div>
                 </div>
-                <div class="mypage-top__middle">{{ $user->name }} </div>
-                <div class="mypage-top__right-edit">
-                    <a href="{{ url('/mypage/profile') }}" class="profile-image-edit__link">プロフィールを編集</a>
-                </div>
+                <ul class="product-tab">
+                    <li class="product-tab-name">
+                        <a href="{{ url('/mypage?tab=sell') }}" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
+                    </li>
+                    <li class="product-tab-name">
+                        <a href="{{ url('/mypage?tab=buy') }}" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
+                    </li>
+                </ul>
             </div>
-            <ul class="product-tab">
-                <li class="product-tab-name">
-                    <a href="{{ url('/mypage?tab=sell') }}" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
-                </li>
-                <li class="product-tab-name">
-                    <a href="{{ url('/mypage?tab=buy') }}" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
-                </li>
-            </ul>
         </div>
         <div class="product-list">
             @if ($tab === 'sell')            

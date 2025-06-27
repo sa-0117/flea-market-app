@@ -4,20 +4,22 @@
     width: 100%;
 }
 
-.product-index {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
+.product-index__border {
     border-bottom: 2px solid #aaa;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    padding-left: 40px;
+    width: 100%;
 }
 
 .product-index__inner {
     padding-top: 40px;
     margin: 0 auto;
-    width: 60%;
+    width: 80%;
+}
+
+.product-index {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    padding-left: 0;
 }
 
 .product-index__item a {
@@ -42,6 +44,7 @@
     grid-template-columns: repeat(4, 1fr);
     width: 90%;
     margin: 60px auto;
+    box-sizing: border-box;
 }
 
 .product-list__image {

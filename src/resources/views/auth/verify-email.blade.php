@@ -14,13 +14,13 @@
             <p>登録いただいたメールアドレスに認証メールを送付しました。</p>
             <p>メール認証を完了してください。</p>
         </div>
-        <form class="email-certification" action="/email/verify/check" method="get" > 
-            <button type="submit" class="email-certification-button">認証はこちらから</button>
-        </form>
+        <div class="email-certification"> 
+            <a class="email-certification-link" href="https://mailtrap.io/home">認証はこちらから</a>
+        </div>
         <form method="POST" action="/email/verification-notification">
             @csrf
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <button type="submit" class="email-resend-button">認証メールを再送する</button>
+            <button type="submit" class="email-resend-link">認証メールを再送する</button>
         </form>
     </div>
 @endsection

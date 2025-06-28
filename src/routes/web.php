@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\UserController;
@@ -75,5 +76,10 @@ Route::middleware(['auth'])->group(function () {
         return back();  
     })->name('verification.check');
 });
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
 
 

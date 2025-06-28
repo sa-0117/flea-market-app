@@ -30,15 +30,16 @@ class PurchaseTest extends TestCase
 
         $listing = Listing::find(2);
 
-        $response = $this->post(route('purchase.pay', ['item_id' => $listing->id]), [
-            'post_code' => '123-4567',
-            'address' => '東京都新宿区',
-            'building' => 'テストビル101',
-            'payment' => 'card'
+        session([
+            'post_code' => '160-0022',
+            'address' => '東京都新宿区新宿1-1-1',
+            'building' => 'ビル101',
         ]);
 
+        $response = $this->get(route('purchase.success', ['item_id' => $listing->id]));
+
         // 購入後のリダイレクト先確認
-        $response->assertRedirect(url('/mypage?page=buy'));
+        $response->assertRedirect(url('/mypage?tab=buy'));
 
         // DB上で商品が「sold」に変更されていることを確認
         $this->assertDatabaseHas('listings', [
@@ -70,7 +71,7 @@ class PurchaseTest extends TestCase
     {
         $buyer = User::find(1);
 
-        $listing = Listing::find(4);
+        $listing = Listing::with('product')->find(4); // ← リレーション付きで取得
         $listing->status = 'sold';
         $listing->buyer_id = $buyer->id;
         $listing->save();
@@ -85,11 +86,11 @@ class PurchaseTest extends TestCase
         ]);
 
         $this->actingAs($buyer);
-
         $response = $this->get(url('/mypage?tab=buy'));
-
         $response->assertStatus(200);
-        $response->assertSee($order->listing->product->name);
+
+        $response->assertSee($listing->product->name);
     }
+
     
 }

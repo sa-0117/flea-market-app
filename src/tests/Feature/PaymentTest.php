@@ -42,6 +42,6 @@ class PaymentTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertSee('コンビニ払い');
+        $response->assertSee('コンビニ支払い');
     }
 }   

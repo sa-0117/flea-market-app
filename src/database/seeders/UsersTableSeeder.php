@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UsersTableSeeder extends Seeder
@@ -19,7 +20,7 @@ class UsersTableSeeder extends Seeder
                 'id' => $i, // 
                 'name' => "User $i",
                 'email' => "user{$i}@example.com",
-                'password' => bcrypt('password'),
+                'password' => Hash::make('fma25046'),
             ]);
         }
     }

@@ -11,7 +11,7 @@
 @section('content')
     <div class="container">
         <div class="container__inner">
-            <p>登録いただいたメールアドレスに認証メールを送付しました。</p>
+            <p>登録していただいたメールアドレスに認証メールを送付しました。</p>
             <p>メール認証を完了してください。</p>
         </div>
         <div class="email-certification"> 

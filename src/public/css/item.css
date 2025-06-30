@@ -115,6 +115,7 @@
 .item-group__description {
     height: 180px;
     width: 100%;
+    margin-top: 20px;
 }
 
 .item-button-submit {

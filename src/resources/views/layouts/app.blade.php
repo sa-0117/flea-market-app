@@ -15,7 +15,7 @@
     <header class="header">
       <div class="header__inner">
         <a href="/" class="header__logo">
-          <img src="{{ asset('storage/image/logo.svg') }}" alt="COACHTECH">
+          <img src="{{ asset('image/logo.svg') }}" alt="COACHTECH">
         </a>
         @empty($HeaderParts)
         <div class="header__form">

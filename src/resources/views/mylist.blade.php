@@ -26,7 +26,9 @@
             @foreach ($products as $product)
                 <div class="product-list__item">
                     <div class="product-list__image">
-                        <img src="{{ asset('storage/' .$product->image) }}" alt="{{ $product->name }}">
+                        <a href="{{ url('item/' . $product->id) }}">
+                            <img src="{{ asset('storage/' .$product->image) }}" alt="{{ $product->name }}">
+                        </a>
                     </div>
                     <div class="product-list__name">{{ $product->name }}</div>
                     @if ($product->listing && $product->listing->status === 'sold')

@@ -35,15 +35,15 @@
                                 <div class="item-iconbutton-favorite">
                                     <button type="submit" class="icon-button {{ auth()->check() && $listing->product->isFavoritedBy(auth()->user()) ? 'favorited' : '' }}">
                                         <img src="{{ auth()->check() && auth()->user()->favoriteProducts->contains($listing->product->id)
-                                            ? asset('storage/image/star-yellow.svg') 
-                                            : asset('storage/image/star.svg') }}" alt="star" class="icon-img">
+                                            ? asset('image/star-yellow.svg') 
+                                            : asset('image/star.svg') }}" alt="star" class="icon-img">
                                     </button>
                                     <p class="icon-text">{{ $listing->product->favoriteBy()->count() }}</p>
                                 </div>
                             </form>
                             <div class="item-iconbutton-comment">
                                 <button class="icon-button">
-                                    <img src="{{ asset('storage/image/comment.svg') }}" alt="comment" class="icon-img">
+                                    <img src="{{ asset('image/comment.svg') }}" alt="comment" class="icon-img">
                                 </button>
                                 <p class="icon-text">{{ $listing->product->comments->count() }}</p>
                             </div>

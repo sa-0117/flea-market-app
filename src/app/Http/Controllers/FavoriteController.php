@@ -39,7 +39,7 @@ class FavoriteController extends Controller
             $user->favoriteProducts()->attach($product->id);
         }
 
-        return back(); 
+        return redirect()->route('item.show', $product->listing->id); 
     }
 
 }

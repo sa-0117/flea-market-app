@@ -21,31 +21,23 @@ use Illuminate\Http\Request;
 |
 */
 
-
 Route::get('/', [ItemController::class, 'index'])->name('product.index');
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth', 'verified'])->group(function (){
     Route::post('/item/{product}/comment', [CommentController::class, 'store'])->name('comment.store');
     Route::get('/mylist',[FavoriteController::class, 'index'])->name('mylist.index');
+    Route::post('/favorite/{product}', [FavoriteController::class, 'toggle'])->name('favorite.toggle');
+    Route::get('/sell', [SellController::class, 'create']);
+    Route::post('/sell', [SellController::class, 'store']);
+    Route::get('/mypage', [UserController::class, 'show']);
+    Route::get('/mypage/profile', [UserController::class, 'edit']);
+    Route::post('/mypage/profile', [UserController::class, 'update']); 
+    Route::get('/purchase/address/{item_id}', [UserController::class, 'editFromPurchase'])->name('purchase.address.edit');
+    Route::post('/purchase/address/{item_id}', [UserController::class, 'updateFromPurchase'])->name('purchase.address.update');
+    Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
+    Route::post('/purchase/{item_id}/pay', [PurchaseController::class, 'pay'])->name('purchase.pay');
 });
-
-Route::post('/favorite/{product}', [FavoriteController::class, 'toggle'])->name('favorite.toggle');
-
-Route::get('/sell', [SellController::class, 'create']);
-Route::post('/sell', [SellController::class, 'store']);
-
-Route::middleware(['auth'])->prefix('mypage')->group(function(){
-    Route::get('/', [UserController::class, 'show']);
-    Route::get('/profile', [UserController::class, 'edit']);
-    Route::post('/profile', [UserController::class, 'update']); 
-});
-
-Route::get('/purchase/address/{item_id}', [UserController::class, 'editFromPurchase'])->name('purchase.address.edit');
-Route::post('/purchase/address/{item_id}', [UserController::class, 'updateFromPurchase'])->name('purchase.address.update');
-
-Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
-Route::post('/purchase/{item_id}/pay', [PurchaseController::class, 'pay'])->name('purchase.pay');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/email/verify', function () {
@@ -60,7 +52,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/email/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
-
         return back()->with('status', 'verification-link-sent');
     })->middleware(['throttle:6,1'])->name('verification.send');
 

@@ -48,8 +48,8 @@ class SearchTest extends TestCase
         $user->favoriteProducts()->attach($product->id);
 
         $response = $this->actingAs($user)->get('/mylist?keyword=時計');
-
+    
+        $response->assertStatus(200);
         $response->assertSee('腕時計');
-
     }
 }

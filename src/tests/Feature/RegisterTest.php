@@ -80,7 +80,7 @@ class RegisterTest extends TestCase
             'email' => 'aaa@exsample.com',
         ]);
 
-        $response->assertRedirect('/mypage/profile');
+        $response->assertRedirect(route('verification.notice'));
 
     }
 }

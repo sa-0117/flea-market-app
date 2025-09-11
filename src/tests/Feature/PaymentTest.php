@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Listing;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PaymentTest extends TestCase
@@ -41,6 +42,6 @@ class PaymentTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertSee('コンビニ払い');
+        $response->assertSee('コンビニ支払い');
     }
 }   

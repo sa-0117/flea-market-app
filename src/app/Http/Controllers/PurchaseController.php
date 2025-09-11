@@ -35,32 +35,21 @@ class PurchaseController extends Controller
         $user = auth()->user();
         $validated = $request->validated();
 
-        if ($listing->buyer_id) {
-            return back();
-        }
-
-        $listing->buyer_id = $user->id;
-        $listing->status = 'sold';
-        $listing->save();
-
-        $user->orders()->create([
-            
-            'listing_id' => $listing->id,
-            'purchase_price' => $listing->listing_price,
-            'shopping_post_code' => $validated['post_code'], 
-            'shopping_address' => $validated['address'],
-            'shopping_building' => $request->building,
-        ]);  
+        session([
+            'post_code' => $validated['post_code'],
+            'address' => $validated['address'],
+            'building' => $request->building,
+        ]);
 
         if (app()->environment('testing')) {
         // テスト時はStripe処理をスキップして直接リダイレクト
-        return redirect('/mypage?page=buy');
+        return redirect('/');
     }
 
-        Stripe::setApiKey(config('services.stripe.secret'));
+    Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $payment_method = $request->input('payment');
-        $payment_method_types = $payment_method ==='konbini' ?['konbini'] : ['card'];
+        $payment_method_types = $payment_method === 'konbini' ? ['konbini'] : ['card'];
 
         $session = Session::create([
             'payment_method_types' => $payment_method_types,
@@ -68,16 +57,44 @@ class PurchaseController extends Controller
                 'price_data' => [
                     'currency' => 'jpy',
                     'product_data' => [
-                        'name' => $listing->product->name,                         
+                        'name' => $listing->product->name,
                     ],
-                    'unit_amount' => $listing->listing_price, 
+                    'unit_amount' => $listing->listing_price,
                 ],
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => url('/mypage?page=buy'),
+            'success_url' => route('purchase.success', ['item_id' => $item_id]),
         ]);
 
-        return  redirect($session->url);
+        return redirect($session->url);
     }
+
+    public function success(Request $request, $item_id)
+{
+    $listing = Listing::with('product')->findOrFail($item_id);
+    $user = auth()->user();
+
+    if ($listing->buyer_id) {
+        return redirect('/');
+    }
+
+    $listing->buyer_id = $user->id;
+    $listing->status = 'sold';
+    $listing->save();
+
+    $user->orders()->create([
+        'listing_id' => $listing->id,
+        'purchase_price' => $listing->listing_price,
+        'shopping_post_code' => session('post_code'),
+        'shopping_address' => session('address'),
+        'shopping_building' => session('building'),
+    ]);
+
+    // セッションから削除
+    session()->forget(['post_code', 'address', 'building']);
+
+    return redirect('/mypage?tab=buy');
+}
+
 }

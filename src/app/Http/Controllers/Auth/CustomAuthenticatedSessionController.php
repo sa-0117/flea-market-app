@@ -16,7 +16,7 @@ class CustomAuthenticatedSessionController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
             
-            return redirect()->intended('/mylist');
+            return redirect()->route('mylist.index');
         }
 
         return back()->withErrors([

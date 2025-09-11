@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\UserController;
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::post('/purchase/address/{item_id}', [UserController::class, 'updateFromPurchase'])->name('purchase.address.update');
     Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
     Route::post('/purchase/{item_id}/pay', [PurchaseController::class, 'pay'])->name('purchase.pay');
+    Route::get('/purchase/{item_id}/success', [PurchaseController::class, 'success'])->name('purchase.success');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -46,7 +48,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
-
         return redirect('/mypage/profile'); 
     })->middleware(['signed'])->name('verification.verify');
 
@@ -59,9 +60,13 @@ Route::middleware(['auth'])->group(function () {
         if (auth()->user()->hasVerifiedEmail()) {
             return redirect('/mypage/profile'); 
         }
-
         return back();  
     })->name('verification.check');
 });
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
 
 

@@ -58,15 +58,17 @@ class AddressTest extends TestCase
             'building' => 'ビル101',
         ])->assertSessionHasNoErrors();
 
-        // 商品を購入
-        $this->post(route('purchase.pay', ['item_id' => $listing->id]), [
+        // 購入処理
+        session([
             'post_code' => '160-0022',
             'address' => '東京都新宿区新宿1-1-1',
             'building' => 'ビル101',
-            'payment' => 'credit',
         ]);
+    
+        $this->get(route('purchase.success', ['item_id' => $listing->id]));
 
         $order = Order::where('user_id', $user->id)->latest()->first();
+        $this->assertNotNull($order);
 
         // 登録された配送先が一致しているか
         $this->assertEquals('160-0022', $order->shopping_post_code);

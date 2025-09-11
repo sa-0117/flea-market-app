@@ -7,6 +7,8 @@ use App\Http\Requests\RegisterRequest;
 use App\Actions\Fortify\CreateNewUser;
 use Laravel\Fortify\Contracts\RegisterResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Hash;
 
 class CustomRegisteredUserController extends Controller
 {
@@ -22,7 +24,9 @@ class CustomRegisteredUserController extends Controller
 
         auth()->login($user);
 
-        return redirect('/mypage/profile');
+        event(new Registered($user));
+
+        return redirect()->route('verification.notice');
     }
 
     public function create()

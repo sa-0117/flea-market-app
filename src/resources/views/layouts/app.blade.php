@@ -15,7 +15,7 @@
     <header class="header">
       <div class="header__inner">
         <a href="/" class="header__logo">
-          <img src="{{ asset('storage/image/logo.svg') }}" alt="COACHTECH">
+          <img src="{{ asset('image/logo.svg') }}" alt="COACHTECH">
         </a>
         @empty($HeaderParts)
         <div class="header__form">
@@ -27,10 +27,14 @@
           <nav>
             <ul class="header-nav">
               <li class="header-nav__item">
-                <form class="header-nav__form" action="/logout" method="post">
-                  @csrf  
-                  <button class="header-nav__link logout-button" type="submit">ログアウト</button>
-                </form>
+                @if(Auth::check())
+                  <form class="header-nav__form" action="{{ route('logout') }}" method="post">
+                    @csrf  
+                      <button class="header-nav__link logout-button" type="submit">ログアウト</button>
+                  </form>
+                @else
+                  <a class="header-nav__link login-button" href="{{ route('login') }}">ログイン</a>
+                @endif
               </li>
               <li class="header-nav__item">
                 <a class="header-nav__link" href="/mypage">マイページ</a>

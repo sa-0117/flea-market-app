@@ -55,8 +55,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
 }
 
 .icon-img {
@@ -64,6 +64,7 @@
     height: 32px;
     object-fit: contain;
     display: block;
+    padding: 2px;
 }
 
 .icon-text {
@@ -114,6 +115,7 @@
 .item-group__description {
     height: 180px;
     width: 100%;
+    margin-top: 20px;
 }
 
 .item-button-submit {

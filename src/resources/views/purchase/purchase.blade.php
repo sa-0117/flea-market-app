@@ -22,7 +22,7 @@
                     <div class="purchase-section__select-inner">       
                         <select class="purchase-section__select" name="payment" id="payment" onchange="this.form.submit()">          
                             <option disabled {{ request('payment') ? '' : 'selected' }}>選択してください</option>
-                            <option value="konbini" {{ request('payment') == 'konbini' ? 'selected' : '' }}>コンビニ払い</option>
+                            <option value="konbini" {{ request('payment') == 'konbini' ? 'selected' : '' }}>コンビニ支払い</option>
                             <option value="card" {{ request('payment') == 'card' ? 'selected' : '' }}>カード支払い</option>
                         </select>                    
                     </div>
@@ -67,11 +67,11 @@
                                 <span>支払い方法</span>
                                 <div class="purchase-summary__payment-select">
                                     @if(request('payment') === 'konbini')
-                                        <span>コンビニ払い</span>
+                                        <span>コンビニ支払い</span>
                                     @elseif(request('payment') === 'card')
                                         <span>カード支払い</span>
                                     @else
-                                        <span>コンビニ払い</span>
+                                        <span>コンビニ支払い</span>
                                     @endif
                                 </div>                        
                             </div>                    

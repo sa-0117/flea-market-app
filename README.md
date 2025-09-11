@@ -24,6 +24,10 @@ php artisan storage:link
 * PHP 8.4  
 * Laravel 8.4  
 * MySQL 8.0  
+* mailtrap
+* stripe  
+    シークレットキー：sk_test_51RYBiL2QkNSkIMt8dxxYIFajzXdutNXlm5KGoctW5CrGQkbN0jU72vuY9VEc5pkV1mUGSylPUAI3mogqkbgMmLg500XnWeaWEN  
+    追加をお願いします
 
 ##ER図
 
@@ -35,3 +39,5 @@ php artisan storage:link
 * 開発環境：http://localhost/ 
 * phpMyAdmin:http://localhost:8080
 
+##ユーザー情報  
+ダミーデータのpasswordはすべて「fma25046」です。

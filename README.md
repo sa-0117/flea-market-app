@@ -55,13 +55,25 @@ STRIPE_SECRET_KEY="シークレットキー"
 
 
 ## テストアカウント
-ダミーデータのpasswordはすべて「fma25046」です。
+* name: テストユーザー1
+
+　email: testuser1@example.com
+
+　password: password
+
+* name: テストユーザー2
+
+　email: testuser2@example.com
+
+　password: password
+
+* ダミーデータのpasswordはすべて「password」です。
 
 ### PHPUnitを利用したテストについて
 ``` 
 docker-compose exec mysql bash
 mysql -u root -p
-create database test_database;
+create database demo_test;
 
 docker-compose exec php bash
 php artisan migrate:fresh --env=testing

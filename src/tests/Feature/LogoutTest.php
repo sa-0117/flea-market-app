@@ -11,11 +11,9 @@ class LogoutTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /** @test */
-
-    public function Logout()
+    public function test_Logout_User()
     {   
-        $user = User::factory()->create();
+        $user = User::firstWhere('email', 'testuser1@example.com');
 
         $response = $this->actingAs($user)->post('/logout');
 

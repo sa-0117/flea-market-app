@@ -20,27 +20,12 @@ class MypageTest extends TestCase
         Storage::disk('public')->put('image/sample01.jpg', 'dummy');
 
         $this->seed(); 
-        
-        $user = \App\Models\User::find(1);
-        $user->avatar = 'sample01.jpg';
-        $user->save();
-
-        $order = Order::create([
-            'user_id' => 1,
-            'listing_id' => 2,
-            'purchase_price' => 2000,
-            'shopping_post_code' => '123-4567',
-            'shopping_address' => '東京都新宿区',
-            'shopping_building' => 'テストビル101',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
     }
 
-    /** @test */
-    public function user_profile_page_shows_profile_and_items()
+    public function test_user_profile_page()
     {
-        $user = User::find(1);
+        $user = User::firstWhere('email', 'testuser1@example.com');
+        $user->avatar = 'sample01.jpg';
 
         $response = $this->actingAs($user)->get('/mypage');
 

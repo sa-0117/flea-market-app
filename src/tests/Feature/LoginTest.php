@@ -2,60 +2,75 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Hash;
-use Tests\TestCase;
 use App\Models\User;
+use Carbon\Carbon;
+use Database\Seeders\DatabaseSeeder;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
+
 
 class LoginTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
-    /** @test */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed();
+    }
 
-    public function test_example()
-    {   //メールアドレスバリデーション存在確認
-        $response = $this->from('/login')->post('/login', [
-            'email' => '',
-            'password' => '12345678',
+    public function test_login_user_validate_email()
+    {
+        $response = $this->post('/login', [
+            'email' => "",
+            'password' => "password",
         ]);
 
-        $response->assertRedirect('/login');
-    
-        $response->assertSessionHasErrors(['email']);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('email');
 
-        //アドレスバリデーション存在確認
-        $response = $this->from('/login')->post('/login', [
-            'email' => 'aaa@example.com',
-            'password' => '',
+        $errors = session('errors');
+        $this->assertEquals('メールアドレスを入力してください', $errors->first('email'));
+    }
+
+    public function test_login_user_validate_password()
+    {
+        $response = $this->post('/login', [
+            'email' => "user@example.com",
+            'password' => "",
         ]);
 
-        $response->assertRedirect('/login');
-    
-        $response->assertSessionHasErrors(['password']);
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('password');
 
-        //入力情報の誤り→バリデーション
-        $user = User::factory()->create([
-            'email' => 'test@example.com',
-            'password' => Hash::make('pass1234')
+        $errors = session('errors');
+        $this->assertEquals('パスワードを入力してください', $errors->first('password'));
+    }
+
+    public function test_login_user_validate_user()
+    {
+        $response = $this->post('/login', [
+            'email' => "user2@example.com",
+            'password' => "password123",
         ]);
 
-        $response = $this->from('/login')->post('/login', [
-            'email' => 'aaa@example.com',
-            'password' => '98765432',
-    
+        $response->assertStatus(302);
+        $response->assertSessionHasErrors('email');
+
+        $errors = session('errors');
+        $this->assertEquals('ログイン情報が登録されていません。', $errors->first('email'));
+    }
+
+    public function test_login_user()
+    {
+        $user = User::firstWhere('email', 'testuser1@example.com');
+
+        $response = $this->post('/login', [
+            'email' => "testuser1@example.com",
+            'password' => "password",
         ]);
-        
-        $response->assertRedirect('/login');
-        $response->assertSessionHasErrors(['email']);
 
-        //正しい情報入力、ログイン処理
-        $response = $this->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class)
-            ->post('/login', [
-                    'email' => 'test@example.com',
-                    'password' => 'pass1234',
-            ]);
-
-        $response->assertRedirect('/mylist'); 
+        $response->assertRedirect('/mylist');
+        $this->assertAuthenticatedAs($user);
     }
 }

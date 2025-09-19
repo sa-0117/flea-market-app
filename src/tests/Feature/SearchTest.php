@@ -18,32 +18,21 @@ class SearchTest extends TestCase
         $this->seed(); 
     }
 
-    /** @test */
-    public function search_with_product_name()
+    public function test_search_with_product_name()
     
     {
-        $user = User::first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
-
-        // ユーザーを作成してログイン
-        $user = User::factory()->create([
-            'id' => 999,
-        ]);
 
         $response = $this->actingAs($user)->get('/?keyword=時計');
 
         $response->assertSee('腕時計');
     }
 
-    /** @test */
-    public function save_search_status_in_mylist()
+    public function test_search_status_in_mylist()
     {
-        $user = User::first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
-
-        $user = User::factory()->create([
-            'id' => 999, 
-        ]);
 
         $user->favoriteProducts()->attach($product->id);
 

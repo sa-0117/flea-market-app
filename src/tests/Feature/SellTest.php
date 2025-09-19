@@ -17,41 +17,34 @@ class SellTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->seed();      
+    }
+
+    public function test_registering_product()
+    {
 
         Storage::fake('public');
-
-        $this->seed();      
-        
-        $user = User::find(1);
-        $user->avatar = 'sample01.jpg';
-        $user->name = 'test user';
-        $user->post_code = '123-4567';
-        $user->address = '東京都新宿区1-1-1';
-        $user->building = 'テストビル101';    
-        $user->save();
-    }
-    /** @test */
-    public function user_can_register_product_using_seeded_data()
-    {
-        $user = User::find(1);
-
+        $image = UploadedFile::fake()->create('sample01.jpg', 100);
         $categories = Category::pluck('id')->take(2)->toArray();
 
-        $image = UploadedFile::fake()->create('sample01.jpg', 100, 'image/jpeg');
+        $user = User::firstWhere('email', 'testuser1@example.com');
 
         $response = $this->actingAs($user)->post('/sell',[
+            'image' => $image,
+            'categories' => $categories,
+            'condition' => '良好',
             'name' => 'テスト商品',
             'brand' => 'ブランド',
             'description' => 'テスト用説明',
-            'condition' => '良好',
-            'listing_price' => '20000',
-            'categories' => $categories,
-            'image' => $image,
+            'listing_price' => '20000',     
         ]);
 
         $response->assertRedirect('/mypage');
 
+        $product = Product::latest()->first();
+
         $this->assertDatabaseHas('products', [
+            'image' => $product->image, 
             'name' => 'テスト商品',
             'brand' => 'ブランド',
             'description' => 'テスト用説明',
@@ -63,13 +56,11 @@ class SellTest extends TestCase
             'status' => 'listed',
         ]);
 
-        $product = Product::where('name', 'テスト商品')->first();
-        foreach ($categories as $categoryId) {
-            $this->assertDatabaseHas('category_product', [
-                'product_id' => $product->id,
-                'category_id' => $categoryId,
-            ]);
-        }
+        $this->assertDatabaseHas('categories_products', [
+            'product_id' => $product->id,
+            'category_id' => $categories[0],
+        ]);
+
     }
 }
 

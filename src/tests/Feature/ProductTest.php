@@ -13,115 +13,57 @@ class ProductTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-
-    public function test_example()
+    protected function setUp(): void
     {
-        // UsersTableSeeder用のユーザーIDを固定で先に作成（id=1〜10）
-        User::factory()->count(10)->sequence(fn ($sequence) => ['id' => $sequence->index + 1])->create();
+        parent::setUp();
+        $this->seed(); 
+    }
 
-        $this->seed(\Database\Seeders\ProductsTableSeeder::class);
-        $this->seed(\Database\Seeders\ListingsTableSeeder::class);
+    public function test_product_all() {
 
         $response = $this->get('/');
 
-        $products = [
-            '腕時計',
-            'HDD',
-            '玉ねぎ3束',
-            '革靴',
-            'ノートPC',
-            'マイク',
-            'ショルダーバッグ',
-            'タンブラー',
-            'コーヒーミル',
-            'メイクセット',
-        ];
+        $response->assertStatus(200);
 
-        foreach ($products as $productName) {
-            $response->assertSee($productName);
+        $listings = Listing::with('product')->get();
+
+        foreach ($listings as $listing) {
+            $response->assertSee($listing->product->name);
         }
+    }
 
-        // ログインユーザー（id=11）
-        $user = User::create([
-            'id' => 11,
-            'name' => 'テストユーザー',
-            'email' => 'test@example.com',
-            'password' => bcrypt('password'),
-        ]);
+    public function test_display_as_sold(){
 
-        // 自分が出品した商品
-        $Product = Product::create([
-            'name' => '自分の商品',
+        $listings = Listing::with('product')->get();
+
+        $listings = Listing::with('product')->update(['status' => 'sold']);
+
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+
+        $response->assertSee('Sold');
+    }
+
+    public function test_does_not_show_own_products()
+    {
+        $user = User::firstWhere('email', 'testuser1@example.com');
+
+        $myProduct = Product::create([
             'image' => 'dummy.jpg',
-            'description' => '自分の商品説明',
+            'name' => '自分の商品',
+            'description' => '商品説明',
             'condition' => '良好',
-            'category_id' => 1,
-            'user_id' => $user->id,
         ]);
-
-        Listing::create([
-            'product_id' => $Product->id,
+        $listing = Listing::create([
             'user_id' => $user->id,
+            'product_id' => $myProduct->id,
             'listing_price' => 10000,
             'status' => 'listed',
         ]);
 
-        // 他人が出品した商品（未購入）
-        $otherUser = User::create([
-            'id' => 12,
-            'name' => '他人ユーザー',
-            'email' => 'other@example.com',
-            'password' => bcrypt('password'),
-        ]);
-
-        $watchProduct = Product::create([
-            'name' => '腕時計',
-            'image' => 'watch.jpg',
-            'description' => '腕時計の説明',
-            'condition' => '良好',
-            'category_id' => 1,
-            'user_id' => $otherUser->id,
-        ]);
-
-        Listing::create([
-            'product_id' => $watchProduct->id,
-            'user_id' => $otherUser->id,
-            'listing_price' => 50000,
-            'status' => 'listed',
-        ]);
-
-        // 他人が出品した商品（購入済み）
-        $buyerUser = User::create([
-            'id' => 13,
-            'name' => '購入者',
-            'email' => 'buyer@example.com',
-            'password' => bcrypt('password'),
-        ]);
-
-        $soldProduct = Product::create([
-            'name' => 'ネックレス',
-            'image' => 'necklace.jpg',
-            'description' => 'ネックレスの説明',
-            'condition' => '良好',
-            'category_id' => 1,
-            'user_id' => $otherUser->id,
-        ]);
-
-        Listing::create([
-            'product_id' => $soldProduct->id,
-            'user_id' => $otherUser->id,
-            'buyer_id' => $buyerUser->id,
-            'listing_price' => 20000,
-            'status' => 'sold',
-        ]);
-
-        // ログイン状態で商品一覧にアクセス
         $response = $this->actingAs($user)->get('/');
 
-        $response->assertStatus(200);
-        $response->assertSee('腕時計'); 
-        $response->assertSee('Sold'); 
         $response->assertDontSee('自分の商品'); 
     }
 }

@@ -14,6 +14,10 @@ class FavoriteController extends Controller
 
         $productsQuery = $user->favoriteProducts()->with(['listing', 'favoriteBy']);
 
+        $productsQuery = $user->favoriteProducts()->whereHas('listing', function ($query) use ($user) {
+                $query->where('user_id', '!=', $user->id);
+            })->with(['listing', 'favoriteBy']);
+
         if ($key) {
             $productsQuery->where('name', 'like', '%' . $key . '%');
         }

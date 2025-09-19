@@ -18,10 +18,9 @@ class FavoriteTest extends TestCase
         $this->seed(); 
     }
 
-    /** @test */
-    public function user_can_favorite_a_product()
+    public function test_user_can_favorite_a_product()
     {
-        $user = User::first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
 
         // 初期状態（0）を確認
@@ -40,10 +39,9 @@ class FavoriteTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function favorite_icon_image_changes_when_product_is_favorited()
+    public function test_favorite_icon_image_changes_when_product_is_favorited()
     {
-        $user = User::first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
 
         $user->favoriteProducts()->detach($product->id);
@@ -62,10 +60,9 @@ class FavoriteTest extends TestCase
         $response->assertDontSee('star.svg');
     }
 
-    /** @test */
-    public function user_can_unfavorite_a_product()
+    public function test_user_can_unfavorite_a_product()
     {
-        $user = User::first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
 
         $user->favoriteProducts()->attach($product->id);

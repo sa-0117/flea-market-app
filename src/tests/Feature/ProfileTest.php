@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class ProfileTest extends TestCase
 {           
@@ -14,34 +15,34 @@ class ProfileTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
         Storage::fake('public');
-        Storage::disk('public')->put('image/sample01.jpg', 'dummy');
-
-        $this->seed(); 
+        $this->seed();
         
-        $user = User::find(1);
-        $user->avatar = 'sample01.jpg';
-        $user->name = 'test user';
+    }
+    
+    public function test_change_profile()
+    {
+        $user = User::firstWhere('email', 'testuser1@example.com');
+        $user->avatar = 'sample01.jpeg';
+        $user->name = $user->name;
         $user->post_code = '123-4567';
         $user->address = '東京都新宿区1-1-1';
         $user->building = 'テストビル101';    
         $user->save();
-    }
-    /** @test */
-    public function it_displays_user_profile_form_with_existing_values()
-    {
-        $user = User::find(1);
+        
+        $this->actingAs($user)->post('/mypage/profile',[
+            'name' => '変更ユーザー',
+            'avatar' => UploadedFile::fake()->create('sample02.jpeg', 100),
+            'post_code' => '151-0051',
+            'address' => '東京都渋谷区千駄ヶ谷2-2',
+            'building' => 'ビル1111',
+        ]);
 
         $response = $this->actingAs($user)->get('/mypage/profile');
-
-        $response->assertStatus(200);
-
-        $response->assertSee('value="test user"', false);
-        $response->assertSee('value="123-4567"', false);
-        $response->assertSee('value="東京都新宿区1-1-1"', false);
-        $response->assertSee('value="テストビル101"', false);
-
-        $response->assertSee('storage/image/sample01.jpg');
+        $response->assertSee('変更ユーザー');
+        $response->assertSee('storage/image/sample02.jpeg');
+        $response->assertSee('151-0051');
+        $response->assertSee('東京都渋谷区千駄ヶ谷2-2');
+        $response->assertSee('ビル1111');
         }
 }

@@ -7,7 +7,6 @@ use App\Models\Product;
 use App\Models\Listing;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PaymentTest extends TestCase
@@ -17,28 +16,34 @@ class PaymentTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        Storage::fake('public');
-        Storage::disk('public')->put('image/sample01.jpg', 'dummy');
-
         $this->seed(); 
     }
 
-    /** @test */
-    public function payment_method_selection()
+    public function test_payment_method_selection()
     {
-        $user = User::find(1);
-        $this->actingAs($user);
+        $user = User::firstWhere('email', 'testuser1@example.com');
 
-        $listing = Listing::find(2);
+        $product = Product::create([
+            'image' => 'dummy.jpg',
+            'name' => 'テスト商品',
+            'description' => '商品説明',
+            'condition' => '良好',
+        ]);
 
-        $response = $this->get(route('purchase.show', ['item_id' => $listing->id, 'payment' => 'credit']));
+        $listing = Listing::create([
+            'user_id' => $user->id,
+            'product_id' => $product->id,
+            'listing_price' => 10000,
+            'status' => 'listed',
+        ]);
+
+        $response = $this->actingAs($user)->get(route('purchase.show', ['item_id' => $listing->id, 'payment' => 'credit']));
 
         $response->assertStatus(200);
 
         $response->assertSee('カード支払い');
 
-        $response = $this->get(route('purchase.show', ['item_id' => $listing->id, 'payment' => 'convenience']));
+        $response = $this->actingAs($user)->get(route('purchase.show', ['item_id' => $listing->id, 'payment' => 'convenience']));
 
         $response->assertStatus(200);
 

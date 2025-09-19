@@ -26,9 +26,7 @@ class FortifyServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //RegisterResponse を独自に差し替え
         $this->app->singleton(\Laravel\Fortify\Contracts\RegisterResponse::class, \App\Http\Responses\RegisterResponse::class);
-
         $this->app->singleton(LoginResponseContract::class, CustomLoginResponse::class);
     }
 

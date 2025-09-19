@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Product::truncate();
         \App\Models\User::truncate();
 
-        // 各Seederを実行
         $this->call([
             UsersTableSeeder::class,
             ProductsTableSeeder::class,
@@ -32,6 +31,8 @@ class DatabaseSeeder extends Seeder
         // 外部キー制約を再有効化
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $this->call(CategoriesTableSeeder::class);
+        $this->call([
+            CategoriesTableSeeder::class,
+            CategoryProductTableSeeder::class,]);
     }
 }

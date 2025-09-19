@@ -16,14 +16,13 @@ class CommentTest extends TestCase
     public function setUp():void
     {
         parent::setUp();
-        $this->seed(UsersTableSeeder::class);
-        $this->seed(ProductsTableSeeder::class);
+        $this->seed();
+        
     }
 
-    /** @test */
-    public function login_user_comment()
+    public function test_login_user_comment()
     {
-        $user = User::where('email', 'user1@example.com')->first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
 
         $response = $this->actingAs($user)->post(route('comment.store', $product->id), [
@@ -38,8 +37,7 @@ class CommentTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function user_is_guest_no_comment()
+    public function test_user_is_guest_no_comment()
     {
         $product = Product::first();
 
@@ -53,10 +51,9 @@ class CommentTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_fails_validation_when_comment_is_empty()
+    public function test_it_fails_validation_when_comment_is_empty()
     {
-        $user = User::where('email', 'user1@example.com')->first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
 
         $response = $this->actingAs($user)->post(route('comment.store', ['product' => $product->id]), [
@@ -66,10 +63,9 @@ class CommentTest extends TestCase
         $response->assertSessionHasErrors(['comment']);
     }
 
-    /** @test */
-    public function it_fails_validation_when_comment_exceeds_255_characters()
+    public function test_it_fails_validation_when_comment_exceeds_255_characters()
     {
-        $user = User::where('email', 'user1@example.com')->first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
 
         $longComment = str_repeat('あ', 256); 

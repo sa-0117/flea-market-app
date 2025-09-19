@@ -13,117 +13,80 @@ class MylistTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
     protected function setUp(): void
     {
         parent::setUp();
         $this->seed(); 
     }
 
-    /** @test */
-    public function Only_Favorite_Products_Are_Shown() 
+    public function test_only_favorite_products_are_shown() 
     {
-        $user = User::first();
+        $user = User::firstWhere('email', 'testuser1@example.com');
+        $otherUser = User::firstWhere('email', 'testuser2@example.com');
+
+        $otherProduct = Product::create([
+            'image' => 'dummy.jpg',
+            'name' => 'テスト商品',
+            'description' => '商品説明',
+            'condition' => '良好',
+        ]);
+        $listing = Listing::create([
+            'user_id' => $otherUser->id,
+            'product_id' => $otherProduct->id,
+            'listing_price' => 5000,
+            'status' => 'listed',
+        ]);
+
+        $user->favoriteProducts()->attach($otherProduct->id);
+
+
+        $response = $this->actingAs($user)->get('/mylist');
+
+        $response->assertSee('テスト商品'); 
+    }
+
+    public function test_purchased_display_as_sold(){
+
+        $user = User::firstWhere('email', 'testuser1@example.com');
         $product = Product::first();
 
         $user->favoriteProducts()->attach($product->id);
 
+        $product->listing->update(['status' => 'sold']);
+
         $response = $this->actingAs($user)->get('/mylist');
 
-        $response->assertSee($product->name); 
+        $response->assertSee('Sold');
     }
-
-    /** @test */
-    public function Sold_Products_Are_Marked_As_Sold_and_Own_Products_Are_NotDisplayed()
+    
+    public function test_mylist_does_not_show_own_products()
     {
-        $user = User::create([
-            'id' => 11,
-            'name' => 'テストユーザー',
-            'email' => 'test@example.com',
-            'password' => bcrypt('password'),
-        ]);
+        $user = User::firstWhere('email', 'testuser1@example.com');
 
-        // 自分が出品した商品
-        $Product = Product::create([
-            'name' => '自分の商品',
+        $myProduct = Product::create([
             'image' => 'dummy.jpg',
-            'description' => '自分の商品説明',
+            'name' => '自分の商品',
+            'description' => '商品説明',
             'condition' => '良好',
-            'category_id' => 1,
-            'user_id' => $user->id,
         ]);
-
-        Listing::create([
-            'product_id' => $Product->id,
+        $listing = Listing::create([
             'user_id' => $user->id,
+            'product_id' => $myProduct->id,
             'listing_price' => 10000,
             'status' => 'listed',
         ]);
 
-        // 他人が出品した商品（未購入）
-        $otherUser = User::create([
-            'id' => 12,
-            'name' => '他人ユーザー',
-            'email' => 'other@example.com',
-            'password' => bcrypt('password'),
-        ]);
-
-        $watchProduct = Product::create([
-            'name' => '腕時計',
-            'image' => 'watch.jpg',
-            'description' => '腕時計の説明',
-            'condition' => '良好',
-            'category_id' => 1,
-            'user_id' => $otherUser->id,
-        ]);
-
-        Listing::create([
-            'product_id' => $watchProduct->id,
-            'user_id' => $otherUser->id,
-            'listing_price' => 50000,
-            'status' => 'listed',
-        ]);
-
-        // 他人が出品した商品（購入済み）
-        $buyerUser = User::create([
-            'id' => 13,
-            'name' => '購入者',
-            'email' => 'buyer@example.com',
-            'password' => bcrypt('password'),
-        ]);
-
-        $soldProduct = Product::create([
-            'name' => 'ネックレス',
-            'image' => 'necklace.jpg',
-            'description' => 'ネックレスの説明',
-            'condition' => '良好',
-            'category_id' => 1,
-            'user_id' => $otherUser->id,
-        ]);
-
-        Listing::create([
-            'product_id' => $soldProduct->id,
-            'user_id' => $otherUser->id,
-            'buyer_id' => $buyerUser->id,
-            'listing_price' => 20000,
-            'status' => 'sold',
-        ]);
-
-        $user->favoriteProducts()->attach($soldProduct->id);
+        $user->favoriteProducts()->attach($myProduct->id);
 
         $response = $this->actingAs($user)->get('/mylist');
 
-        $response->assertSee('Sold'); 
         $response->assertDontSee('自分の商品'); 
     }
 
-     /** @test */
-     public function it_redirects_to_login_when_user_is_guest() 
+     public function test_it_redirects_to_login_when_user_is_guest() 
      {
          $product = Product::first();
- 
-         $response = $this->get(route('mylist.index'));
- 
+         $response = $this->get('mylist');
          $response->assertRedirect(route('login'));
      }
 }

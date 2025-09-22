@@ -74,7 +74,7 @@ html,body {
     background-color: #f0f0f0;
 }
 
-.transaction-form__button {
+.transaction__button {
     padding: 3px 12px;
     background: #fb8e8e;
     border: 2px solid #fb8e8e;
@@ -82,11 +82,13 @@ html,body {
     cursor: pointer;
     margin: 5px;
     display: inline-block;
+    
 }
 
-.transaction-end__button-submit {
+.transaction-end__button {
     font-size: 14px;
     color: #fff;
+    text-decoration: none;
 }
 
 .product-group {
@@ -259,5 +261,93 @@ html,body {
     width: 30px;
     height: 30px;
     opacity: 0.6;
+    cursor: pointer;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal:target {
+    display: block;
+    opacity: 1;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.modal__inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f2f3cf;
+    transform: translate(-50%, -50%);
+}
+
+.modal-underborder-line {
+    border-bottom: 0.5px solid #aaa;
+    width: 100%;
+}
+
+.modal-endmessage {
+    padding: 10px;
+}
+
+.form-title {
+    color: #969696;
+    font-size: 13px;
+    padding: 5px;
+}
+
+.form-rating-star {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-rating__input {
+    display: none;
+}
+
+.form-rating__label {
+    color: #ccc;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 0 10px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.form-rating__label:hover,
+.form-rating__label:hover~.form-rating__label,
+.form-rating__input:checked~.form-rating__label {
+    /* 「~」でホバー時を動的に、チェック時にそれ以下の数字をもつスターの色も変化 */
+    color: #c4c403;
+}
+
+.modal-rating-send {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 5px;
+}
+
+.modal-rating-send__button {
+    padding: 3px 12px;
+    font-size: 14px;
+    color: #fff;
+    background: #fb8e8e;
+    border: 2px solid #fb8e8e;
+    border-radius: 8px;
     cursor: pointer;
 }

@@ -31,14 +31,44 @@
                     </div>                         
                     <div class="transaction-user-name">「{{ $otherUser->name }}」さんとの取引画面</div> 
                 </div>
-                <div class="transaction-form__button">
-                    <button class="transaction-end__button-submit" type="submit">取引を完了する</button>
+                <div class="transaction__button">
+                    <a href="#modal-{{ $listing->id }}" class="transaction-end__button">取引を完了する</a>
                 </div>
             </div>
+            <div class="modal hidden" id="modal-{{ $listing->id }}">
+                <div class="modal__inner">
+                    <div class="modal-underborder-line">
+                        <p  class="modal-endmessage">取引が完了しました。</p>
+                    </div>
+                    
+                    <form action="{{ route('rating.store', ['listingId' => $listing->id]) }}" class="form-rating" method="post">
+                        @csrf
+                        <div class="modal-underborder-line">
+                            <p class="form-title">今回の取引相手はどうでしたか？</p>
+                            <div class="form-rating-star">
+                                <input class="form-rating__input" id="star5" name="rating" type="radio" value="5">
+                                <label class="form-rating__label" for="star5"><i class="fa-solid fa-star"></i></label>
 
-            <div></div>
+                                <input class="form-rating__input" id="star4" name="rating" type="radio" value="4">
+                                <label class="form-rating__label" for="star4"><i class="fa-solid fa-star"></i></label>
 
+                                <input class="form-rating__input" id="star3" name="rating" type="radio" value="3">
+                                <label class="form-rating__label" for="star3"><i class="fa-solid fa-star"></i></label>
 
+                                <input class="form-rating__input" id="star2" name="rating" type="radio" value="2">
+                                <label class="form-rating__label" for="star2"><i class="fa-solid fa-star"></i></label>
+
+                                <input class="form-rating__input" id="star1" name="rating" type="radio" value="1">
+                                <label class="form-rating__label" for="star1"><i class="fa-solid fa-star"></i></label>
+                            </div>
+                        </div>
+                        <div class="modal-rating-send">
+                            <button type="submit" class="modal-rating-send__button">送信</button>
+                        </div>
+                    </form>   
+                </div>
+
+            </div>
         </div>
         <div class="transaction-product">
             <div class="underborder-line">

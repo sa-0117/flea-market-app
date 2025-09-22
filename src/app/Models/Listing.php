@@ -42,5 +42,10 @@ class Listing extends Model
         return $this->hasMany(Message::class);
     }
 
+    public function rating()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
 
 }

@@ -18,15 +18,19 @@
 .mypage-top {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
     width: 80%;
     margin-bottom: 40px;
 }
 
 .mypage-top__left {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    display: flex;
+}
+
+.mypage-top-username {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px;
 }
 
 .avatar {
@@ -41,7 +45,10 @@
 }
 
 .mypage-top__middle {
-    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px;
 }
 
 .mypage-top__right-edit {
@@ -57,7 +64,7 @@
     color: #ff4b4b;
     background: #fff;
     text-decoration: none;
-    padding: 5px;
+    padding: 5px 20px;
     
 }
 

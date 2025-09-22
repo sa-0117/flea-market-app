@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -39,6 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::get('/purchase/{item_id}',[PurchaseController::class, 'show'])->name('purchase.show');
     Route::post('/purchase/{item_id}/pay', [PurchaseController::class, 'pay'])->name('purchase.pay');
     Route::get('/purchase/{item_id}/success', [PurchaseController::class, 'success'])->name('purchase.success');
+    Route::get('/transaction/{listingId}', [TransactionController::class, 'show'])->name('transaction.show');
+    Route::post('/transaction/{listingId}/message', [MessageController::class, 'store'])->name('transaction.message');
+    Route::post('/transaction/message/{id}/update', [MessageController::class, 'update'])->name('message.update');
+    Route::delete('/transaction/message//{id}', [MessageController::class, 'destroy'])->name('message.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {

@@ -22,15 +22,19 @@ class UserController extends Controller
 
         if ($tab === 'sell') {
             $listings = Listing::with('product')->where('user_id', $user->id)->get();
-        } elseif ($request->tab === 'buy') {
+        } elseif ($tab === 'buy') {
             $orders = $user->orders()->with('listing.product')->latest()->get();
+        } elseif ($tab === 'transaction') {
+            $listings = Listing::with('product')->where(function ($query) use ($user){
+                $query->where('user_id', $user->id)->orWhere('buyer_id', $user->id);
+            })->where('status', 'Sold')->get();
         }
 
         return view('mypage.mypage',[
             'listings' => $listings,
             'tab'=> $tab,
             'user' => $user,
-            'orders' => $orders
+            'orders' => $orders,
         ]);
         
     }

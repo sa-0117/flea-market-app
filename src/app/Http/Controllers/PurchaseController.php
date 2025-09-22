@@ -42,7 +42,7 @@ class PurchaseController extends Controller
         ]);
     
 
-        Stripe::setApiKey(config('stripe_secret_key'));
+        Stripe::setApiKey(config('stripe.stripe_secret_key'));
 
             $payment_method = $request->input('payment');
             $payment_method_types = $payment_method === 'konbini' ? ['konbini'] : ['card'];

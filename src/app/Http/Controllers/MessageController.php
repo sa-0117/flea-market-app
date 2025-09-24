@@ -22,7 +22,7 @@ class MessageController extends Controller
             'image' => $path,
         ]);
 
-        return redirect()->route('transaction.show', $listingId);
+        return back();
     }
 
     public function update(Request $request, $id) {

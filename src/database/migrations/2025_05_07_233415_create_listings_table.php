@@ -19,7 +19,7 @@ class CreateListingsTable extends Migration
             $table->foreignId('buyer_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->integer('listing_price');
-            $table->string('status')->default('listed');
+            $table->enum('status',['listed', 'Sold', 'completed'])->default('listed');
             $table->timestamps();
         });
     }

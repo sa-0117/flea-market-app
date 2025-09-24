@@ -27,7 +27,7 @@ class ListingsTableSeeder extends Seeder
             ],
 
             [   
-            "user_id" => 2,
+            "user_id" => 1,
             "product_id" => 2,
             "listing_price" => 5000,
             "status" => "listed",
@@ -36,7 +36,7 @@ class ListingsTableSeeder extends Seeder
             ],
             
             [   
-            "user_id" => 3,
+            "user_id" => 1,
             "product_id" => 3,
             "listing_price" => 300,
             "status" => "listed",
@@ -45,7 +45,7 @@ class ListingsTableSeeder extends Seeder
             ],
 
             [   
-            "user_id" => 4,
+            "user_id" => 1,
             "product_id" => 4,
             "listing_price" => 4000,
             "status" => "listed",
@@ -54,7 +54,7 @@ class ListingsTableSeeder extends Seeder
             ],
 
             [   
-            "user_id" => 5,
+            "user_id" => 1,
             "product_id" => 5,
             "listing_price" => 45000,
             "status" => "listed",
@@ -63,7 +63,7 @@ class ListingsTableSeeder extends Seeder
             ],
 
             [   
-            "user_id" => 6,
+            "user_id" => 2,
             "product_id" => 6,
             "listing_price" => 8000,
             "status" => "listed",
@@ -72,7 +72,7 @@ class ListingsTableSeeder extends Seeder
             ],
 
             [   
-            "user_id"=> 7,
+            "user_id"=> 2,
             "product_id" => 7,
             "listing_price" => 3500,
             "status" => "listed",
@@ -81,7 +81,7 @@ class ListingsTableSeeder extends Seeder
             ],
 
             [   
-            "user_id" => 8,
+            "user_id" => 2,
             "product_id" => 8,
             "listing_price" => 500,
             "status" => "listed",
@@ -90,7 +90,7 @@ class ListingsTableSeeder extends Seeder
             ],
 
             [   
-            "user_id" => 9,
+            "user_id" => 2,
             "product_id" => 9,
             "listing_price" => 4000,
             "status" => "listed",
@@ -99,7 +99,7 @@ class ListingsTableSeeder extends Seeder
             ],
 
             [   
-            "user_id"=> 10,
+            "user_id"=> 2,
             "product_id" => 10,
             "listing_price" => 2500,
             "status" => "listed",

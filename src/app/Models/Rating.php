@@ -13,6 +13,7 @@ class Rating extends Model
         'user_id',
         'listing_id',
         'rating',
+        'status'
     ]; 
 
     public function user()

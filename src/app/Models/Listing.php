@@ -26,7 +26,6 @@ class Listing extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-
     public function buyer(){
 
         return $this->belongsTo(User::class, 'buyer_id');
@@ -42,7 +41,7 @@ class Listing extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function rating()
+    public function ratings()
     {
         return $this->hasMany(Rating::class);
     }

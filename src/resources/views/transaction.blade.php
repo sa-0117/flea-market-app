@@ -7,14 +7,18 @@
 @section('content')
 <di class="transaction">
     <div class="transactionpage-side-menu">
-        @if ($otherUser)
-            <p>その他の取引</p>
-        @else
-            <p>その他の取引</p>
+        <p>その他の取引</p>
+        @if($isSeller)
             <div class="side-menu__button__group">
-                <button class="side-menu__button" type="submit">商品名</button>
-                <button class="side-menu__button" type="submit">商品名</button>
-                <button class="side-menu__button" type="submit">商品名</button>     
+                @forelse ($listings as $otherListing)
+                    <div class="side-menu__item">
+                        <a href="{{ route('transaction.show', ['listingId' => $otherListing->id]) }}">
+                        <div class="side-menu__button" type="submit">{{ $otherListing->product->name }}</div>
+                        </a>
+                    </div>
+                @empty
+                    <p>その他の取引</p>
+                @endforelse
             </div>
         @endif
     </div>
@@ -31,43 +35,34 @@
                     </div>                         
                     <div class="transaction-user-name">「{{ $otherUser->name }}」さんとの取引画面</div> 
                 </div>
-                <div class="transaction__button">
-                    <a href="#modal-{{ $listing->id }}" class="transaction-end__button">取引を完了する</a>
-                </div>
-            </div>
-            <div class="modal hidden" id="modal-{{ $listing->id }}">
-                <div class="modal__inner">
-                    <div class="modal-underborder-line">
-                        <p  class="modal-endmessage">取引が完了しました。</p>
-                    </div>
-                    
-                    <form action="{{ route('rating.store', ['listingId' => $listing->id]) }}" class="form-rating" method="post">
+                <div class="modal {{ $sellerModal ? '' : '' }}" id="modal-{{ $listing->id }}">
+                    <div class="modal__inner">
+                        <div class="modal-underborder-line">
+                        <p class="modal-endmessage">取引が完了しました。</p>
+                        </div>
+
+                        <form action="{{ route('rating.store', ['listingId' => $listing->id]) }}" class="form-rating" method="post">
                         @csrf
                         <div class="modal-underborder-line">
                             <p class="form-title">今回の取引相手はどうでしたか？</p>
                             <div class="form-rating-star">
-                                <input class="form-rating__input" id="star5" name="rating" type="radio" value="5">
-                                <label class="form-rating__label" for="star5"><i class="fa-solid fa-star"></i></label>
-
-                                <input class="form-rating__input" id="star4" name="rating" type="radio" value="4">
-                                <label class="form-rating__label" for="star4"><i class="fa-solid fa-star"></i></label>
-
-                                <input class="form-rating__input" id="star3" name="rating" type="radio" value="3">
-                                <label class="form-rating__label" for="star3"><i class="fa-solid fa-star"></i></label>
-
-                                <input class="form-rating__input" id="star2" name="rating" type="radio" value="2">
-                                <label class="form-rating__label" for="star2"><i class="fa-solid fa-star"></i></label>
-
-                                <input class="form-rating__input" id="star1" name="rating" type="radio" value="1">
-                                <label class="form-rating__label" for="star1"><i class="fa-solid fa-star"></i></label>
+                            @for($i = 5; $i >= 1; $i--)
+                                <input class="form-rating__input" id="star{{ $i }}" name="rating" type="radio" value="{{ $i }}">
+                                <label class="form-rating__label" for="star{{ $i }}"><i class="fa-solid fa-star"></i></label>
+                            @endfor
                             </div>
                         </div>
                         <div class="modal-rating-send">
                             <button type="submit" class="modal-rating-send__button">送信</button>
                         </div>
-                    </form>   
+                        </form>
+                    </div>
                 </div>
-
+                @if($buyerButton)
+                    <div class="transaction__button">
+                        <a href="#modal-{{ $listing->id }}" class="transaction-end__button">取引を完了する</a>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="transaction-product">
@@ -94,7 +89,7 @@
                         <div class="chat-message mymessage">
                             <div class="chat-header">
                                 <div class="chat-name">{{ $message->user->name }}</div> 
-                                @if($message->avatar !== null)
+                                @if($authUser->avatar !== null)
                                     <img src="{{ asset('storage/image/' . $message->user->avatar)}}" alt="avatar" class="avatar">
                                 @else
                                     <div class="avatar avatar-placeholder"></div>
@@ -108,7 +103,7 @@
                                 </form>
                             @else
                                 <div class="chat-content">
-                                    {{ old('content', $message->content) }}
+                                    {{ $message->content }}
                                     @if($message->image)
                                         <img src="{{ asset('storage/' . $message->image) }}" alt="message image">
                                     @endif
@@ -126,7 +121,7 @@
                     @else
                         <div class="chat-message othermessage">
                             <div class="chat-header">
-                                @if($message->avatar !== null)
+                                @if($message->user->avatar !== null)
                                     <img src="{{ asset('storage/image/' . $message->user->avatar)}}" alt="avatar" class="avatar">
                                 @else
                                     <div class="avatar avatar-placeholder"></div>
@@ -142,7 +137,8 @@
                         </div>     
                     @endif
                 @endforeach   
-                <div class="error-message">
+            </div>
+            <div class="error-message">
                     @error('content')
                         {{ $message }}
                     @enderror
@@ -150,12 +146,11 @@
                         {{ $message }}
                     @enderror
                 </div>
-            </div>
             <form class="form-chat" action="{{ route('transaction.message', $listing->id) }}" method="post"  enctype="multipart/form-data">
                 @csrf
                 <div class="chat-create__group">
                     <div class="chat-comment">
-                        <textarea name="content" class="chat-comment__textarea" placeholder="取引メッセージを記入してください">{{ old('comment') }}</textarea>
+                        <textarea name="content" class="chat-comment__textarea" placeholder="取引メッセージを記入してください">{{ old('content') }}</textarea>
                     </div>
                     <div class="image-button">
                         <input class="image-input" type="file" name="image" id="image" accept="image/*">

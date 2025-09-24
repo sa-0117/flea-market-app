@@ -18,6 +18,7 @@ class CreateRatingsTable extends Migration
             $table->foreignId('listing_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->unsignedTinyInteger('rating')->default(0)->nullable(false);
+            $table->enum('status', ['waiting', 'evaluated'])->default('waiting');
             $table->timestamps();
         });
     }

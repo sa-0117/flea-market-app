@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Listing;
+use App\Models\Message;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ProfileRequest;
 
@@ -17,6 +18,8 @@ class UserController extends Controller
 
         $user = auth()->user();
 
+        $averageRating = round($user->ratings()->avg('rating'));
+
         $listings = collect();
         $orders = collect();
 
@@ -25,16 +28,47 @@ class UserController extends Controller
         } elseif ($tab === 'buy') {
             $orders = $user->orders()->with('listing.product')->latest()->get();
         } elseif ($tab === 'transaction') {
-            $listings = Listing::with('product')->where(function ($query) use ($user){
-                $query->where('user_id', $user->id)->orWhere('buyer_id', $user->id);
-            })->where('status', 'Sold')->get();
+            $listings = Listing::with('product')
+            ->withMax('messages', 'created_at') //最新メッセージ取得
+            ->where(function ($query) use ($user){
+                $query->where('user_id', $user->id)
+                    ->orWhere('buyer_id', $user->id);
+            })
+            ->where('status', 'Sold')
+            ->orderByDesc('messages_max_created_at') //最新メッセージ順に並び替え
+            ->get();
         }
 
+        $transactionListings = Listing::with('product', 'messages')->where(function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                    ->orWhere('buyer_id', $user->id);
+            })
+            ->where('status', 'Sold')
+            ->get();
+
+        $newMessageCount = Message::whereIn('listing_id', $transactionListings->pluck('id'))
+            ->where('receiver_id', $user->id)
+            ->where('is_read', false)
+            ->count();
+
+        $transactionListings->map(function($query) use ($user) {
+            $listing->newMessageCount = $listing->messages
+                ->where('receiver_id', $user->id)
+                ->where('is_read', false)
+                ->count();
+
+            return $listing;
+        });
+
         return view('mypage.mypage',[
+            
             'listings' => $listings,
-            'tab'=> $tab,
+            'tab' => $tab,
             'user' => $user,
             'orders' => $orders,
+            'averageRating' => $averageRating,
+            'transactionListings' => $transactionListings,
+            'newMessageCount' => $newMessageCount,
         ]);
         
     }

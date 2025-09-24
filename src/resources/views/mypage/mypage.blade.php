@@ -19,7 +19,11 @@
                         </div>
                         <div class="mypage-top__middle">
                             <div class="mypage-top-username">{{ $user->name }}</div>
-                            <div class="mypage-top-rating">☆</div>
+                            <div class="mypage-top-rating">
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <span class="form-rating__label" style="{{ $i <= $averageRating ? 'color: #e5e506ff;' : 'color: #ccc;' }}">★</span>
+                                @endfor
+                            </div>
                         </div>
                     </div>
                     <div class="mypage-top__right-edit">
@@ -35,6 +39,9 @@
                     </li>
                     <li class="product-tab-name">
                         <a href="{{ url('/mypage?tab=transaction') }}" class="{{ $tab === 'transaction' ? 'active' : '' }}">取引中の商品</a>
+                        @if($newMessageCount > 0)
+                            <span class="count">{{ $newMessageCount }}</span>
+                        @endif
                     </li>
                 </ul>
             </div>
@@ -47,6 +54,9 @@
                             <img src="{{ asset('storage/' .$listing->product->image) }}" alt="{{ $listing->product->name }}">
                         </div>
                         <div class="product-list__name">{{ $listing->product->name }}</div>
+                        @if (in_array($listing->status,['Sold', 'completed']))
+                            <div class="product-status">Sold</div>
+                        @endif
                     </div>
                 @endforeach
             @elseif ($tab === 'buy')
@@ -62,11 +72,15 @@
                 @foreach ($listings as $listing)
                     <div class="product-list__item">
                         <a href="{{ route('transaction.show', ['listingId' => $listing->id]) }}">
-                            <div class="product-list__image">
+                            <div class="product-list__image-wrapper">
                                 <img src="{{ asset('storage/' .$listing->product->image) }}" alt="{{ $listing->product->name }}">
+                                @if($listing->newMessageCount > 0)
+                                    <span class="count-badge">{{ $listing->newMessagesCount }}</span>
+                                @endif
                             </div>
-                            <div class="product-list__name">{{ $listing->product->name }}</div>
                         </a>
+                        <div class="product-list__name">{{ $listing->product->name }}</div>
+                        
                     </div>
                 @endforeach
             @endif

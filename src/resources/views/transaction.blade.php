@@ -35,7 +35,7 @@
                     </div>                         
                     <div class="transaction-user-name">「{{ $otherUser->name }}」さんとの取引画面</div> 
                 </div>
-                <div class="modal {{ $sellerModal ? '' : '' }}" id="modal-{{ $listing->id }}">
+                <div class="modal {{ $sellerModal ? 'show' : '' }}" id="modal-{{ $listing->id }}">
                     <div class="modal__inner">
                         <div class="modal-underborder-line">
                         <p class="modal-endmessage">取引が完了しました。</p>
@@ -43,18 +43,28 @@
 
                         <form action="{{ route('rating.store', ['listingId' => $listing->id]) }}" class="form-rating" method="post">
                         @csrf
-                        <div class="modal-underborder-line">
-                            <p class="form-title">今回の取引相手はどうでしたか？</p>
-                            <div class="form-rating-star">
-                            @for($i = 5; $i >= 1; $i--)
-                                <input class="form-rating__input" id="star{{ $i }}" name="rating" type="radio" value="{{ $i }}">
-                                <label class="form-rating__label" for="star{{ $i }}"><i class="fa-solid fa-star"></i></label>
-                            @endfor
+                            <div class="modal-underborder-line">
+                                <p class="form-title">今回の取引相手はどうでしたか？</p>
+                                <div class="form-rating-star">
+                                    <input class="form-rating__input" id="star5" name="rating" type="radio" value="5">
+                                    <label class="form-rating__label" for="star5"><i class="fa-solid fa-star"></i></label>
+
+                                    <input class="form-rating__input" id="star4" name="rating" type="radio" value="4">
+                                    <label class="form-rating__label" for="star4"><i class="fa-solid fa-star"></i></label>
+
+                                    <input class="form-rating__input" id="star3" name="rating" type="radio" value="3">
+                                    <label class="form-rating__label" for="star3"><i class="fa-solid fa-star"></i></label>
+
+                                    <input class="form-rating__input" id="star2" name="rating" type="radio" value="2">
+                                    <label class="form-rating__label" for="star2"><i class="fa-solid fa-star"></i></label>
+
+                                    <input class="form-rating__input" id="star1" name="rating" type="radio" value="1">
+                                    <label class="form-rating__label" for="star1"><i class="fa-solid fa-star"></i></label>
                             </div>
-                        </div>
-                        <div class="modal-rating-send">
-                            <button type="submit" class="modal-rating-send__button">送信</button>
-                        </div>
+                            </div>
+                            <div class="modal-rating-send">
+                                <button type="submit" class="modal-rating-send__button">送信</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -150,7 +160,7 @@
                 @csrf
                 <div class="chat-create__group">
                     <div class="chat-comment">
-                        <textarea name="content" class="chat-comment__textarea" placeholder="取引メッセージを記入してください">{{ old('content') }}</textarea>
+                        <textarea name="content" class="chat-comment__textarea" placeholder="取引メッセージを記入してください">{{ old('content', session('chat_draft_'.$listing->id)) }}</textarea>
                     </div>
                     <div class="image-button">
                         <input class="image-input" type="file" name="image" id="image" accept="image/*">

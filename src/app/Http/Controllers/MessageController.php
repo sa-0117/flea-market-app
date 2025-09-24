@@ -10,6 +10,8 @@ class MessageController extends Controller
 {
     public function store(MessageRequest $request, $listingId) {
 
+        session(['chat_draft_'.$listingId => $request->input('content')]);
+
         $path = null;
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('messages', 'public');
@@ -21,6 +23,8 @@ class MessageController extends Controller
             'content' => $request->input('content'),
             'image' => $path,
         ]);
+
+        session()->forget('chat_draft_'.$listingId);
 
         return back();
     }

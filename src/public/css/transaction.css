@@ -269,18 +269,14 @@ html,body {
     cursor: pointer;
 }
 
-.modal:target {
-    display: block;
-    opacity: 1;
-}
-
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
+    display: none;
+    z-index: 1000;
 }
 
 .modal__inner {
@@ -301,6 +297,14 @@ html,body {
 
 .modal-endmessage {
     padding: 10px;
+}
+
+.modal:target {
+    display: block;
+}
+
+.modal.show {
+    display: block;
 }
 
 .form-title {
@@ -333,8 +337,7 @@ html,body {
 .form-rating__label:hover,
 .form-rating__label:hover~.form-rating__label,
 .form-rating__input:checked~.form-rating__label {
-    /* 「~」でホバー時を動的に、チェック時にそれ以下の数字をもつスターの色も変化 */
-    color: #c4c403;
+    color: #e5e506ff;
 }
 
 .modal-rating-send {

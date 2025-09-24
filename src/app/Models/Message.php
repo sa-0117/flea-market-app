@@ -12,7 +12,9 @@ class Message extends Model
     protected $fillable = [
         'user_id',
         'listing_id',
+        'receiver_id',
         'content',
+        'is_read',
         'image',
     ]; 
 

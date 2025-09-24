@@ -23,12 +23,12 @@ class TransactionController extends Controller
 
         $sellerModal = false;
 
-        $buyerButton = $authUser->id === $listing->buyer_id && (!$myRating || $myRating->status === 'waiting');
-
         if ($authUser->id === $listing->user_id && $otherRating && $otherRating->status === 'evaluated' 
             && (!$myRating || $myRating->status === 'waiting')) {
             $sellerModal = true;
         }
+
+        $buyerButton = $authUser->id === $listing->buyer_id && (!$myRating || $myRating->status === 'waiting');
 
         //その他の取引一覧
         $listings = Listing::with('product')

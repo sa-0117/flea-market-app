@@ -25,6 +25,21 @@ class RatingController extends Controller
            ]
         );
 
+        //評価済みのチェック
+        $buyerRated = Rating::where('listing_id', $listingId)
+            ->where('user_id', $listing->buyer_id)
+            ->where('status', 'evaluated')
+            ->exists();
+
+        $sellerRated = Rating::where('listing_id', $listingId)
+            ->where('user_id', $listing->user_id)
+            ->where('status', 'evaluated')
+            ->exists();
+
+        if ($buyerRated && $sellerRated) {
+            $listing->update(['status' => 'completed']);
+        }
+
         if ($authUser->id === $listing->buyer->id) {
             Mail::to($listing->user->email)->send(new RatingCompletedMail($listing));
         }

@@ -65,7 +65,7 @@
     background: #fff;
     text-decoration: none;
     padding: 5px 20px;
-    
+
 }
 
 .product-tab {
@@ -162,29 +162,31 @@
 @media (min-width: 768px) and (max-width: 850px) {
     .product-list {
         grid-template-columns: repeat(3, 1fr);
-        width: 85%;
+        padding: 20px;
     }
 
     .mypage-top {
-        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .mypage-top__left {
+        align-items: center;
     }
 
     .product-tab {
-        justify-content: space-between;
-    }
-
-    .product-tab-name a {
-        text-decoration: none;
-        color: #aaa;
+        justify-content: center;
+        gap: 1rem;
     }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1400px) and (max-width: 1500px) {
     .product-list {
         grid-template-columns: repeat(4, 1fr);
         width: 80%;
-        gap: 2rem;
-        padding: 30px 40px;
+        margin: 0 auto;
     }
+
 
 }

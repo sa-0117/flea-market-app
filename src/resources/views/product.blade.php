@@ -32,7 +32,7 @@
                     </div>
                     <div class="product-list__image-title">
                         <div class="product-list__name">{{ $listing->product->name }}</div>
-                            @if ($listing->status === 'sold')
+                            @if (in_array($listing->status,['Sold', 'completed']))
                                 <div class="product-status">Sold</div>
                             @endif
                     </div>

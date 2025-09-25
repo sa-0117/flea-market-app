@@ -6,11 +6,8 @@
     display: flex;
         flex-direction: column;
         justify-content: center;
-        /* 縦中央 */
         align-items: center;
-        /* 横中央 */
         height: 100vh;
-        /* 画面の高さ全体を使用 */
         padding: 30px 15px;
         text-align: center;
 }

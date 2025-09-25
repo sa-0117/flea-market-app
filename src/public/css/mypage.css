@@ -18,15 +18,19 @@
 .mypage-top {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: space-between;
     width: 80%;
     margin-bottom: 40px;
 }
 
 .mypage-top__left {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    display: flex;
+}
+
+.mypage-top-username {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px;
 }
 
 .avatar {
@@ -41,7 +45,10 @@
 }
 
 .mypage-top__middle {
-    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px;
 }
 
 .mypage-top__right-edit {
@@ -57,7 +64,7 @@
     color: #ff4b4b;
     background: #fff;
     text-decoration: none;
-    padding: 5px;
+    padding: 5px 20px;
     
 }
 
@@ -76,12 +83,25 @@
     text-decoration: none;
     color: #aaa;
     margin-right: 50px;
+}
 
+.transaction-tab a {
+    margin-right: 0;
 }
 
 .product-tab-name a.active {
     color: #FF0000;
     font-weight: bold;
+}
+
+.count {
+    display: inline-block;
+    background: #FF0000;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    margin-left: 5px;
 }
 
 .product-list {
@@ -93,7 +113,8 @@
     padding: 40px;
 }
 
-.product-list__image img {
+.product-list__image img,
+.product-list__image-wrapper img {
     width: 100%;
     height: auto;
     border: 1px solid #e7e7e7;
@@ -101,14 +122,60 @@
     box-shadow: rgba(0, 0, 0, 0.1);
 }
 
+.product-status {
+    color: #FF0000;
+}
+
 .product-list__item a {
     text-decoration: none;
+}
+
+.product-list__image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.count-badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #FF0000;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.form-rating-star {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-rating__label {
+    font-size: 24px;
+    cursor: default;
 }
 
 @media (min-width: 768px) and (max-width: 850px) {
     .product-list {
         grid-template-columns: repeat(3, 1fr);
         width: 85%;
+    }
+
+    .mypage-top {
+        width: 100%;
+    }
+
+    .product-tab {
+        justify-content: space-between;
+    }
+
+    .product-tab-name a {
+        text-decoration: none;
+        color: #aaa;
     }
 }
 

@@ -19,7 +19,7 @@ class ItemController extends Controller
             session()->forget('key');
         }
 
-        $query = Listing::with('product')->whereIn('status', ['listed','sold']);
+        $query = Listing::with('product')->whereIn('status', ['listed','sold','completed']);
 
         if($userId !== null) {
             $query->where('user_id', '!=', $userId);

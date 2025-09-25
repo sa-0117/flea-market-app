@@ -13,15 +13,9 @@
     margin: 0 auto;
     width: 80%;
 }
+
 .item-column {
     width: 100%;
-}
-
-.item-group {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;   
 }
 
 .item-group-price {

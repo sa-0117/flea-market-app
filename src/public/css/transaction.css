@@ -1,0 +1,393 @@
+html,body {
+    height: 100%;
+}
+
+.transaction {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+}
+
+.underborder-line {
+    border-bottom: 2px solid #aaa;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.transactionpage-side-menu {
+    width: 20%;
+    box-sizing: border-box;
+    background: #969696;
+    color: #fff;
+    padding: 10px 30px;
+}
+
+.transactionpage-side-menu p {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.side-menu__button__group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side-menu__item a {
+    text-decoration: none;
+    color: #000;
+}
+
+.side-menu__button {
+    border: 1px solid #ddd;
+    background: #ddd;
+    border-radius: 3px;
+    padding: 2px 30px;
+    margin: 10px;
+}
+
+.transaction-main {
+    width: 85%;
+    box-sizing: border-box;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.transaction-user__group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.transaction-user {
+    display: flex;
+    align-items: center;
+}
+
+.transaction-user-avatar {
+    display: flex;
+    align-items: flex-start;
+}
+
+.avatar-placeholder {
+    background-color: #f0f0f0;
+}
+
+.transaction__button {
+    padding: 3px 12px;
+    background: #fb8e8e;
+    border: 2px solid #fb8e8e;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+    display: inline-block;  
+}
+
+.transaction-end__button {
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.product-group {
+    margin: 20px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.product-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.product-info {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.product-group-price {
+    padding: 10px;
+}
+
+.product-group-price h1,
+.product-group-price span {
+    margin-bottom: 30px;
+}
+
+.product-group-price span {
+    font-size: 18px;
+}
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.chat-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+}
+
+.chat-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.chat-name {
+    margin: 0 5px;
+}
+
+.form-edit-textarea {
+    background: #f1f1f1;
+    text-align: center;
+}
+
+.form-edit__button {
+    font-size: 13px;
+    color: #989797;
+    background: linear-gradient(transparent 75%, #eae9e9 40%);
+    text-decoration: none;
+}
+
+.chat-content {
+    padding: 10px 22px;
+    border-radius: 8px;
+    background: #f1f1f1;
+    word-wrap: break-word;
+}
+
+.chat-image {
+    margin-top: 5px;
+    max-width: 150px;
+    border-radius: 8px;
+}
+
+.othermessage {
+    text-align: center;
+    margin-right: auto;
+}
+
+.mymessage {
+    text-align: center;
+    margin-left: auto;
+}
+
+.mymessage .chat-header {
+    justify-content: flex-end;
+}
+
+.mymessage .chat-name {
+    order: -1;
+}
+
+.chat-action {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    font-size: 13px;
+    margin-left: auto;
+}
+
+.chat-button {
+    font-size: 12px;
+    margin-left: 5px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.chat-button-edit,
+.chat-button-delete {
+    color: #989797;
+    background: linear-gradient(transparent 75%, #eae9e9 40%);
+    text-decoration: none;
+}
+
+.chat-create__group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    padding: 10px;   
+}
+
+.chat-comment {
+    flex: 1;
+}
+
+.chat-comment__textarea {
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd; 
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.image-button {
+    align-items: center;
+    gap: 10px;
+    display: flex;
+}
+
+.image-input[type="file"] {
+    display: none;
+}
+
+.chat-comment-submit {
+    border: 1px solid #ff4b4b;
+    border-radius: 8px;
+    color: #ff4b4b;
+    background: #fff;
+    text-decoration: none;
+    padding: 5px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.send-button {
+    width: 30px;
+    height: 30px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.chat-draft-button {
+    font-size: 12px;
+    color: #aaa;
+    margin-left: 10px;
+    padding: 2px 6px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1000;
+}
+
+.modal__inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f2f3cf;
+    transform: translate(-50%, -50%);
+}
+
+.modal-underborder-line {
+    border-bottom: 0.5px solid #aaa;
+    width: 100%;
+}
+
+.modal-endmessage {
+    padding: 10px;
+}
+
+.modal:target {
+    display: block;
+}
+
+.modal.show {
+    display: block;
+}
+
+.form-title {
+    color: #969696;
+    font-size: 13px;
+    padding: 5px;
+}
+
+.form-rating-star {
+    align-items: center;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-rating__input {
+    display: none;
+}
+
+.form-rating__label {
+    color: #ccc;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 0 10px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.form-rating__label:hover,
+.form-rating__label:hover~.form-rating__label,
+.form-rating__input:checked~.form-rating__label {
+    color: #e5e506ff;
+}
+
+.modal-rating-send {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 5px;
+}
+
+.modal-rating-send__button {
+    padding: 3px 12px;
+    font-size: 14px;
+    color: #fff;
+    background: #fb8e8e;
+    border: 2px solid #fb8e8e;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: #ff0000;
+    text-align: left;
+    padding-left: 10px;
+}
+
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .product-image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .chat-create__group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 85%;
+        gap: 10px;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+}

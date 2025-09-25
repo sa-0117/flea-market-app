@@ -53,6 +53,25 @@ STRIPE_SECRET_KEY="シークレットキー"
 
 ![er](https://github.com/user-attachments/assets/5f4bc1b0-e129-4b52-9a7b-e24d30d24e11)
 
+## ダミーデータ
+* name: ユーザー1(CO01～CO05の商品データを出品しているユーザー)
+
+  email: user1@example.com
+
+  password: password
+
+* name: ユーザー2(CO06～CO10の商品データを出品しているユーザー)
+
+  email: user2@example.com
+
+  password: password
+
+* name: ユーザー3(紐づけなしのユーザー)
+
+  email: user3@example.com
+
+  password: password
+  
 
 ## テストアカウント
 * name: テストユーザー1
@@ -67,8 +86,6 @@ STRIPE_SECRET_KEY="シークレットキー"
 
 　password: password
 
-* ダミーデータのpasswordはすべて「password」です。
-
 ### PHPUnitを利用したテストについて
 ``` 
 docker-compose exec mysql bash
@@ -82,6 +99,11 @@ php artisan migrate:fresh --env=testing
 ※mysql rootのパスワードは「root」で入力ください。
 
 ※.env.testingにもStripeのAPIキーの設定をお願いします。
+
+### 補足
+要件ID：FN009 入力情報保持機能
+
+上記要件を満たすため、取引チャット画面にFigmaデザインとは異なる仕様の「下書き保存」ボタンを設けています。
 
 ## URL  
 

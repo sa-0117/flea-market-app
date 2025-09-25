@@ -43,8 +43,8 @@ MAIL_FROM_ADDRESSについては任意のメールアドレスを入力してく
 
 また、StripeのAPIキーは以下のように設定をお願いいたします。
 ``` 
-STRIPE_PUBLIC_KEY="パブリックキー"
-STRIPE_SECRET_KEY="シークレットキー"
+STRIPE_KEY="パブリックキー"
+STRIPE_SECRET="シークレットキー"
 ``` 
 
 公式ドキュメント:https://docs.stripe.com/payments/checkout?locale=ja-JP

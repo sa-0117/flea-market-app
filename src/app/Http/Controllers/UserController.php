@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Listing;
 use App\Models\Message;
+use App\Models\Rating;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\ProfileRequest;
 
@@ -18,7 +19,7 @@ class UserController extends Controller
 
         $user = auth()->user();
 
-        $averageRating = round($user->ratings()->avg('rating'));
+        $averageRating = Rating::where('user_id', $user->id)->avg('rating');
 
         $listings = collect();
         $orders = collect();

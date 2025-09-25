@@ -37,7 +37,7 @@
                     <li class="product-tab-name">
                         <a href="{{ url('/mypage?tab=buy') }}" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
                     </li>
-                    <li class="product-tab-name">
+                    <li class="product-tab-name transaction-tab">
                         <a href="{{ url('/mypage?tab=transaction') }}" class="{{ $tab === 'transaction' ? 'active' : '' }}">取引中の商品</a>
                         @if($newMessageCount > 0)
                             <span class="count">{{ $newMessageCount }}</span>
@@ -75,7 +75,7 @@
                             <div class="product-list__image-wrapper">
                                 <img src="{{ asset('storage/' .$listing->product->image) }}" alt="{{ $listing->product->name }}">
                                 @if($listing->newMessageCount > 0)
-                                    <span class="count-badge">{{ $listing->newMessagesCount }}</span>
+                                    <span class="count-badge">{{ $listing->newMessageCount }}</span>
                                 @endif
                             </div>
                         </a>

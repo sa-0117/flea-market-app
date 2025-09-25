@@ -14,6 +14,12 @@ class TransactionController extends Controller
         $listing = Listing::with(['product', 'user', 'buyer'])->findOrFail($listingId);
         $authUser = auth()->user();
 
+        //商品の未読→既読へ
+        Message::where('listing_id', $listing->id)
+            ->where('user_id', '!=', $authUser->id)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
         $otherUser = $authUser->id === $listing->user->id ? $listing->buyer : $listing->user;
 
         $messages = Message::with('user')->where('listing_id', $listing->id)->orderBy('created_at', 'asc')->get();

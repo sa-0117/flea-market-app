@@ -10,7 +10,10 @@ class MessageController extends Controller
 {
     public function store(MessageRequest $request, $listingId) {
 
-        session(['chat_draft_'.$listingId => $request->input('content')]);
+        if ($request->input('action') === 'draft') {
+            session(['chat_draft_'.$listingId => $request->input('content')]);
+            return back();
+        }
 
         $path = null;
         if ($request->hasFile('image')) {
@@ -51,4 +54,6 @@ class MessageController extends Controller
 
         return redirect()->route('transaction.show', $listingId);
     }
+
+    
 }

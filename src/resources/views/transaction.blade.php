@@ -7,17 +7,17 @@
 @section('content')
 <di class="transaction">
     <div class="transactionpage-side-menu">
-        <p>その他の取引</p>
         @if($isSeller)
             <div class="side-menu__button__group">
+                <p>その他の取引</p>
                 @forelse ($listings as $otherListing)
                     <div class="side-menu__item">
                         <a href="{{ route('transaction.show', ['listingId' => $otherListing->id]) }}">
-                        <div class="side-menu__button" type="submit">{{ $otherListing->product->name }}</div>
+                            <div class="side-menu__button" type="submit">{{ $otherListing->product->name }}</div>
                         </a>
                     </div>
                 @empty
-                    <p>その他の取引</p>
+                    <p>取引中の商品はありません</p>
                 @endforelse
             </div>
         @endif
@@ -165,7 +165,8 @@
                     <div class="image-button">
                         <input class="image-input" type="file" name="image" id="image" accept="image/*">
                         <label for="image" class="chat-comment-submit">画像を追加</label>
-                        <button type="submin" class="send-button">
+                        <button type="submit" name="action" value="draft" class="chat-draft-button">下書き保存</button>
+                        <button type="submin" na,e="action" value="send" class="send__button">
                             <image src="{{ asset('image/send.svg') }}" alt="send">
                         </button> 
                     </div> 

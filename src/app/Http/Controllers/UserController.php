@@ -28,7 +28,7 @@ class UserController extends Controller
         } elseif ($tab === 'buy') {
             $orders = $user->orders()->with('listing.product')->latest()->get();
         } elseif ($tab === 'transaction') {
-            $listings = Listing::with('product')
+            $listings = Listing::with(['product', 'messages'])
             ->withMax('messages', 'created_at') //最新メッセージ取得
             ->where(function ($query) use ($user){
                 $query->where('user_id', $user->id)
@@ -37,6 +37,20 @@ class UserController extends Controller
             ->where('status', 'Sold')
             ->orderByDesc('messages_max_created_at') //最新メッセージ順に並び替え
             ->get();
+
+            //未読→既読へupdate
+            Message::whereIn('listing_id', $listings->pluck('id'))
+                ->where('user_id', '!=', $user->id)
+                ->where('is_read', false)
+                ->update(['is_read' => true]);
+
+            $listings->map(function($listing) use ($user) {
+                $listing->newMessageCount = $listing->messages
+                    ->where('user_id', '!=', $user->id)
+                    ->where('is_read', false)
+                    ->count();
+                return $listing;
+            });
         }
 
         $transactionListings = Listing::with('product', 'messages')->where(function ($query) use ($user) {
@@ -47,13 +61,13 @@ class UserController extends Controller
             ->get();
 
         $newMessageCount = Message::whereIn('listing_id', $transactionListings->pluck('id'))
-            ->where('receiver_id', $user->id)
+            ->where('user_id', '!=', $user->id)
             ->where('is_read', false)
             ->count();
 
-        $transactionListings->map(function($query) use ($user) {
+        $transactionListings->map(function($listing) use ($user) {
             $listing->newMessageCount = $listing->messages
-                ->where('receiver_id', $user->id)
+                ->where('user_id', '!=', $user->id)
                 ->where('is_read', false)
                 ->count();
 

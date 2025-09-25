@@ -83,7 +83,10 @@
     text-decoration: none;
     color: #aaa;
     margin-right: 50px;
+}
 
+.transaction-tab a {
+    margin-right: 0;
 }
 
 .product-tab-name a.active {
@@ -110,7 +113,8 @@
     padding: 40px;
 }
 
-.product-list__image img {
+.product-list__image img,
+.product-list__image-wrapper img {
     width: 100%;
     height: auto;
     border: 1px solid #e7e7e7;
@@ -140,7 +144,6 @@
     font-size: 12px;
     padding: 2px 6px;
     border-radius: 50%;
-    z-index: 10;
 }
 
 .form-rating-star {
@@ -160,6 +163,19 @@
     .product-list {
         grid-template-columns: repeat(3, 1fr);
         width: 85%;
+    }
+
+    .mypage-top {
+        width: 100%;
+    }
+
+    .product-tab {
+        justify-content: space-between;
+    }
+
+    .product-tab-name a {
+        text-decoration: none;
+        color: #aaa;
     }
 }
 

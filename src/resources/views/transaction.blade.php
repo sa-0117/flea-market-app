@@ -10,15 +10,17 @@
         @if($isSeller)
             <div class="side-menu__button__group">
                 <p>その他の取引</p>
-                @forelse ($listings as $otherListing)
+                @foreach ($listings as $otherListing)
                     <div class="side-menu__item">
                         <a href="{{ route('transaction.show', ['listingId' => $otherListing->id]) }}">
                             <div class="side-menu__button" type="submit">{{ $otherListing->product->name }}</div>
                         </a>
                     </div>
-                @empty
-                    <p>取引中の商品はありません</p>
-                @endforelse
+                @endforeach
+            </div>
+        @else
+            <div class="side-menu__button__group">
+                <p>その他の取引</p>
             </div>
         @endif
     </div>

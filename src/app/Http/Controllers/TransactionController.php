@@ -57,7 +57,7 @@ class TransactionController extends Controller
             'buyerButton',
             'sellerModal',
             'listings',
-            'isSeller'
+            'isSeller',
         ));
     }
 

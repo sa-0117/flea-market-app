@@ -47,7 +47,7 @@ class TransactionController extends Controller
         ->where('status', '!=', 'completed')
         ->get();
 
-        $isSeller = $authUser->id === $listing->user_id; 
+        $oldContent = session('chat_content');
 
         return view('transaction', compact(
             'listing',
@@ -57,7 +57,7 @@ class TransactionController extends Controller
             'buyerButton',
             'sellerModal',
             'listings',
-            'isSeller',
+            'oldContent'
         ));
     }
 

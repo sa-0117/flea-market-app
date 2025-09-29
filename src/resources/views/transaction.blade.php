@@ -4,25 +4,23 @@
 <link rel="stylesheet" href="{{ asset('css/transaction.css') }}">
 @endsection
 
+@php
+  $HeaderParts = true;
+@endphp
+
 @section('content')
 <di class="transaction">
     <div class="transactionpage-side-menu">
-        @if($isSeller)
-            <div class="side-menu__button__group">
-                <p>その他の取引</p>
-                @foreach ($listings as $otherListing)
-                    <div class="side-menu__item">
-                        <a href="{{ route('transaction.show', ['listingId' => $otherListing->id]) }}">
-                            <div class="side-menu__button" type="submit">{{ $otherListing->product->name }}</div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-        @else
-            <div class="side-menu__button__group">
-                <p>その他の取引</p>
-            </div>
-        @endif
+        <div class="side-menu__button__group">
+            <p>その他の取引</p>
+            @foreach ($listings as $otherListing)
+                <div class="side-menu__item">
+                    <a href="{{ route('transaction.show', ['listingId' => $otherListing->id]) }}">
+                        <div class="side-menu__button" type="submit">{{ $otherListing->product->name }}</div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
     </div>
     <div class="transaction-main">
         <div class="underborder-line">
@@ -151,24 +149,47 @@
                 @endforeach   
             </div>
             <div class="error-message">
-                    @error('content')
-                        {{ $message }}
-                    @enderror
-                    @error('image')
-                        {{ $message }}
-                    @enderror
-                </div>
+                @error('content')
+                    <p>{{ $message }}</p>
+                @enderror
+                @error('image')
+                    <p>{{ $message }}</p>
+                @enderror
+            </div>
             <form class="form-chat" action="{{ route('transaction.message', $listing->id) }}" method="post"  enctype="multipart/form-data">
                 @csrf
                 <div class="chat-create__group">
                     <div class="chat-comment">
-                        <textarea name="content" class="chat-comment__textarea" placeholder="取引メッセージを記入してください">{{ old('content', session('chat_draft_'.$listing->id)) }}</textarea>
+                        <textarea name="content" id="chatContent" class="chat-comment__textarea" placeholder="取引メッセージを記入してください">{{ old('content', session('chat_content') ?? '') }}</textarea>
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const textarea = document.getElementById('chatContent');
+                            let timeout = null;
+                            //入力中にセッション保存
+                            textarea.addEventListener('input', function() {
+                                clearTimeout(timeout);
+                                timeout = setTimeout(function() {
+                                    fetch("{{ route('transaction.saveDraft', ['listingId' => $listing->id]) }}", {
+                                        method: "POST",
+                                        headers: {
+                                            "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                            "Content-Type": "application/json"
+                                        },
+                                        body: JSON.stringify({ content: textarea.value })
+                                    });
+                                }, 1000);
+                            });
+                            //ページ離脱時に保存
+                            window.addEventListener('beforeunload', function() {
+                                navigator.sendBeacon("{{ route('transaction.saveDraft', ['listingId' => $listing->id]) }}", JSON.stringify({ content: textarea.value }));
+                            });
+                        });
+                    </script>
                     <div class="image-button">
                         <input class="image-input" type="file" name="image" id="image" accept="image/*">
                         <label for="image" class="chat-comment-submit">画像を追加</label>
-                        <button type="submit" name="action" value="draft" class="chat-draft-button">下書き保存</button>
-                        <button type="submin" na,e="action" value="send" class="send__button">
+                        <button type="submit" name="action" value="send" class="send__button">
                             <image src="{{ asset('image/send.svg') }}" alt="send">
                         </button> 
                     </div> 

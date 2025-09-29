@@ -20,7 +20,7 @@ body {
     box-sizing: border-box;
     background: #969696;
     color: #fff;
-    padding: 10px 30px;
+    padding: 10px 20px;
 }
 
 .transactionpage-side-menu p {
@@ -40,11 +40,16 @@ body {
 }
 
 .side-menu__button {
+    display: block;
+    width: 180px;
+    text-align: center;
     border: 1px solid #ddd;
     background: #ddd;
     border-radius: 3px;
-    padding: 2px 30px;
-    margin: 10px;
+    padding: 8px 10px;
+    margin: 10px 0;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .transaction-main {
@@ -269,17 +274,6 @@ body {
     cursor: pointer;
 }
 
-.chat-draft-button {
-    font-size: 12px;
-    color: #aaa;
-    margin-left: 10px;
-    padding: 2px 6px;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-}
-
 .modal {
     position: fixed;
     top: 0;
@@ -368,13 +362,28 @@ body {
 }
 
 .error-message {
+    display: flex;
+    flex-direction: column;
     color: #ff0000;
-    text-align: left;
     padding-left: 10px;
+    
 }
 
-
 @media (min-width: 768px) and (max-width: 850px) {
+    .transaction-main {
+        width: 75%;
+    }
+
+    .transactionpage-side-menu {
+        width: 25%;
+    }
+
+    .side-menu__button {
+        font-size: 13px;
+        width: 140px;
+        padding: 6px 8px;
+    }
+
     .product-image {
         width: 200px;
         height: 200px;
@@ -398,6 +407,13 @@ body {
         gap: 10px;
         padding: 10px;
         margin: 0 auto;
+    }
+
+    .error-message {
+        display: flex;
+        align-items: center;
+        color: #ff0000;
+        padding-left: 10px;
     }
 }
 

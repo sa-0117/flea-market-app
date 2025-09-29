@@ -8,12 +8,21 @@ use App\Http\Requests\MessageRequest;
 
 class MessageController extends Controller
 {
-    public function store(MessageRequest $request, $listingId) {
+    // チャット本文を一時保存
+public function saveDraft(Request $request, $listingId)
+{
+    $request->validate([
+        'content' => 'nullable|string|max:1000',
+    ]);
 
-        if ($request->input('action') === 'draft') {
-            session(['chat_draft_'.$listingId => $request->input('content')]);
-            return back();
-        }
+    // セッションに保存
+    session()->put('chat_content', $request->input('content'));
+
+    return response()->json(['status' => 'ok']);
+}
+
+
+    public function store(MessageRequest $request, $listingId) {
 
         $path = null;
         if ($request->hasFile('image')) {
@@ -27,9 +36,8 @@ class MessageController extends Controller
             'image' => $path,
         ]);
 
-        session()->forget('chat_draft_'.$listingId);
-
         return back();
+
     }
 
     public function update(Request $request, $id) {

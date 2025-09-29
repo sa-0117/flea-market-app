@@ -47,6 +47,8 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::post('/transaction/{listingId}/message', [MessageController::class, 'store'])->name('transaction.message');
     Route::post('/transaction/message/{id}/update', [MessageController::class, 'update'])->name('message.update');
     Route::delete('/transaction/message//{id}', [MessageController::class, 'destroy'])->name('message.destroy');
+Route::post('/transaction/{listingId}/save-draft', [MessageController::class, 'saveDraft'])->name('transaction.saveDraft');
+
 });
 
 Route::middleware(['auth'])->group(function () {

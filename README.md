@@ -26,6 +26,7 @@ php artisan storage:link
 * MySQL 8.0  
 * mailtrap
 * stripe
+* JavaScript（フロントエンド：入力内容の保持用）
 
 ## メール認証について
 
@@ -105,7 +106,7 @@ php artisan migrate:fresh --env=testing
 ### 補足
 要件ID：FN009 入力情報保持機能
 
-上記要件を満たすため、取引チャット画面にFigmaデザインとは異なる仕様の「下書き保存」ボタンを設けています。
+上記要件について、PHP/Laravelのみでの実装が困難と判断し、フロントエンドとしてJavaScriptを使用しています。
 
 ## URL  
 

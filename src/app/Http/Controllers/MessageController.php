@@ -16,7 +16,7 @@ public function saveDraft(Request $request, $listingId)
     ]);
 
     // セッションに保存
-    session()->put('chat_content', $request->input('content'));
+    session()->put("chat_content_{$listingId}", $request->input('content'));
 
     return response()->json(['status' => 'ok']);
 }
@@ -35,6 +35,8 @@ public function saveDraft(Request $request, $listingId)
             'content' => $request->input('content'),
             'image' => $path,
         ]);
+
+        session()->forget("chat_content_{$listingId}");
 
         return back();
 

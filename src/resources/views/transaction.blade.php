@@ -160,7 +160,7 @@
                 @csrf
                 <div class="chat-create__group">
                     <div class="chat-comment">
-                        <textarea name="content" id="chatContent" class="chat-comment__textarea" placeholder="取引メッセージを記入してください">{{ old('content', session('chat_content') ?? '') }}</textarea>
+                        <textarea name="content" id="chatContent" class="chat-comment__textarea" placeholder="取引メッセージを記入してください">{{ old('content', session("chat_content_{$listing->id}") ?? '') }}</textarea>
                     </div>
                     <script>
                         document.addEventListener('DOMContentLoaded', function () {
